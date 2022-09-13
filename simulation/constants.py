@@ -49,7 +49,7 @@ mapping_fertility = {
 }
 
 """
-# Tableau des espÃ©rances de vie.
+# Tableau des esperance de vie.
 esperance = {
 	
 	'10': '4.98',

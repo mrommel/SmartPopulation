@@ -1,6 +1,9 @@
-import constants
 import math
+
+from simulation.configuration import SimulationConfiguration
 import plotly.graph_objects as go
+
+from simulation import constants
 
 
 class SimulationRecord:
@@ -11,11 +14,9 @@ class SimulationRecord:
 
 
 class Simulation:
-	def __init__(self):
-		self.currentFertilityParam = 17.22
-		self.life_expectancy = 81.8  # in years
-		self.number_of_children_per_women = 1.62
-		self.boys_ratio = 51.4
+	def __init__(self, config: SimulationConfiguration):
+		self.currentFertilityParam: int = 0
+		self.config = config
 		
 		self.data = []
 		
@@ -196,19 +197,19 @@ class Simulation:
 		_tmpA184 = self.param_a1(84)
 		
 		if age == 1:
-			_tmpRes = _tmpA0 + _tmpA1 * math.log10(100 - self.life_expectancy)
+			_tmpRes = _tmpA0 + _tmpA1 * math.log10(100 - self.config.life_expectancy)
 			_newVal = _tmpVal - _tmpVal * (pow(10, _tmpRes) / 1000)
 		elif 2 <= age < 5:
 			_tmpRes = 1 - math.exp(
-				0.25 * math.log(1 - math.pow(10, _tmpA0 + _tmpA1 * math.log10(100 - self.life_expectancy)) / 1000));
+				0.25 * math.log(1 - math.pow(10, _tmpA0 + _tmpA1 * math.log10(100 - self.config.life_expectancy)) / 1000))
 			_newVal = _tmpVal - _tmpVal * _tmpRes
 		elif 5 <= age <= 84:
 			_tmpRes = 1 - math.exp(
-				0.20 * math.log(1 - math.pow(10, _tmpA0 + _tmpA1 * math.log10(100 - self.life_expectancy)) / 1000));
+				0.20 * math.log(1 - math.pow(10, _tmpA0 + _tmpA1 * math.log10(100 - self.config.life_expectancy)) / 1000))
 			_newVal = _tmpVal - _tmpVal * _tmpRes
 		elif 85 <= age <= 89:
 			_tmpRes = 1 - math.exp(
-				0.20 * math.log(1 - math.pow(10, _tmpA084 + _tmpA184 * math.log10(100 - self.life_expectancy)) / 1000));
+				0.20 * math.log(1 - math.pow(10, _tmpA084 + _tmpA184 * math.log10(100 - self.config.life_expectancy)) / 1000))
 			_newVal = _tmpVal - _tmpVal * ((0.3378 + 0.69798 * 5 * _tmpRes) / 5)
 		elif 90 <= age <= 94:
 			_newVal = _tmpVal - _tmpVal * 0.25
@@ -241,19 +242,19 @@ class Simulation:
 		_tmpA184 = self.param_a1(84)
 		
 		if age == 1:
-			_tmpRes = _tmpA0 + _tmpA1 * math.log10(100 - self.life_expectancy)
+			_tmpRes = _tmpA0 + _tmpA1 * math.log10(100 - self.config.life_expectancy)
 			_newVal = _tmpVal - _tmpVal * (math.pow(10, _tmpRes) / 1000)
 		elif 2 <= age < 5:
 			_tmpRes = 1 - math.exp(
-				0.25 * math.log(1 - math.pow(10, _tmpA0 + _tmpA1 * math.log10(100 - self.life_expectancy)) / 1000))
+				0.25 * math.log(1 - math.pow(10, _tmpA0 + _tmpA1 * math.log10(100 - self.config.life_expectancy)) / 1000))
 			_newVal = _tmpVal - _tmpVal * _tmpRes
 		elif 5 <= age <= 84:
 			_tmpRes = 1 - math.exp(
-				0.20 * math.log(1 - math.pow(10, _tmpA0 + _tmpA1 * math.log10(100 - self.life_expectancy)) / 1000))
+				0.20 * math.log(1 - math.pow(10, _tmpA0 + _tmpA1 * math.log10(100 - self.config.life_expectancy)) / 1000))
 			_newVal = _tmpVal - _tmpVal * _tmpRes
 		elif 85 <= age <= 89:
 			_tmpRes = 1 - math.exp(
-				0.20 * math.log(1 - math.pow(10, _tmpA084 + _tmpA184 * math.log10(100 - self.life_expectancy)) / 1000))
+				0.20 * math.log(1 - math.pow(10, _tmpA084 + _tmpA184 * math.log10(100 - self.config.life_expectancy)) / 1000))
 			_newVal = _tmpVal - _tmpVal * ((0.3378 + 0.69798 * 5 * _tmpRes) / 5)
 		elif 90 <= age <= 94:
 			_newVal = _tmpVal - _tmpVal * 0.15
@@ -265,6 +266,16 @@ class Simulation:
 			_newVal = _tmpVal - _tmpVal  # just as stupid because 0
 		
 		return _newVal
+	
+	@property
+	def population(self):
+		total_population = 0
+		for age in range(0, 100):
+			females = self.number_of_females(age)
+			males = self.number_of_males(age)
+			total_population += females + males
+		
+		return total_population
 	
 	def print_curve(self, year):
 		
@@ -322,7 +333,7 @@ class Simulation:
 		
 		for key in constants.mapping_fertility:
 			mapping_value = constants.mapping_fertility[key]
-			if self.number_of_children_per_women <= mapping_value:
+			if self.config.number_of_children_per_women <= mapping_value:
 				_downParam = _oldItem
 				_upParam['title'] = key
 				_upParam['data'] = mapping_value
@@ -337,8 +348,8 @@ class Simulation:
 		_paramDown = _downParam['title']
 		
 		_newParam = _paramDown + ((_paramUp - _paramDown) / (_valUp - _valDown)) * (
-					self.number_of_children_per_women - _valDown)
-
+				self.config.number_of_children_per_women - _valDown)
+		
 		self.currentFertilityParam = _newParam
 	
 	def iterate(self):
@@ -391,13 +402,13 @@ class Simulation:
 		old_total_population += self.number_of_males(0)
 		old_total_population += self.number_of_females(0)
 		
-		print('--- debug ---')
-		print(' total babies: ', int(total_babies))
-		print(' total_population: ', int(total_population))
-		print(' old_total_population: ', old_total_population)
+		# print('--- debug ---')
+		# print(' total babies: ', int(total_babies))
+		# print(' total_population: ', int(total_population))
+		# print(' old_total_population: ', old_total_population)
 		
-		male_babies = total_babies * (self.boys_ratio / 100.0)
-		female_babies = total_babies * (1.0 - (self.boys_ratio / 100.0))
+		male_babies = total_babies * (self.config.boys_ratio / 100.0)
+		female_babies = total_babies * (1.0 - (self.config.boys_ratio / 100.0))
 		
 		if male_babies >= _maxH:
 			_maxH = male_babies
@@ -406,13 +417,3 @@ class Simulation:
 		
 		self.set_number_of_males(0, male_babies)
 		self.set_number_of_females(0, female_babies)
-
-
-if __name__ == '__main__':
-	sim = Simulation()
-	sim.print_curve(2019)
-	# sim.show_chart(2019)
-	
-	sim.iterate()
-	sim.print_curve(2020)
-	sim.show_chart(2020)
