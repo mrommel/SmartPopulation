@@ -11,7 +11,7 @@ $(VENV)/bin/activate: requirements.txt
 # venv is a shortcut target
 venv: $(VENV)/bin/activate
 
-test: venv
+tests: venv
 	./$(VENV)/bin/python3 -m unittest
 
 run: venv
@@ -22,16 +22,3 @@ clean:
 	find . -type f -name '*.pyc' -delete
 
 .PHONY: all venv run clean
-
-# setup: requirements.txt
-#     pip install -r requirements.txt
-
-
-
-# clean:
-#     rm -rf __pycache__
-
-# run:
-#     python3 app.py
-
-# .PHONY: run clean
