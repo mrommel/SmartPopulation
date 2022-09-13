@@ -1,6 +1,7 @@
 import unittest
 
-from simulation.configuration import SimulationConfiguration
+from simulation.configuration import SimulationConfiguration, SimulationConfigurationGermany2019
+from simulation.data import SimulationDataGermany2019
 from simulation.simulation import Simulation
 
 
@@ -8,8 +9,9 @@ class TestSimulation(unittest.TestCase):
 	
 	def test_basic_population(self):
 		# GIVEN
-		config = SimulationConfiguration()
-		sim = Simulation(config)
+		config = SimulationConfigurationGermany2019()
+		data = SimulationDataGermany2019()
+		sim = Simulation(config = config, data = data)
 		population_before = sim.population
 		
 		# WHEN
@@ -22,7 +24,8 @@ class TestSimulation(unittest.TestCase):
 	def test_population_increases(self):
 		# GIVEN
 		config = SimulationConfiguration(81.8, 3.5)  # number_of_children_per_women must bigger than usual
-		sim = Simulation(config)
+		data = SimulationDataGermany2019()
+		sim = Simulation(config = config, data = data)
 		population_before = sim.population
 		
 		# WHEN
