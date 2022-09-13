@@ -132,7 +132,7 @@ class Simulation:
 	
 	# getSimulationLibreBabies (_n,_val)
 	def calculate_babies(self, fertility, number_of_females):
-
+		
 		_tmpPow = 100.0 / self.currentFertilityParam
 		_tmpKi = pow(fertility, _tmpPow)
 		_tmpB = self.currentFertilityParam / 100.0
@@ -281,7 +281,7 @@ class Simulation:
 		print('-----------------------------')
 		print('total population ', total_population)
 		print('-----------------------------')
-		
+	
 	def show_chart(self, year):
 		y_age = [age for age in range(0, 100)]
 		x_male = [self.number_of_males(age) for age in range(0, 100)]
@@ -312,9 +312,34 @@ class Simulation:
 		)
 		
 		fig.show()
-		
+	
+	# updatePerformanceParam
 	def update_fertility(self):
-		self.currentFertilityParam = 17.22  # self.number_of_children_per_women
+		
+		_oldItem = {}
+		_downParam = {}
+		_upParam = {}
+		
+		for key in constants.mapping_fertility:
+			mapping_value = constants.mapping_fertility[key]
+			if self.number_of_children_per_women <= mapping_value:
+				_downParam = _oldItem
+				_upParam['title'] = key
+				_upParam['data'] = mapping_value
+				break
+			
+			_oldItem['title'] = key
+			_oldItem['data'] = mapping_value
+		
+		_valUp = _upParam['data']
+		_valDown = _downParam['data']
+		_paramUp = _upParam['title']
+		_paramDown = _downParam['title']
+		
+		_newParam = _paramDown + ((_paramUp - _paramDown) / (_valUp - _valDown)) * (
+					self.number_of_children_per_women - _valDown)
+
+		self.currentFertilityParam = _newParam
 	
 	def iterate(self):
 		
@@ -387,7 +412,7 @@ if __name__ == '__main__':
 	sim = Simulation()
 	sim.print_curve(2019)
 	# sim.show_chart(2019)
-
+	
 	sim.iterate()
 	sim.print_curve(2020)
 	sim.show_chart(2020)
