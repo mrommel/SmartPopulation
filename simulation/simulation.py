@@ -263,8 +263,7 @@ class Simulation:
 		_down_param = {}
 		_up_param = {}
 		
-		for key in constants.mapping_fertility.items():
-			mapping_value = constants.mapping_fertility[key]
+		for key, mapping_value in constants.mapping_fertility.items():
 			if self.config.number_of_children_per_women <= mapping_value:
 				_down_param = _old_item
 				_up_param['title'] = key
