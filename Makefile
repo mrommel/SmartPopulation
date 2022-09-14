@@ -11,6 +11,9 @@ $(VENV)/bin/activate: requirements.txt
 # venv is a shortcut target
 venv: $(VENV)/bin/activate
 
+pylint: venv
+	./$(VENV)/bin/pylint --disable=C0303,R0903,R0915 simulation
+
 tests: venv
 	./$(VENV)/bin/python3 -m unittest
 

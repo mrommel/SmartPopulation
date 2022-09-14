@@ -1,19 +1,38 @@
+"""simulation data module."""
+
 
 class SimulationRecord:
+	"""
+		single record of age distribution data of the simulation
+	"""
+	
 	def __init__(self, age, men, women):
+		"""
+			value constructor
+			
+			:param age: age of this record
+			:param men: amount of men in this age group
+			:param women: amount of women in this age group
+		"""
 		self.age = age
 		self.men = men
 		self.women = women
+		
+	def population(self):
+		"""
+			:return: amount of total people in this age group
+		"""
+		return self.women + self.men
 
 
 class SimulationData:
 	"""
-	age distribution data of the simulation
+		age distribution data of the simulation
 	"""
 	
 	def __init__(self):
 		"""
-		default constructor
+			default constructor
 		"""
 		self.data = []
 		
@@ -21,12 +40,31 @@ class SimulationData:
 			self.data.append(SimulationRecord(age, 0, 0))
 	
 	def number_of_females(self, age):
+		"""
+			get the number of females of a certain age
+			
+			:param age: age of the number of females
+			:return: number of females of a certain age
+		"""
 		return next(filter(lambda val: val.age == age, self.data), SimulationRecord(0, 0, 0)).women
 	
 	def number_of_males(self, age):
+		"""
+			get the number of males of a certain age
+			
+			:param age: age of the number of males
+			:return: number of males of a certain age
+		"""
 		return next(filter(lambda val: val.age == age, self.data), SimulationRecord(0, 0, 0)).men
 	
 	def set_number_of_females(self, age, value):
+		"""
+			set the number of females of a certain age
+
+			:param age: age of the number of females
+			:param value: new value of females for this female group
+			:return: (nothing)
+		"""
 		item = next(filter(lambda val: val.age == age, self.data), SimulationRecord(0, -1, -1))
 		
 		if item.women == -1:
@@ -35,6 +73,13 @@ class SimulationData:
 			item.women = int(value)
 	
 	def set_number_of_males(self, age, value):
+		"""
+			set the number of males of a certain age
+		
+			:param age: age of the number of males
+			:param value: new value of males for this male group
+			:return: (nothing)
+		"""
 		item = next(filter(lambda val: val.age == age, self.data), SimulationRecord(0, -1, -1))
 		
 		if item.men == -1:
