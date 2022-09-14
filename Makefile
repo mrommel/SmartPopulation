@@ -21,4 +21,5 @@ clean:
 	rm -rf $(VENV)
 	find . -type f -name '*.pyc' -delete
 
-.PHONY: all venv run clean
+# make sure that all targets are used/evaluated even if a file with same name exists
+.PHONY: all venv run clean tests
