@@ -8,19 +8,19 @@ Python implementation of https://www.ined.fr/_modules/SimulateurPopulation/?lang
 This can manipulate a population distribution chart of a given setup (aka country).
 This also plots this chart using plotly.
 
-# execute application
+### execute application
 
 ```
 make run
 ```
 
-# execute pytests
+### execute pytests
 
 ```
 make tests
 ```
 
-# execute pylint
+### execute pylint
 
 ```
 make pylint
