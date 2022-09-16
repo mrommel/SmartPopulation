@@ -12,7 +12,7 @@ $(VENV)/bin/activate: requirements.txt
 venv: $(VENV)/bin/activate
 
 pylint: venv
-	./$(VENV)/bin/pylint --disable=C0303,R0903,R0915,C0103 simulation map
+	./$(VENV)/bin/pylint --disable=C0303,R0903,R0915,C0103,E1101 simulation map
 
 tests: venv
 	./$(VENV)/bin/python3 -m unittest

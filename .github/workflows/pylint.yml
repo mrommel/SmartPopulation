@@ -21,4 +21,4 @@ jobs:
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Analysing the code with pylint
       run: |
-        pylint --disable=C0303,R0903,R0915,C0103 simulation map
+        pylint --disable=C0303,R0903,R0915,C0103,E1101 simulation map
