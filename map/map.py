@@ -1,4 +1,5 @@
 """map main module."""
+from typing import Union
 from dataclasses import dataclass
 from enum import Enum
 
@@ -13,6 +14,12 @@ class Tile:
 			default constructor
 		"""
 		self.dummy = 0
+
+
+class HexCube:
+	"""
+		dummy class for type declaration
+	"""
 
 
 class HexCube:
@@ -32,7 +39,7 @@ class HexCube:
 		self.r_val = r
 		self.s_val = s
 	
-	def distance_to(self, cube):
+	def distance_to(self, cube) -> int:
 		"""
 			calculate the distance in points (int)
 		
@@ -41,7 +48,7 @@ class HexCube:
 		"""
 		return max(abs(self.q_val - cube.q_val), abs(self.r_val - cube.r_val), abs(self.s_val - cube.s_val))
 	
-	def __add__(self, other):
+	def __add__(self, other: HexCube) -> HexCube:
 		"""
 			+ operator to add two HexCube
 		
@@ -53,7 +60,7 @@ class HexCube:
 
 		raise Exception(f'not a valid type: {other}')
 	
-	def __mul__(self, factor: int):
+	def __mul__(self, factor: int) -> HexCube:
 		"""
 			scale HexCube with factor
 		
@@ -78,7 +85,7 @@ class HexDirection(Enum):
 	southwest = 4
 	northwest = 5
 	
-	def cube_direction(self):
+	def cube_direction(self) -> HexCube:
 		"""
 			get a HexCube value for each of the enum directions
 		
@@ -107,6 +114,12 @@ class HexDirection(Enum):
 
 class HexPoint:
 	"""
+		dummy class for type declaration
+	"""
+
+
+class HexPoint:
+	"""
 		class that encapsulates a hexagonal location / point
 	"""
 	
@@ -129,7 +142,7 @@ class HexPoint:
 		else:
 			raise ValueError(f"unsupported format: {x}")
 		
-	def is_neighbor_of(self, point):
+	def is_neighbor_of(self, point) -> bool:
 		"""
 			check if given point is a direct neighbor
 			
@@ -138,7 +151,7 @@ class HexPoint:
 		"""
 		return self.distance_to(point) == 1
 	
-	def neighbor_in(self, direction: HexDirection, distance: int = 1):
+	def neighbor_in(self, direction: HexDirection, distance: int = 1) -> HexPoint:
 		"""
 			get neighbor in direction (and distance)
 		
@@ -149,7 +162,7 @@ class HexPoint:
 		cube_neighbor = self.to_cube() + (direction.cube_direction() * distance)
 		return HexPoint(x=cube_neighbor)
 	
-	def neighbors(self):
+	def neighbors(self) -> [HexPoint]:
 		"""
 			get all 6 neighbors of the point
 		
@@ -189,7 +202,7 @@ class HexPoint:
 
 		raise ValueError(f"unsupported format: {x}")
 	
-	def to_cube(self):
+	def to_cube(self) -> HexCube:
 		"""
 			converts HexPoint to HexCube representation
 		
@@ -202,7 +215,7 @@ class HexPoint:
 	# def areaWith(self, radius: int):
 	#	return HexArea(center: self, radius: radius)
 	
-	def __str__(self):
+	def __str__(self) -> str:
 		"""
 			string representation
 			
@@ -210,7 +223,7 @@ class HexPoint:
 		"""
 		return f'HexPoint({self.x}, {self.y})'
 	
-	def __repr__(self):
+	def __repr__(self) -> str:
 		"""
 			string representation
 
@@ -218,7 +231,7 @@ class HexPoint:
 		"""
 		return f'HexPoint({self.x}, {self.y})'
 	
-	def __eq__(self, other):
+	def __eq__(self, other) -> bool:
 		"""
 			compares current to other HexPoint
 		
@@ -247,25 +260,48 @@ class Map:
 		self.height = height
 		self.tiles = [[Tile() for x in range(width)] for y in range(height)]
 	
-	def get(self, x: int, y: int):
+	def get(self, x_or_point: Union[int, HexPoint], y: int = -1) -> Tile:
 		"""
 			get tile at coord (x, y)
 		
-			:param x: x coord of tile ot return
+			:param x_or_point: x coord or point of tile ot return
 			:param y: y coord of tile ot return
 			:return: tile at coord (x, y) or None if coord (x, y) is not valid
 		"""
-		if not self.valid(x, y):
-			return None
-		
-		return self.tiles[x][y]
-	
-	def valid(self, x: int, y: int):
-		"""
-			checks if coord (x, y) is valid
+		if isinstance(x_or_point, HexPoint) and y == -1:
+			point = x_or_point
 			
-			:param x: x coord to check
+			if not self.valid(point):
+				return None
+			
+			return self.tiles[point.x][point.y]
+		
+		if isinstance(x_or_point, int):
+			x = x_or_point
+			
+			if not self.valid(x, y):
+				return None
+		
+			return self.tiles[x][y]
+		
+		return None
+	
+	def valid(self, x_or_point: Union[int, HexPoint], y: int = -1) -> bool:
+		"""
+			checks if coord (x, y) or point is valid
+			
+			:param x_or_point: x coord or point to check
 			:param y: y coord to check
 			:return: true, if coord (x, y) is valid - false, otherwise
 		"""
-		return 0 <= x < self.width and 0 <= y < self.height
+		if isinstance(x_or_point, HexPoint) and y == -1:
+			point = x_or_point
+			
+			return 0 <= point.x < self.width and 0 <= point.y < self.height
+			
+		if isinstance(x_or_point, int):
+			x = x_or_point
+		
+			return 0 <= x < self.width and 0 <= y < self.height
+		
+		return False

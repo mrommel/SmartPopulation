@@ -62,12 +62,12 @@ class TestMap(unittest.TestCase):
 		hex_map = Map(width=5, height=5)
 		
 		# WHEN
-		is_inside = hex_map.valid(x=2, y=2)
-		is_outside = hex_map.valid(x=5, y=2)
+		is_inside = hex_map.valid(2, 2)
+		is_outside = hex_map.valid(5, 2)
 		
 		# THEN
-		self.assertEqual(is_outside, False)
 		self.assertEqual(is_inside, True)
+		self.assertEqual(is_outside, False)
 
 
 if __name__ == '__main__':
