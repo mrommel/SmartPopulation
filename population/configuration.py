@@ -1,9 +1,9 @@
 """simulation configuration module."""
 
 
-class SimulationConfiguration:
+class PopulationConfiguration:
 	"""
-		configuration of the simulation
+		configuration of the population simulation
 	"""
 	
 	def __init__(self, life_expectancy: float, number_of_children_per_women: float, boys_ratio: float = 51.4):
@@ -17,9 +17,9 @@ class SimulationConfiguration:
 		self.life_expectancy = life_expectancy  # in years
 		self.number_of_children_per_women = number_of_children_per_women
 		self.boys_ratio = boys_ratio  # in percent
+		
 
-
-class SimulationConfigurationGermany2019(SimulationConfiguration):
+class PopulationConfigurationGermany2019(PopulationConfiguration):
 	"""
 		configuration of the simulation for germany in 2019
 	"""
