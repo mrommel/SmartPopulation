@@ -20,6 +20,9 @@ tests: venv
 run: venv
 	./$(VENV)/bin/python3 app.py
 
+wsgi: venv
+	./$(VENV)/bin/python3 -m flask --app web/wsgi run
+
 clean:
 	rm -rf $(VENV)
 	find . -type f -name '*.pyc' -delete

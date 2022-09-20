@@ -1,6 +1,7 @@
 # project setup
 pip==22.2.2
-pylint
+pylint==2.15.3
 
 # used libries
 plotly==5.10.0
+flask==2.2.2

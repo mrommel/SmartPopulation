@@ -30,10 +30,12 @@ make pylint
 * https://www.ined.fr/_modules/SimulateurPopulation/?lang=en
 * https://service.destatis.de/bevoelkerungspyramide/#! from 2019 for germany
 * https://democracygame.fandom.com/wiki/Democracy_4
+* https://github.com/bakster55/W3JsonToExcel
+* https://jsoncrack.com/
+* https://github.com/ColorlibHQ/AdminLTE
 
 ## Scratch pad
 
-* https://github.com/bakster55/W3JsonToExcel/blob/master/democracy3/clonesdrones/data/simulation/simulation.csv
 
 ### Life span input
 

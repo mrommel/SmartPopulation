@@ -162,20 +162,22 @@ class Simulation:
 			
 			:return: (nothing)
 		"""
-		print('---------------')
-		print('--- simulations ------------')
+		print('---------------------------')
+		print('--- simulations -----------')
 		for _, simulation_item in self.simulations.items():
 			simulation_item.print()
 		print('')
-		print('--- groups ------------')
+		print('--- groups ----------------')
 		for _, group_item in self.groups.items():
 			group_item.print()
 		print('')
-		print('--- groups ------------')
+		print('--- situations ------------')
 		for _, situation_item in self.situations.items():
 			situation_item.print()
-		print('---------------')
+		
 		print('')
+		print('---------------------------')
+		
 		print('')
 
 

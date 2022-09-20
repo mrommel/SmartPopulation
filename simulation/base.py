@@ -148,7 +148,7 @@ class SimulationBase:
 		
 			:return: (nothing)
 		"""
-		print(f'{self.name}: {self.value:.2f}')
+		print(f'{self.name:24}: \t{self.value:.2f}')
 
 
 class GroupBase:
@@ -206,7 +206,7 @@ class GroupBase:
 
 			:return: (nothing)
 		"""
-		print(f'{self.name}: freq={self.freq.value * 100.0:.2f}% / mood={self.mood.value}')
+		print(f'{self.name:24}: \tfreq={self.freq.value * 100.0:.2f}% / \tmood={self.mood.value}')
 
 
 class SituationBase:
@@ -311,5 +311,5 @@ class SituationBase:
 
 			:return: (nothing)
 		"""
-		print(f'{self.name}: {self.value:.2f} => {self.is_active}')
+		print(f'{self.name:24}: \t{self.value:.2f} => {self.is_active}')
 	
