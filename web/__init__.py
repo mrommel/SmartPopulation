@@ -2,7 +2,7 @@ import os
 
 from flask import Flask, render_template
 
-from web.db import get_db
+from web.db import get_db, simulation_from_database
 
 
 def create_app(test_config=None):
@@ -31,8 +31,8 @@ def create_app(test_config=None):
 	
 	@app.route("/")
 	def index():
-		db = get_db()
-		simulation_count = db.execute(
+		database = get_db()
+		simulation_count = database.execute(
 			'SELECT count(*) as simulation_count FROM simulations'
 		).fetchall()
 		
@@ -44,16 +44,9 @@ def create_app(test_config=None):
 	
 	@app.route("/simulations")
 	def simulations():
-		db = get_db()
-		simulation_items = db.execute(
-			'SELECT '
-			'  s.id, s.name, s.description, c.name as category_name, s.value, s.min_value, s.max_value '
-			'FROM '
-			'  simulations AS s'
-			'  INNER JOIN categories AS c ON s.category_id = c.id'
-		).fetchall()
+		simulation = simulation_from_database()
 		
-		return render_template('simulations.html', simulations=simulation_items)
+		return render_template('simulations.html', simulations=simulation.simulations   )
 	
 	@app.route("/groups")
 	def groups():
