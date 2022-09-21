@@ -32,25 +32,25 @@ def init_db():
 
 
 def populate_db():
-	db = get_db()
+	database = get_db()
 	
 	sim = Simulation()
 	
 	for key, simulation in sim.simulations.items():
-		db.execute(
+		database.execute(
 			'INSERT INTO simulations (key, value)'
 			' VALUES (?, ?)',
 			(key, simulation.value)
 		)
-		db.commit()
+		database.commit()
 	
 	for key, situation in sim.situations.items():
-		db.execute(
+		database.execute(
 			'INSERT INTO situations (key, is_active)'
 			' VALUES (?, ?)',
 			(key, situation.is_active)
 		)
-		db.commit()
+		database.commit()
 
 
 @click.command('init-db')
@@ -99,3 +99,25 @@ def simulation_from_database() -> Simulation:
 	# @todo: handle loading historic simulation values
 	
 	return sim
+
+
+def simulation_to_database(sim: Simulation):
+	database = get_db()
+	
+	for key, simulation in sim.simulations.items():
+		database.execute(
+			'UPDATE simulations '
+			' SET value = ?'
+			' WHERE key = ?',
+			(simulation.value, key)
+		)
+		database.commit()
+	
+	for key, situation in sim.situations.items():
+		database.execute(
+			'UPDATE situations '
+			' SET is_active = ?'
+			' WHERE key = ?',
+			(situation.is_active, key)
+		)
+		database.commit()

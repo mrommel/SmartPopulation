@@ -2,6 +2,24 @@
 
 {% block menu_simulations %}active{% endblock %}
 
+{% block content_header %}
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">Simulations</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <!--<li class="breadcrumb-item"><a href="#">Home</a></li>-->
+                    <li class="breadcrumb-item active">Simulations</li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+{% endblock %}
+
 {% block content %}
 <div class="row">
     <div class="col-md-12">
@@ -17,7 +35,7 @@
                         <th style="width: 10px">#</th>
                         <th>Name</th>
                         <th>Category</th>
-                        <th style="width: 40px">Value</th>
+                        <th>Value</th>
                         <th style="width: 40px">Min</th>
                         <th style="width: 40px">Max</th>
                     </tr>
@@ -26,66 +44,28 @@
                     {% for key, simulation in simulations.items() %}
                         <tr>
                             <td>{{ loop.index }}</td>
-                            <td>{{ simulation.name }}</td>
+                            <td>
+                                <div class="nav-sidebar nav-pills">
+                                    <a href="/simulation/{{ key }}" class="nav-link">
+                                        <i class="nav-icon fas fa-people-carry"></i>&nbsp;<p>{{ simulation.name }}</p>
+                                    </a>
+                                </div>
+                            </td>
                             <td>{{ simulation.category.name }}</td>
-                            <td>{{ simulation.value }}</td>
-                            <td>{{ simulation.min_value }}</td>
-                            <td>{{ simulation.max_value }}</td>
+                            <td>
+                                <div class="progress progress-xs">
+                                    <div class="progress-bar {{ simulation.prop }}" style="width: {{ (simulation.value * 100)|int }}%"></div>
+                                </div>
+                                {{ (simulation.value * 100)|int }}%
+                            </td>
+                            <td>{{ (simulation.min_value * 100)|int }}%</td>
+                            <td>{{ (simulation.max_value * 100)|int }}%</td>
                         </tr>
                     {% endfor %}
-                    <!--<tr>
-                        <td>1.</td>
-                        <td>Update software</td>
-                        <td>
-                            <div class="progress progress-xs">
-                                <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
-                            </div>
-                        </td>
-                        <td><span class="badge bg-danger">55%</span></td>
-                    </tr>
-                    <tr>
-                        <td>2.</td>
-                        <td>Clean database</td>
-                        <td>
-                            <div class="progress progress-xs">
-                                <div class="progress-bar bg-warning" style="width: 70%"></div>
-                            </div>
-                        </td>
-                        <td><span class="badge bg-warning">70%</span></td>
-                    </tr>
-                    <tr>
-                        <td>3.</td>
-                        <td>Cron job running</td>
-                        <td>
-                            <div class="progress progress-xs progress-striped active">
-                                <div class="progress-bar bg-primary" style="width: 30%"></div>
-                            </div>
-                        </td>
-                        <td><span class="badge bg-primary">30%</span></td>
-                    </tr>
-                    <tr>
-                        <td>4.</td>
-                        <td>Fix and squish bugs</td>
-                        <td>
-                            <div class="progress progress-xs progress-striped active">
-                                <div class="progress-bar bg-success" style="width: 90%"></div>
-                            </div>
-                        </td>
-                        <td><span class="badge bg-success">90%</span></td>
-                    </tr>-->
                     </tbody>
                 </table>
             </div>
 
-            <!--<div class="card-footer clearfix">
-                <ul class="pagination pagination-sm m-0 float-right">
-                    <li class="page-item"><a class="page-link" href="#">«</a></li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">»</a></li>
-                </ul>
-            </div>-->
         </div>
     </div>
 </div>

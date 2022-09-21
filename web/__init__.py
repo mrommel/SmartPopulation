@@ -1,8 +1,8 @@
 import os
 
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
-from web.db import get_db, simulation_from_database
+from web.db import get_db, simulation_from_database, simulation_to_database
 
 
 def create_app(test_config=None):
@@ -29,8 +29,13 @@ def create_app(test_config=None):
 	from . import db
 	db.init_app(app)
 	
-	@app.route("/")
+	@app.route("/", methods=('GET', 'POST'))
 	def index():
+		if request.method == 'POST':
+			simulation = simulation_from_database()
+			simulation.iterate()
+			simulation_to_database(simulation)
+			
 		database = get_db()
 		simulation_count = database.execute(
 			'SELECT count(*) as simulation_count FROM simulations'
@@ -38,15 +43,40 @@ def create_app(test_config=None):
 		
 		return render_template('index.html', simulation_count=simulation_count[0][0])
 	
-	@app.route("/dashboard")
-	def dashboard():
-		return render_template('dashboard.html')
-	
 	@app.route("/simulations")
 	def simulations():
-		simulation = simulation_from_database()
+		sim = simulation_from_database()
 		
-		return render_template('simulations.html', simulations=simulation.simulations)
+		# enrich simulations
+		for key, simulation_item in sim.simulations.items():
+			if simulation_item.value > 0.75:
+				simulation_item.prop = 'bg-success'
+			elif simulation_item.value > 0.50:
+				simulation_item.prop = 'bg-primary'
+			elif simulation_item.value > 0.25:
+				simulation_item.prop = 'bg-warning'
+			else:
+				simulation_item.prop = 'bg-danger'
+		
+		return render_template('simulations.html', simulations=sim.simulations)
+	
+	@app.route('/simulation/<key>')
+	def simulation(key):
+		sim = simulation_from_database()
+		
+		simulation_item = sim.simulations[key]
+		
+		# enrich the simulation
+		if simulation_item.value > 0.75:
+			simulation_item.prop = 'bg-success'
+		elif simulation_item.value > 0.50:
+			simulation_item.prop = 'bg-primary'
+		elif simulation_item.value > 0.25:
+			simulation_item.prop = 'bg-warning'
+		else:
+			simulation_item.prop = 'bg-danger'
+		
+		return render_template('simulation.html', simulation=simulation_item)
 	
 	@app.route("/groups")
 	def groups():

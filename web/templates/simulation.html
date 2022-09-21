@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block menu_simulations %}active{% endblock %}
+
+{% block content_header %}
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">{{ simulation.name }}</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="/simulations">Simulations</a></li>
+                    <li class="breadcrumb-item active">{{ simulation.name }}</li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Simulation</h3>
+            </div>
+
+            <div class="card-body">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>Property</th>
+                        <th>Value</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Name</td>
+                        <td>{{ simulation.name }}</td>
+                    </tr>
+                    <tr>
+                        <td>Description</td>
+                        <td>{{ simulation.description }}</td>
+                    </tr>
+                    <tr>
+                        <td>Category</td>
+                        <td>{{ simulation.category.name }}</td>
+                    </tr>
+                    <tr>
+                        <td>Value</td>
+                        <td>
+                            <div class="progress progress-xs">
+                                <div class="progress-bar {{ simulation.prop }}" style="width: {{ (simulation.value * 100)|int }}%"></div>
+                            </div>
+                            {{ (simulation.value * 100)|int }}%
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Minimal Value</td>
+                        <td>{{ (simulation.min_value * 100)|int }}%</td>
+                    </tr>
+                    <tr>
+                        <td>Maximal Value</td>
+                        <td>{{ (simulation.max_value * 100)|int }}%</td>
+                    </tr>
+                    <tr>
+                        <td>Effects</td>
+                        <td>{{ simulation.effects }}</td>
+                    </tr>
+                    <tr>
+                        <td>History</td>
+                        <td>{{ simulation.history }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
