@@ -9,9 +9,6 @@
             <!--<div class="card-header">
                 <h3 class="card-title">Simulations</h3>
             </div>-->
-            <div class="card-header">
-                <h3 class="card-title">{{ simulations }}</h3>
-            </div>
 
             <div class="card-body">
                 <table class="table table-bordered">
@@ -19,12 +16,24 @@
                     <tr>
                         <th style="width: 10px">#</th>
                         <th>Name</th>
-                        <th>Progress</th>
-                        <th style="width: 40px">Label</th>
+                        <th>Category</th>
+                        <th style="width: 40px">Value</th>
+                        <th style="width: 40px">Min</th>
+                        <th style="width: 40px">Max</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
+                    {% for simulation in simulations %}
+                        <tr>
+                            <td>{{ simulation.id }}</td>
+                            <td>{{ simulation.name }}</td>
+                            <td>{{ simulation.category_name }}</td>
+                            <td>{{ simulation.value }}</td>
+                            <td>{{ simulation.min_value }}</td>
+                            <td>{{ simulation.max_value }}</td>
+                        </tr>
+                    {% endfor %}
+                    <!--<tr>
                         <td>1.</td>
                         <td>Update software</td>
                         <td>
@@ -63,7 +72,7 @@
                             </div>
                         </td>
                         <td><span class="badge bg-success">90%</span></td>
-                    </tr>
+                    </tr>-->
                     </tbody>
                 </table>
             </div>

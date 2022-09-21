@@ -2,6 +2,7 @@ import sqlite3
 import click
 from flask import current_app, g
 
+from simulation.base import SimulationCategory
 from simulation.simulation import Simulation
 
 
@@ -35,11 +36,28 @@ def populate_db():
 
     sim = Simulation()
 
+    for category in SimulationCategory:
+        db.execute(
+            'INSERT INTO categories (id, name)'
+            ' VALUES (?, ?)',
+            (category.value, category.name)
+        )
+        db.commit()
+
     for key, simulation in sim.simulations.items():
         db.execute(
-            'INSERT INTO simulations (name, description)'
+            'INSERT INTO simulations (name, description, category_id, value, min_value, max_value)'
+            ' VALUES (?, ?, ?, ?, ?, ?)',
+            (simulation.name, simulation.description, simulation.category.value, simulation.value,
+             simulation.min_value, simulation.max_value)
+        )
+        db.commit()
+
+    for key, situation in sim.situations.items():
+        db.execute(
+            'INSERT INTO situations (name, description)'
             ' VALUES (?, ?)',
-            (simulation.name, simulation.description)
+            (situation.name, situation.description)
         )
         db.commit()
     

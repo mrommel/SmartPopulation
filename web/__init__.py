@@ -31,7 +31,12 @@ def create_app(test_config=None):
 	
 	@app.route("/")
 	def index():
-		return render_template('index.html')
+		db = get_db()
+		simulation_count = db.execute(
+			'SELECT count(*) as simulation_count FROM simulations'
+		).fetchall()
+		
+		return render_template('index.html', simulation_count=simulation_count[0][0])
 	
 	@app.route("/dashboard")
 	def dashboard():
@@ -41,8 +46,11 @@ def create_app(test_config=None):
 	def simulations():
 		db = get_db()
 		simulation_items = db.execute(
-			'SELECT s.id, s.name, s.description'
-			' FROM simulations as s'
+			'SELECT '
+			'  s.id, s.name, s.description, c.name as category_name, s.value, s.min_value, s.max_value '
+			'FROM '
+			'  simulations AS s'
+			'  INNER JOIN categories AS c ON s.category_id = c.id'
 		).fetchall()
 		
 		return render_template('simulations.html', simulations=simulation_items)
