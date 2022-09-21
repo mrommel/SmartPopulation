@@ -26,3 +26,7 @@ def groups():
 @app.route("/situations")
 def situations():
 	return render_template('situations.html')
+
+@app.route("/policies")
+def policies():
+	return render_template('policies.html')
