@@ -3,21 +3,10 @@ DROP TABLE IF EXISTS simulation_histories;
 DROP TABLE IF EXISTS categories;
 DROP TABLE IF EXISTS situations;
 
-CREATE TABLE categories (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  name TEXT NOT NULL
-);
-
 CREATE TABLE simulations (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   key TEXT UNIQUE NOT NULL,
-  name TEXT UNIQUE NOT NULL,
-  description TEXT NOT NULL,
-  category_id INTEGER NOT NULL,
-  value FLOAT NOT NULL,
-  min_value FLOAT NOT NULL,
-  max_value FLOAT NOT NULL,
-  FOREIGN KEY (category_id) REFERENCES categories (id)
+  value FLOAT NOT NULL
 );
 
 CREATE TABLE simulation_histories (
@@ -30,6 +19,5 @@ CREATE TABLE simulation_histories (
 CREATE TABLE situations (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   key TEXT UNIQUE NOT NULL,
-  name TEXT UNIQUE NOT NULL,
-  description TEXT NOT NULL
+  is_active BOOL NOT NULL
 );

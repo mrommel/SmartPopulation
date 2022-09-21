@@ -223,7 +223,8 @@ class SituationBase:
 			category: SimulationCategory,
 			default_value: float,
 			start_trigger: float,
-			end_trigger: float
+			end_trigger: float,
+			is_active: bool = False
 	):
 		"""
 			value constructor
@@ -236,6 +237,7 @@ class SituationBase:
 			:param default_value: default value of the simulation
 			:param start_trigger:
 			:param end_trigger:
+			:param is_active:
 		"""
 		self.name = name
 		self.description = description
@@ -243,15 +245,14 @@ class SituationBase:
 		self.end_text = end_text
 		self.category = category
 		
+		self.start_trigger = start_trigger
+		self.end_trigger = end_trigger
+		
 		# values
 		self.default_value = default_value
 		self.value = default_value
 		self.new_value = 0.0
-		
-		self.start_trigger = start_trigger
-		self.end_trigger = end_trigger
-		
-		self.is_active = False
+		self.is_active = is_active
 		
 		self.effects = []
 	

@@ -23,11 +23,11 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {% for simulation in simulations %}
+                    {% for key, simulation in simulations.items() %}
                         <tr>
-                            <td>{{ simulation.id }}</td>
+                            <td>{{ loop.index }}</td>
                             <td>{{ simulation.name }}</td>
-                            <td>{{ simulation.category_name }}</td>
+                            <td>{{ simulation.category.name }}</td>
                             <td>{{ simulation.value }}</td>
                             <td>{{ simulation.min_value }}</td>
                             <td>{{ simulation.max_value }}</td>

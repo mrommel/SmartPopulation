@@ -46,7 +46,7 @@ def create_app(test_config=None):
 	def simulations():
 		simulation = simulation_from_database()
 		
-		return render_template('simulations.html', simulations=simulation.simulations   )
+		return render_template('simulations.html', simulations=simulation.simulations)
 	
 	@app.route("/groups")
 	def groups():
