@@ -1,0 +1,7 @@
+DROP TABLE IF EXISTS simulations;
+
+CREATE TABLE simulations (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name TEXT UNIQUE NOT NULL,
+  description TEXT NOT NULL
+);

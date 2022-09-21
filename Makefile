@@ -21,7 +21,10 @@ run: venv
 	./$(VENV)/bin/python3 app.py
 
 wsgi: venv
-	./$(VENV)/bin/python3 -m flask --app web/wsgi run
+	./$(VENV)/bin/python3 -m flask --app web run
+
+init-db: venv
+	./$(VENV)/bin/python3 -m flask --app web init-db
 
 clean:
 	rm -rf $(VENV)

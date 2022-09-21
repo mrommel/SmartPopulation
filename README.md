@@ -33,6 +33,7 @@ make pylint
 * https://github.com/bakster55/W3JsonToExcel
 * https://jsoncrack.com/
 * https://github.com/ColorlibHQ/AdminLTE
+* https://fontawesome.com/icons
 
 ## Scratch pad
 
