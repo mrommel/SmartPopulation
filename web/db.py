@@ -73,23 +73,25 @@ def simulation_from_database() -> Simulation:
 	
 	# populate simulations
 	simulation_items = database.execute(
-		'SELECT '
-		'  s.key, s.value '
-		'FROM '
-		'  simulations AS s'
+		'SELECT s.id, s.key, s.value FROM simulations AS s'
 	).fetchall()
 	
 	for simulation_item in simulation_items:
 		sim.simulations[simulation_item['key']].value = simulation_item['value']
-		print(f"updated: {simulation_item['key']} = {simulation_item['value']}")
-	# @todo: handle loading historic simulation values
+		# print(f"updated: {simulation_item['key']} = {simulation_item['value']}")
+		
+		# @todo: handle loading historic simulation values
+		simulation_histories_items = database.execute(
+			'SELECT s.value FROM simulation_histories AS s WHERE simulation_id = ?', (simulation_item['id'], )
+		).fetchall()
+		
+		for simulation_histories_item in simulation_histories_items:
+			# print(f'simulation_histories_item={simulation_histories_item["value"]}')
+			sim.simulations[simulation_item['key']].history.append(simulation_histories_item["value"])
 	
 	# populate situations
 	situation_items = database.execute(
-		'SELECT '
-		'  s.key, s.is_active '
-		'FROM '
-		'  situations AS s'
+		'SELECT s.key, s.is_active FROM situations AS s'
 	).fetchall()
 	
 	for situation_item in situation_items:
@@ -104,20 +106,40 @@ def simulation_from_database() -> Simulation:
 def simulation_to_database(sim: Simulation):
 	database = get_db()
 	
+	# simulations
 	for key, simulation in sim.simulations.items():
 		database.execute(
-			'UPDATE simulations '
-			' SET value = ?'
-			' WHERE key = ?',
+			'UPDATE simulations SET value = ? WHERE key = ?',
 			(simulation.value, key)
 		)
 		database.commit()
+		
+		print(f'key={key}')
+		simulation_row = database.execute(
+			'SELECT s.id FROM simulations AS s WHERE key = ?',
+			(key,)
+		).fetchone()
+		database.commit()
+		simulation_id = simulation_row[0]
+		
+		print(f'simulation_id={simulation_id}')
+		database.execute(
+			'DELETE FROM simulation_histories WHERE simulation_id = ?',
+			(simulation_id,)
+		)
+		database.commit()
+		
+		for simulation_history_value in simulation.history:
+			database.execute(
+				'INSERT INTO simulation_histories (simulation_id, value) VALUES (?, ?)',
+				(simulation_id, simulation_history_value)
+			)
+			database.commit()
 	
+	# situations
 	for key, situation in sim.situations.items():
 		database.execute(
-			'UPDATE situations '
-			' SET is_active = ?'
-			' WHERE key = ?',
+			'UPDATE situations SET is_active = ? WHERE key = ?',
 			(situation.is_active, key)
 		)
 		database.commit()

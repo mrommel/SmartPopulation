@@ -49,12 +49,14 @@ def create_app(test_config=None):
 		
 		# enrich simulations
 		for key, simulation_item in sim.simulations.items():
-			if simulation_item.value > 0.75:
+			if simulation_item.value > 0.8:
 				simulation_item.prop = 'bg-success'
-			elif simulation_item.value > 0.50:
+			elif simulation_item.value > 0.6:
 				simulation_item.prop = 'bg-primary'
-			elif simulation_item.value > 0.25:
+			elif simulation_item.value > 0.4:
 				simulation_item.prop = 'bg-warning'
+			elif simulation_item.value > 0.2:
+				simulation_item.prop = 'bg-orange'
 			else:
 				simulation_item.prop = 'bg-danger'
 		
@@ -67,12 +69,14 @@ def create_app(test_config=None):
 		simulation_item = sim.simulations[key]
 		
 		# enrich the simulation
-		if simulation_item.value > 0.75:
+		if simulation_item.value > 0.8:
 			simulation_item.prop = 'bg-success'
-		elif simulation_item.value > 0.50:
+		elif simulation_item.value > 0.6:
 			simulation_item.prop = 'bg-primary'
-		elif simulation_item.value > 0.25:
+		elif simulation_item.value > 0.4:
 			simulation_item.prop = 'bg-warning'
+		elif simulation_item.value > 0.2:
+			simulation_item.prop = 'bg-orange'
 		else:
 			simulation_item.prop = 'bg-danger'
 		

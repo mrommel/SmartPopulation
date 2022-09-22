@@ -68,11 +68,21 @@
                     </tr>
                     <tr>
                         <td>Effects</td>
-                        <td>{{ simulation.effects }}</td>
+                        <td>
+                            <ul>
+                            {% for effect in simulation.effects %}
+                                <li>{{ effect.target_name }}</li>
+                            {% endfor %}
+                            </ul>
+                        </td>
                     </tr>
                     <tr>
                         <td>History</td>
-                        <td>{{ simulation.history }}</td>
+                        <td>
+                            {% for history_item in simulation.history %}
+                                {{ "%.2f"|format(history_item) }}, 
+                            {% endfor %}
+                        </td>
                     </tr>
                     </tbody>
                 </table>
