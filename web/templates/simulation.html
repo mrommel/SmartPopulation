@@ -80,7 +80,7 @@
                         <td>History</td>
                         <td>
                             {% for history_item in simulation.history %}
-                                {{ "%.2f"|format(history_item) }}, 
+                                {{ "%.2f"|format(history_item) }}{% if not loop.last %}, {% endif %}
                             {% endfor %}
                         </td>
                     </tr>

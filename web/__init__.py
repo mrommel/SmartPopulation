@@ -32,16 +32,13 @@ def create_app(test_config=None):
 	@app.route("/", methods=('GET', 'POST'))
 	def index():
 		if request.method == 'POST':
-			simulation = simulation_from_database()
-			simulation.iterate()
-			simulation_to_database(simulation)
-			
-		database = get_db()
-		simulation_count = database.execute(
-			'SELECT count(*) as simulation_count FROM simulations'
-		).fetchall()
+			sim = simulation_from_database()
+			sim.iterate()
+			simulation_to_database(sim)
+		else:
+			sim = simulation_from_database()
 		
-		return render_template('index.html', simulation_count=simulation_count[0][0])
+		return render_template('index.html', simulation_count=len(sim.simulations))
 	
 	@app.route("/simulations")
 	def simulations():
@@ -84,11 +81,49 @@ def create_app(test_config=None):
 	
 	@app.route("/groups")
 	def groups():
-		return render_template('groups.html')
+		sim = simulation_from_database()
+		
+		# enrich simulations
+		for key, groups_item in sim.groups.items():
+			if groups_item.mood.value > 0.8:
+				groups_item.prop = 'bg-success'
+			elif groups_item.mood.value > 0.6:
+				groups_item.prop = 'bg-primary'
+			elif groups_item.mood.value > 0.4:
+				groups_item.prop = 'bg-warning'
+			elif groups_item.mood.value > 0.2:
+				groups_item.prop = 'bg-orange'
+			else:
+				groups_item.prop = 'bg-danger'
+		
+		return render_template('groups.html', groups=sim.groups)
 	
 	@app.route("/situations")
 	def situations():
-		return render_template('situations.html')
+		sim = simulation_from_database()
+		
+		# enrich simulations
+		for key, situation_item in sim.situations.items():
+			if situation_item.is_active:
+				situation_item.prop = 'bg-success'
+			else:
+				situation_item.prop = 'bg-danger'
+		
+		return render_template('situations.html', situations=sim.situations)
+	
+	@app.route('/situation/<key>')
+	def situation(key):
+		sim = simulation_from_database()
+		
+		situation_item = sim.situations[key]
+		
+		# enrich the simulation
+		if situation_item.is_active:
+			situation_item.prop = 'bg-success'
+		else:
+			situation_item.prop = 'bg-danger'
+		
+		return render_template('situation.html', situation=situation_item)
 	
 	@app.route("/policies")
 	def policies():
