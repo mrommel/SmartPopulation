@@ -1,18 +1,18 @@
 {% extends "base.html" %}
 
-{% block menu_situations %}active{% endblock %}
+{% block menu_groups %}active{% endblock %}
 
 {% block content_header %}
 <div class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">{{ situation.name }}</h1>
+                <h1 class="m-0">{{ group.name }}</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="/situations">Situations</a></li>
-                    <li class="breadcrumb-item active">{{ situation.name }}</li>
+                    <li class="breadcrumb-item"><a href="/groups">Groups</a></li>
+                    <li class="breadcrumb-item active">{{ group.name }}</li>
                 </ol>
             </div><!-- /.col -->
         </div><!-- /.row -->
@@ -25,7 +25,7 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">Simulation</h3>
+                <h3 class="card-title">Group</h3>
             </div>
 
             <div class="card-body">
@@ -39,32 +39,40 @@
                     <tbody>
                     <tr>
                         <td>Name</td>
-                        <td>{{ situation.name }}</td>
+                        <td>{{ group.name }}</td>
                     </tr>
                     <tr>
                         <td>Description</td>
-                        <td>{{ situation.description }}</td>
+                        <td>{{ group.description }}</td>
                     </tr>
                     <tr>
                         <td>Category</td>
-                        <td>{{ situation.category.name }}</td>
+                        <td>{{ group.category.name }}</td>
                     </tr>
                     <tr>
-                        <td>Start Text</td>
-                        <td>{{ situation.start_text }}</td>
-                    </tr>
-                    <tr>
-                        <td>End Text</td>
-                        <td>{{ situation.end_text }}</td>
-                    </tr>
-                    <tr>
-                        <td>Effects</td>
+                        <td>Mood Value</td>
                         <td>
-                            <ul>
-                            {% for effect in situation.effects %}
-                                <li>{{ effect.target_name }}</li>
+                            <div class="progress progress-xs">
+                                <div class="progress-bar {{ group.prop_mood }}" style="width: {{ (group.mood.value * 100)|int }}%"></div>
+                            </div>
+                            {{ (group.mood.value * 100)|int }}%
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Freq Value</td>
+                        <td>
+                            <div class="progress progress-xs">
+                                <div class="progress-bar {{ group.prop_freq }}" style="width: {{ (group.freq.value * 100)|int }}%"></div>
+                            </div>
+                            {{ (group.freq.value * 100)|int }}%
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>History</td>
+                        <td>
+                            {% for history_item in group.history %}
+                                {{ "%.2f"|format(history_item) }}{% if not loop.last %}, {% endif %}
                             {% endfor %}
-                            </ul>
                         </td>
                     </tr>
                     </tbody>

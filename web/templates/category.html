@@ -1,18 +1,18 @@
 {% extends "base.html" %}
 
-{% block menu_situations %}active{% endblock %}
+{% block menu_categories %}active{% endblock %}
 
 {% block content_header %}
 <div class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">{{ situation.name }}</h1>
+                <h1 class="m-0">{{ category.title }}</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="/situations">Situations</a></li>
-                    <li class="breadcrumb-item active">{{ situation.name }}</li>
+                    <li class="breadcrumb-item"><a href="/categories">Categories</a></li>
+                    <li class="breadcrumb-item active">{{ category.title }}</li>
                 </ol>
             </div><!-- /.col -->
         </div><!-- /.row -->
@@ -25,7 +25,7 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">Simulation</h3>
+                <h3 class="card-title">Group</h3>
             </div>
 
             <div class="card-body">
@@ -39,33 +39,34 @@
                     <tbody>
                     <tr>
                         <td>Name</td>
-                        <td>{{ situation.name }}</td>
+                        <td>{{ category.title }}</td>
                     </tr>
                     <tr>
-                        <td>Description</td>
-                        <td>{{ situation.description }}</td>
-                    </tr>
-                    <tr>
-                        <td>Category</td>
-                        <td>{{ situation.category.name }}</td>
-                    </tr>
-                    <tr>
-                        <td>Start Text</td>
-                        <td>{{ situation.start_text }}</td>
-                    </tr>
-                    <tr>
-                        <td>End Text</td>
-                        <td>{{ situation.end_text }}</td>
-                    </tr>
-                    <tr>
-                        <td>Effects</td>
+                        <td>Simulations</td>
                         <td>
                             <ul>
-                            {% for effect in situation.effects %}
-                                <li>{{ effect.target_name }}</li>
+                            {% for key, simulation_item in category.simulations.items() %}
+                                <li>
+                                    <div class="nav-sidebar nav-pills">
+                                        <a href="/simulation/{{ key }}" class="nav-link p-0">
+                                            <i class="nav-icon fas fa-chart-bar"></i>&nbsp;<p>{{ simulation_item.name }}</p>
+                                        </a>
+                                    </div>
+                                </li>
                             {% endfor %}
                             </ul>
                         </td>
+                    </tr>
+                    <tr>
+                        <td>Situations</td>
+                        <td>
+                            {{ category.situations }}
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Policies</td>
+                        <td>{{ category.policies }}</td>
                     </tr>
                     </tbody>
                 </table>

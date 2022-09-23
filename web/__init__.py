@@ -2,6 +2,7 @@ import os
 
 from flask import Flask, render_template, request
 
+from simulation.base import SimulationCategory
 from web.db import get_db, simulation_from_database, simulation_to_database
 
 
@@ -84,19 +85,60 @@ def create_app(test_config=None):
 		sim = simulation_from_database()
 		
 		# enrich simulations
-		for key, groups_item in sim.groups.items():
-			if groups_item.mood.value > 0.8:
-				groups_item.prop = 'bg-success'
-			elif groups_item.mood.value > 0.6:
-				groups_item.prop = 'bg-primary'
-			elif groups_item.mood.value > 0.4:
-				groups_item.prop = 'bg-warning'
-			elif groups_item.mood.value > 0.2:
-				groups_item.prop = 'bg-orange'
+		for key, group_item in sim.groups.items():
+			if group_item.mood.value > 0.8:
+				group_item.mood_prop = 'bg-success'
+			elif group_item.mood.value > 0.6:
+				group_item.mood_prop = 'bg-primary'
+			elif group_item.mood.value > 0.4:
+				group_item.mood_prop = 'bg-warning'
+			elif group_item.mood.value > 0.2:
+				group_item.mood_prop = 'bg-orange'
 			else:
-				groups_item.prop = 'bg-danger'
+				group_item.mood_prop = 'bg-danger'
+				
+			if group_item.freq.value > 0.8:
+				group_item.freq_prop = 'bg-success'
+			elif group_item.freq.value > 0.6:
+				group_item.freq_prop = 'bg-primary'
+			elif group_item.freq.value > 0.4:
+				group_item.freq_prop = 'bg-warning'
+			elif group_item.freq.value > 0.2:
+				group_item.freq_prop = 'bg-orange'
+			else:
+				group_item.freq_prop = 'bg-danger'
 		
 		return render_template('groups.html', groups=sim.groups)
+	
+	@app.route("/group/<key>")
+	def group(key):
+		sim = simulation_from_database()
+		
+		group_item = sim.groups[key]
+		
+		if group_item.mood.value > 0.8:
+			group_item.mood_prop = 'bg-success'
+		elif group_item.mood.value > 0.6:
+			group_item.mood_prop = 'bg-primary'
+		elif group_item.mood.value > 0.4:
+			group_item.mood_prop = 'bg-warning'
+		elif group_item.mood.value > 0.2:
+			group_item.mood_prop = 'bg-orange'
+		else:
+			group_item.mood_prop = 'bg-danger'
+		
+		if group_item.freq.value > 0.8:
+			group_item.freq_prop = 'bg-success'
+		elif group_item.freq.value > 0.6:
+			group_item.freq_prop = 'bg-primary'
+		elif group_item.freq.value > 0.4:
+			group_item.freq_prop = 'bg-warning'
+		elif group_item.freq.value > 0.2:
+			group_item.freq_prop = 'bg-orange'
+		else:
+			group_item.freq_prop = 'bg-danger'
+		
+		return render_template('group.html', group=group_item)
 	
 	@app.route("/situations")
 	def situations():
@@ -128,5 +170,23 @@ def create_app(test_config=None):
 	@app.route("/policies")
 	def policies():
 		return render_template('policies.html')
+	
+	@app.route("/categories")
+	def categories():
+		category_items = SimulationCategory
+		
+		return render_template('categories.html', categories=category_items)
+	
+	@app.route('/category/<key>')
+	def category(key):
+		sim = simulation_from_database()
+		category_item = SimulationCategory[key]
+		
+		# {k: v for k, v in points.items() if v[0] < 5 and v[1] < 5}
+		category_item.simulations = {k: simulation_item for k, simulation_item in sim.simulations.items() if simulation_item.category.value == category_item.value }
+		category.situations = []
+		category.policies = []
+		
+		return render_template('category.html', category=category_item)
 	
 	return app

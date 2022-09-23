@@ -1,18 +1,18 @@
 {% extends "base.html" %}
 
-{% block menu_groups %}active{% endblock %}
+{% block menu_categories %}active{% endblock %}
 
 {% block content_header %}
 <div class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">Groups</h1>
+                <h1 class="m-0">Categories</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <!--<li class="breadcrumb-item"><a href="#">Home</a></li>-->
-                    <li class="breadcrumb-item active">Groups</li>
+                    <li class="breadcrumb-item active">Categories</li>
                 </ol>
             </div><!-- /.col -->
         </div><!-- /.row -->
@@ -21,8 +21,7 @@
 {% endblock %}
 
 {% block content %}
-<div class="row">
-    <div class="col-md-12">
+<div class="col-md-12">
         <div class="card">
             <!--<div class="card-header">
                 <h3 class="card-title">Simulations</h3>
@@ -34,35 +33,21 @@
                     <tr>
                         <th style="width: 10px">#</th>
                         <th>Name</th>
-                        <th>Mood</th>
-                        <th>Frequency</th>
                     </tr>
                     </thead>
                     <tbody>
-                    {% for key, group in groups.items() %}
+                        {% for category in categories %}
                         <tr>
                             <td>{{ loop.index }}</td>
                             <td>
                                 <div class="nav-sidebar nav-pills">
-                                    <a href="/group/{{ key }}" class="nav-link p-0">
-                                        <i class="nav-icon fas fa-users"></i>&nbsp;<p>{{ group.name }}</p>
+                                    <a href="/category/{{ category.name }}" class="nav-link p-0">
+                                        <i class="nav-icon fas fa-list"></i>&nbsp;<p>{{ category.title }}</p>
                                     </a>
                                 </div>
                             </td>
-                            <td>
-                                <div class="progress progress-xs">
-                                    <div class="progress-bar {{ group.mood_prop }}" style="width: {{ (group.mood.value * 100)|int }}%"></div>
-                                </div>
-                                {{ (group.mood.value * 100)|int }}%
-                            </td>
-                            <td>
-                                <div class="progress progress-xs">
-                                    <div class="progress-bar {{ group.freq_prop }}" style="width: {{ (group.freq.value * 100)|int }}%"></div>
-                                </div>
-                                {{ (group.freq.value * 100)|int }}%
-                            </td>
                         </tr>
-                    {% endfor %}
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>

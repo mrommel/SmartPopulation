@@ -16,6 +16,28 @@ class SimulationCategory(Enum):
 	
 	hidden = 10
 	people = 20
+	
+	def __str__(self):
+		return self.name
+	
+	@property
+	def title(self):
+		if self.value == SimulationCategory.public_services.value:
+			return 'Public Services'
+		elif self.value == SimulationCategory.law_and_order.value:
+			return 'Law and order'
+		elif self.value == SimulationCategory.economy.value:
+			return 'Economy'
+		elif self.value == SimulationCategory.foreign_policy.value:
+			return 'Foreign policy'
+		elif self.value == SimulationCategory.welfare.value:
+			return 'Welfare'
+		elif self.value == SimulationCategory.transport.value:
+			return 'Transport'
+		elif self.value == SimulationCategory.people.value:
+			return 'People'
+		else:
+			return 'default'
 
 
 class SimulationConnection:
