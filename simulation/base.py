@@ -277,6 +277,7 @@ class SituationBase:
 		self.is_active = is_active
 		
 		self.effects = []
+		self.history = []
 	
 	def prepare(self):
 		"""
@@ -327,6 +328,8 @@ class SituationBase:
 
 			:return: (nothing)
 		"""
+		# put to history
+		self.history.insert(0, self.value)
 
 	def print(self):
 		"""
