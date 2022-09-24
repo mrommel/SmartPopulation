@@ -47,7 +47,13 @@
                     </tr>
                     <tr>
                         <td>Category</td>
-                        <td>{{ simulation.category.name }}</td>
+                        <td>
+                            <div class="nav-sidebar nav-pills">
+                                <a href="/category/{{ simulation.category.name }}" class="nav-link p-0">
+                                    <i class="nav-icon fas fa-list"></i>&nbsp;<p>{{ simulation.category.title }}</p>
+                                </a>
+                            </div>
+                        </td>
                     </tr>
                     <tr>
                         <td>Value</td>

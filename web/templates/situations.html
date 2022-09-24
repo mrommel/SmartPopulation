@@ -49,7 +49,13 @@
                                     </a>
                                 </div>
                             </td>
-                            <td>{{ situation.category.name }}</td>
+                            <td>
+                                <div class="nav-sidebar nav-pills">
+                                    <a href="/category/{{ situation.category.name }}" class="nav-link p-0">
+                                        <i class="nav-icon fas fa-list"></i>&nbsp;<p>{{ situation.category.title }}</p>
+                                    </a>
+                                </div>
+                            </td>
                             <td>
                                 <div class="progress progress-xs">
                                     <div class="progress-bar {{ situation.prop }}" style="width: 100%"></div>

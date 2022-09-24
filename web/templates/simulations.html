@@ -51,7 +51,13 @@
                                     </a>
                                 </div>
                             </td>
-                            <td>{{ simulation.category.name }}</td>
+                            <td>
+                                <div class="nav-sidebar nav-pills">
+                                    <a href="/category/{{ simulation.category.name }}" class="nav-link p-0">
+                                        <i class="nav-icon fas fa-list"></i>&nbsp;<p>{{ simulation.category.title }}</p>
+                                    </a>
+                                </div>
+                            </td>
                             <td>
                                 <div class="progress progress-xs">
                                     <div class="progress-bar {{ simulation.prop }}" style="width: {{ (simulation.value * 100)|int }}%"></div>

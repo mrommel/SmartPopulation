@@ -3,7 +3,7 @@ import os
 from flask import Flask, render_template, request
 
 from simulation.base import SimulationCategory
-from web.db import get_db, simulation_from_database, simulation_to_database
+from web.db import get_db, simulation_from_database, simulation_to_database, init_db, populate_db
 
 
 def create_app(test_config=None):
@@ -33,9 +33,18 @@ def create_app(test_config=None):
 	@app.route("/", methods=('GET', 'POST'))
 	def index():
 		if request.method == 'POST':
-			sim = simulation_from_database()
-			sim.iterate()
-			simulation_to_database(sim)
+			action = request.form['action']
+			if action == 'next_turn':
+				sim = simulation_from_database()
+				sim.iterate()
+				simulation_to_database(sim)
+			elif action == 'reset':
+				init_db()
+				populate_db()
+				sim = simulation_from_database()
+			else:
+				print(f'unknown action: {action}')
+				sim = simulation_from_database()
 		else:
 			sim = simulation_from_database()
 		
@@ -169,7 +178,9 @@ def create_app(test_config=None):
 	
 	@app.route("/policies")
 	def policies():
-		return render_template('policies.html')
+		sim = simulation_from_database()
+		
+		return render_template('policies.html', policies=sim.policies)
 	
 	@app.route("/categories")
 	def categories():

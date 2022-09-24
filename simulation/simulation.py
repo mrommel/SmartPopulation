@@ -105,6 +105,10 @@ class Simulation:
 			'pollution': PollutionSituation()
 		}
 		
+		self.policies = {
+			# taxes etc
+		}
+		
 		self.started_situations = []
 		self.ended_situations = []
 	
