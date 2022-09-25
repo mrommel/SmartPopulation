@@ -1,5 +1,5 @@
 """low income simulation"""
-from simulation.base import SimulationCategory, SimulationBase, SimulationConnection
+from simulation.base import SimulationCategory, SimulationBase, SimulationConnection, SimulationEmotion
 
 
 class LowIncomeSimulation(SimulationBase):
@@ -17,7 +17,8 @@ class LowIncomeSimulation(SimulationBase):
 			SimulationCategory.economy,
 			0.0,
 			-1.0,
-			1.0
+			1.0,
+			emotion=SimulationEmotion.high_good
 		)
 
 		# connections:

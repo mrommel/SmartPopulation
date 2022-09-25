@@ -1,5 +1,5 @@
 """oil demand simulation"""
-from simulation.base import SimulationCategory, SimulationBase, SimulationConnection
+from simulation.base import SimulationCategory, SimulationBase, SimulationConnection, SimulationEmotion
 
 
 class OilDemandSimulation(SimulationBase):
@@ -15,6 +15,7 @@ class OilDemandSimulation(SimulationBase):
 			"somewhat, as can investments in cleaner industry and renewable energy sources.",
 			SimulationCategory.transport,
 			0.1,
+			emotion=SimulationEmotion.high_good
 		)
 		
 		# input @todo

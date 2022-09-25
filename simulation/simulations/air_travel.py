@@ -1,7 +1,7 @@
 """
 	air travel simulation
 """
-from simulation.base import SimulationCategory, SimulationBase, SimulationConnection
+from simulation.base import SimulationCategory, SimulationBase, SimulationConnection, SimulationEmotion
 
 
 class AirTravelSimulation(SimulationBase):
@@ -17,7 +17,8 @@ class AirTravelSimulation(SimulationBase):
 			"air freight. The amount of air travel is very price sensitive, so changes in fuel costs, taxes and other "
 			"charges can have a major effect.",
 			SimulationCategory.transport,
-			0.0
+			0.0,
+			emotion=SimulationEmotion.unknown
 		)
 
 		# connections:

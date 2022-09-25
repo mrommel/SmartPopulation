@@ -1,5 +1,5 @@
 """technology simulation"""
-from simulation.base import SimulationCategory, SimulationBase, SimulationConnection
+from simulation.base import SimulationCategory, SimulationBase, SimulationConnection, SimulationEmotion
 
 
 class TechnologySimulation(SimulationBase):
@@ -15,7 +15,8 @@ class TechnologySimulation(SimulationBase):
 			"students, and the capabilities of industry. A high technological index boosts international "
 			"competitiveness. Tax incentives may be required to attract high tech industry. ",
 			SimulationCategory.economy,
-			0.5
+			0.5,
+			emotion=SimulationEmotion.high_good
 		)
 
 		# connections:

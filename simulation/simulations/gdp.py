@@ -1,5 +1,5 @@
 """gdp simulation"""
-from simulation.base import SimulationCategory, SimulationBase, SimulationConnection
+from simulation.base import SimulationCategory, SimulationBase, SimulationConnection, SimulationEmotion
 
 
 class GDPSimulation(SimulationBase):
@@ -15,7 +15,8 @@ class GDPSimulation(SimulationBase):
 			"of your economy, and the nations overall wealth. One of the contributing factors is the global economic "
 			"cycle, which tends to be cyclical, and is beyond your control.",
 			SimulationCategory.economy,
-			0.35
+			0.35,
+			emotion=SimulationEmotion.high_good
 		)
 
 		# connections:

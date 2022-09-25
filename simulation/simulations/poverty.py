@@ -1,5 +1,5 @@
 """poverty simulation"""
-from simulation.base import SimulationCategory, SimulationBase, SimulationConnection
+from simulation.base import SimulationCategory, SimulationBase, SimulationConnection, SimulationEmotion
 
 
 class PovertySimulation(SimulationBase):
@@ -13,7 +13,8 @@ class PovertySimulation(SimulationBase):
 			"One of the most widely used measures of comparison between nations. The poverty level is periodically "
 			"reassessed, but all nations should strive to get their poverty rate as low as possible.",
 			SimulationCategory.welfare,
-			0.64
+			0.64,
+			emotion=SimulationEmotion.high_bad
 		)
 		
 		# connections:

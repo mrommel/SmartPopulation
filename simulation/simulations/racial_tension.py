@@ -1,5 +1,5 @@
 """racial tension simulation"""
-from simulation.base import SimulationCategory, SimulationBase, SimulationConnection
+from simulation.base import SimulationCategory, SimulationBase, SimulationConnection, SimulationEmotion
 
 
 class RacialTensionSimulation(SimulationBase):
@@ -14,7 +14,8 @@ class RacialTensionSimulation(SimulationBase):
 			"immigration can sometimes lead to racial tensions, which can in the worst case, result in violent "
 			"clashes.",
 			SimulationCategory.foreign_policy,
-			0.0
+			0.0,
+			emotion=SimulationEmotion.high_bad
 		)
 		
 		# connections:

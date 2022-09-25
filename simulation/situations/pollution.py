@@ -1,7 +1,7 @@
 """
 	situation of pollution
 """
-from simulation.base import SituationBase, SimulationCategory
+from simulation.base import SituationBase, SimulationCategory, SimulationConnection
 
 
 class PollutionSituation(SituationBase):
@@ -25,7 +25,7 @@ class PollutionSituation(SituationBase):
 		)
 
 		# connections
-		# Environmentalist,-0.1-(0.3*x)
-		# Health,0-(0.48*x)^1.5
-		# Environmentalist_freq,0.1+(0.1*x)
+		self.effects.append(SimulationConnection('health', '0 - (0.48 * x) ** 1.5'))
+		self.effects.append(SimulationConnection('environmentalist_mood', '-0.1 - (0.3 * x)'))
+		self.effects.append(SimulationConnection('environmentalist_freq', '0.1 + (0.1 * x)'))
 	

@@ -1,5 +1,5 @@
 """foreign relations simulation"""
-from simulation.base import SimulationCategory, SimulationBase, SimulationConnection
+from simulation.base import SimulationCategory, SimulationBase, SimulationConnection, SimulationEmotion
 
 
 class ForeignRelationsSimulation(SimulationBase):
@@ -14,7 +14,8 @@ class ForeignRelationsSimulation(SimulationBase):
 			"wars or terrorism which may threaten our citizens, and secondly, as a way to ensure trade relations are "
 			"good and that we benefit economically from trade and tourism with other nations.",
 			SimulationCategory.foreign_policy,
-			0.14
+			0.14,
+			emotion=SimulationEmotion.high_good
 		)
 		
 		# connections:

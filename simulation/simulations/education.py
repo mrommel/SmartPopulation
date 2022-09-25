@@ -1,5 +1,5 @@
 """education simulation"""
-from simulation.base import SimulationCategory, SimulationBase, SimulationConnection
+from simulation.base import SimulationCategory, SimulationBase, SimulationConnection, SimulationEmotion
 
 
 class EducationSimulation(SimulationBase):
@@ -13,7 +13,8 @@ class EducationSimulation(SimulationBase):
 			"A measurement of the education level of the average citizen. Not only literacy, but numeracy and general "
 			"understanding of everything from history to IT and science.",
 			SimulationCategory.public_services,
-			0.18
+			0.18,
+			emotion=SimulationEmotion.high_good
 		)
 
 		# connections:

@@ -1,5 +1,5 @@
 """crime rate simulation"""
-from simulation.base import SimulationCategory, SimulationBase, SimulationConnection
+from simulation.base import SimulationCategory, SimulationBase, SimulationConnection, SimulationEmotion
 
 
 class CrimeRateSimulation(SimulationBase):
@@ -13,7 +13,8 @@ class CrimeRateSimulation(SimulationBase):
 			"An indicator of the level of general non violent crime in your nation. This includes crimes such as car "
 			"crime, burglary etc., but also covers fraud and other similar crimes.",
 			SimulationCategory.law_and_order,
-			0.55
+			0.55,
+			emotion=SimulationEmotion.high_bad
 		)
 
 		# connections:

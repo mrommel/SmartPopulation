@@ -1,5 +1,5 @@
 """life span simulation"""
-from simulation.base import SimulationCategory, SimulationBase, SimulationConnection
+from simulation.base import SimulationCategory, SimulationBase, SimulationConnection, SimulationEmotion
 
 
 class LifespanSimulation(SimulationBase):
@@ -12,7 +12,8 @@ class LifespanSimulation(SimulationBase):
 			"Lifespan",
 			"",
 			SimulationCategory.public_services,
-			0.5
+			0.5,
+			emotion=SimulationEmotion.high_good
 		)
 
 		# connections:

@@ -1,5 +1,5 @@
 """rail usage simulation"""
-from simulation.base import SimulationCategory, SimulationBase, SimulationConnection
+from simulation.base import SimulationCategory, SimulationBase, SimulationConnection, SimulationEmotion
 
 
 class RailUsageSimulation(SimulationBase):
@@ -15,7 +15,8 @@ class RailUsageSimulation(SimulationBase):
 			"efficient in highly populated countries, but improvements to rail  infrastructure can be extremely "
 			"expensive and take a long time.",
 			SimulationCategory.transport,
-			0.25
+			0.25,
+			emotion=SimulationEmotion.high_good
 		)
 		
 		# input @todo

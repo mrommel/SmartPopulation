@@ -1,5 +1,5 @@
 """worker productivity simulation"""
-from simulation.base import SimulationCategory, SimulationBase, SimulationConnection
+from simulation.base import SimulationCategory, SimulationBase, SimulationConnection, SimulationEmotion
 
 
 class WorkerProductivitySimulation(SimulationBase):
@@ -13,7 +13,8 @@ class WorkerProductivitySimulation(SimulationBase):
 			"The average output in financial terms of a typical citizen. Some nations have more productive employees "
 			"than others, due to such factors as work ethic, technical knowledge and workplace hours.",
 			SimulationCategory.economy,
-			0.5
+			0.5,
+			emotion=SimulationEmotion.high_good
 		)
 
 		# connections:

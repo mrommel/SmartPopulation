@@ -1,5 +1,5 @@
 """health simulation"""
-from simulation.base import SimulationBase, SimulationCategory, SimulationConnection
+from simulation.base import SimulationBase, SimulationCategory, SimulationConnection, SimulationEmotion
 
 
 class HealthSimulation(SimulationBase):
@@ -13,7 +13,8 @@ class HealthSimulation(SimulationBase):
 			"A general indicator for the health of your citizens that measures not just raw lifespan, but also fitness "
 			"and the general well-being of people.",
 			SimulationCategory.public_services,
-			0.8
+			0.8,
+			emotion=SimulationEmotion.high_good
 		)
 		
 		# connections

@@ -1,5 +1,5 @@
 """bus usage simulation"""
-from simulation.base import SimulationCategory, SimulationBase, SimulationConnection
+from simulation.base import SimulationCategory, SimulationBase, SimulationConnection, SimulationEmotion
 
 
 class BusUsageSimulation(SimulationBase):
@@ -14,7 +14,8 @@ class BusUsageSimulation(SimulationBase):
 			"environmentally friendly than cars, so are seen as a way to reduce pollution, as well as reduce traffic "
 			"congestion.",
 			SimulationCategory.transport,
-			0.15
+			0.15,
+			emotion=SimulationEmotion.high_good
 		)
 		
 		# input @todo

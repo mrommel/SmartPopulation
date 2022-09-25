@@ -1,5 +1,5 @@
 """CO2 emissions simulation"""
-from simulation.base import SimulationCategory, SimulationBase, SimulationConnection
+from simulation.base import SimulationCategory, SimulationBase, SimulationConnection, SimulationEmotion
 
 
 class CO2EmissionsSimulation(SimulationBase):
@@ -16,7 +16,8 @@ class CO2EmissionsSimulation(SimulationBase):
 			"if unchecked, will produce more carbon, as will high levels of car and air travel. There are a vast range "
 			"of different strategies that can be employed to minimize the level of CO2 emissions.",
 			SimulationCategory.law_and_order,
-			0.2
+			0.2,
+			emotion=SimulationEmotion.high_bad
 		)
 		
 		# connections:

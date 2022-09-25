@@ -1,5 +1,5 @@
 """violent crime rate simulation"""
-from simulation.base import SimulationCategory, SimulationBase, SimulationConnection
+from simulation.base import SimulationCategory, SimulationBase, SimulationConnection, SimulationEmotion
 
 
 class ViolentCrimeRateSimulation(SimulationBase):
@@ -13,7 +13,8 @@ class ViolentCrimeRateSimulation(SimulationBase):
 			"A more worrying indicator than the overall crime level, this measures the frequency of violent crimes "
 			"such as murder, rape and muggings. Violent crime is a worry for everyone in the country.",
 			SimulationCategory.law_and_order,
-			0.57
+			0.57,
+			emotion=SimulationEmotion.high_bad
 		)
 
 		# connections:

@@ -1,6 +1,11 @@
 import os
 
+import pandas as pd
 from flask import Flask, render_template, request
+
+import json
+import plotly
+import plotly.express as px
 
 from simulation.base import SimulationCategory
 from web.db import get_db, simulation_from_database, simulation_to_database, init_db, populate_db
@@ -69,6 +74,11 @@ def create_app(test_config=None):
 		
 		return render_template('simulations.html', simulations=sim.simulations)
 	
+	@app.route('/simulation_callback', methods=[' POST', 'GET'])
+	def cb():
+		# request.args.get('data')
+		return simulation_history('key')
+	
 	@app.route('/simulation/<key>')
 	def simulation(key):
 		sim = simulation_from_database()
@@ -86,8 +96,24 @@ def create_app(test_config=None):
 			simulation_item.prop = 'bg-orange'
 		else:
 			simulation_item.prop = 'bg-danger'
+			
+		simulation_item.input_list = simulation_item.input_values(sim)
+		simulation_item.effect_list = simulation_item.effect_values(sim)
 		
-		return render_template('simulation.html', simulation=simulation_item)
+		return render_template('simulation.html', simulation=simulation_item, graph_json=simulation_history(key))
+	
+	def simulation_history(key):
+		sim = simulation_from_database()
+		
+		simulation_item = sim.simulations[key]
+		
+		reversed_history = list(reversed(simulation_item.history))
+		d = {"iteration": range(0, len(reversed_history)), "history": reversed_history}
+		df = pd.DataFrame(d)
+		
+		fig = px.line(df, title="History", x="iteration", y="history", range_y=[0.0, 1.0], template="plotly_dark")
+		graph_json = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
+		return graph_json
 	
 	@app.route("/groups")
 	def groups():
@@ -105,7 +131,7 @@ def create_app(test_config=None):
 				group_item.mood_prop = 'bg-orange'
 			else:
 				group_item.mood_prop = 'bg-danger'
-				
+			
 			if group_item.freq.value > 0.8:
 				group_item.freq_prop = 'bg-success'
 			elif group_item.freq.value > 0.6:
@@ -173,6 +199,9 @@ def create_app(test_config=None):
 			situation_item.prop = 'bg-success'
 		else:
 			situation_item.prop = 'bg-danger'
+			
+		situation_item.input_list = situation_item.input_values(sim)
+		situation_item.effect_list = situation_item.effect_values(sim)
 		
 		return render_template('situation.html', situation=situation_item)
 	
@@ -194,7 +223,8 @@ def create_app(test_config=None):
 		category_item = SimulationCategory[key]
 		
 		# {k: v for k, v in points.items() if v[0] < 5 and v[1] < 5}
-		category_item.simulations = {k: simulation_item for k, simulation_item in sim.simulations.items() if simulation_item.category.value == category_item.value }
+		category_item.simulations = {k: simulation_item for k, simulation_item in sim.simulations.items() if
+		                             simulation_item.category.value == category_item.value}
 		category.situations = []
 		category.policies = []
 		

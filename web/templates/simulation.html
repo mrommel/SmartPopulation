@@ -7,7 +7,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">{{ simulation.name }}</h1>
+                <h1 class="m-0"><i class="nav-icon fas fa-chart-bar"></i>&nbsp;{{ simulation.name }}</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
@@ -73,11 +73,49 @@
                         <td>{{ (simulation.max_value * 100)|int }}%</td>
                     </tr>
                     <tr>
+                        <td>Inputs</td>
+                        <td>
+                            <ul>
+                            {% for input in simulation.input_list %}
+                                <li>
+                                    <div class="nav-sidebar nav-pills">
+                                        {% if input.base_type.value == 0 %}
+                                            <a href="/simulation/{{ input.key }}" class="nav-link p-0">
+                                                <i class="nav-icon fas fa-chart-bar"></i>&nbsp;<p>{{ input.name }}</p>
+                                            </a>
+                                        {% else %}
+                                            Not handled input: {{ input.key }} ({{ input.base_type.value }})
+                                        {% endif %}
+                                    </div>
+                                </li>
+                            {% endfor %}
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
                         <td>Effects</td>
                         <td>
                             <ul>
-                            {% for effect in simulation.effects %}
-                                <li>{{ effect.target_name }}</li>
+                            {% for effect in simulation.effect_list %}
+                                <li>
+                                    <div class="nav-sidebar nav-pills">
+                                        {% if effect.base_type.value == 0 %}
+                                            <a href="/simulation/{{ effect.key }}" class="nav-link p-0">
+                                                <i class="nav-icon fas fa-chart-bar"></i>&nbsp;<p>{{ effect.name }}</p>
+                                            </a>
+                                        {% elif effect.base_type.value == 1 %}
+                                            <a href="/situation/{{ effect.key }}" class="nav-link p-0">
+                                                <i class="nav-icon fas fa-bolt"></i>&nbsp;<p>{{ effect.name }}</p>
+                                            </a>
+                                        {% elif effect.base_type.value == 3 %}
+                                            <a href="/group/{{ effect.key }}" class="nav-link p-0">
+                                                <i class="nav-icon fas fa-users"></i>&nbsp;<p>{{ effect.name }}</p>
+                                            </a>
+                                        {% else %}
+                                            Not handled effect: {{ effect.key }} ({{ effect.base_type.value }})
+                                        {% endif %}
+                                    </div>
+                                </li>
                             {% endfor %}
                             </ul>
                         </td>
@@ -88,6 +126,8 @@
                             {% for history_item in simulation.history %}
                                 {{ "%.2f"|format(history_item) }}{% if not loop.last %}, {% endif %}
                             {% endfor %}
+                            <input type="hidden" id="fname" name="fname" onchange="cb(this.value)">
+                            <div id='chart' class='chart'></div>
                         </td>
                     </tr>
                     </tbody>
@@ -96,4 +136,21 @@
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block script %}
+<script src='https://cdn.plot.ly/plotly-latest.min.js' type='text/javascript'></script>
+<script type='text/javascript'>
+function cb(selection) {
+    $.getJSON({
+        url: "/simulation_callback", data: { 'key': selection }, success: function (result) {
+            Plotly.newPlot('chart', result, 1);;
+        }
+    });
+}
+</script>
+<script type='text/javascript'>
+    var graphs = {{graph_json | safe}};
+    Plotly.plot('chart', graphs, {});
+</script>
 {% endblock %}

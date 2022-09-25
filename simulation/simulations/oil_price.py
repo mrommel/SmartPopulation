@@ -1,5 +1,5 @@
 """oil price simulation"""
-from simulation.base import SimulationCategory, SimulationBase, SimulationConnection
+from simulation.base import SimulationCategory, SimulationBase, SimulationConnection, SimulationEmotion
 
 
 class OilPriceSimulation(SimulationBase):
@@ -15,6 +15,7 @@ class OilPriceSimulation(SimulationBase):
 			"make us less sensitive to global oil price shocks caused by political instabilities.",
 			SimulationCategory.transport,
 			0.1,
+			emotion=SimulationEmotion.high_bad
 		)
 		
 		# connections:

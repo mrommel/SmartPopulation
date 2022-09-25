@@ -1,5 +1,5 @@
 """immigration simulation"""
-from simulation.base import SimulationCategory, SimulationBase, SimulationConnection
+from simulation.base import SimulationCategory, SimulationBase, SimulationConnection, SimulationEmotion
 
 
 class ImmigrationSimulation(SimulationBase):
@@ -16,7 +16,8 @@ class ImmigrationSimulation(SimulationBase):
 			"be reduced by border controls, and citizenship tests. Too much immigration too fast can lead to racial "
 			"tensions developing.",
 			SimulationCategory.foreign_policy,
-			1.0
+			1.0,
+			emotion=SimulationEmotion.unknown
 		)
 		
 		# connections:

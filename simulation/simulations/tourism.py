@@ -1,5 +1,5 @@
 """tourism simulation"""
-from simulation.base import SimulationCategory, SimulationBase, SimulationConnection
+from simulation.base import SimulationCategory, SimulationBase, SimulationConnection, SimulationEmotion
 
 
 class TourismSimulation(SimulationBase):
@@ -15,7 +15,8 @@ class TourismSimulation(SimulationBase):
 			"Generally, tourism is seen as positive as it brings money into the economy. Encouraging tourism may "
 			"partially depend on low air travel costs, which can have implications for pollution and CO2 emissions.",
 			SimulationCategory.economy,
-			0.35
+			0.35,
+			emotion=SimulationEmotion.high_good
 		)
 		
 		# input @todo

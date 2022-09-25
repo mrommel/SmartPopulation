@@ -1,5 +1,5 @@
 """international trade simulation"""
-from simulation.base import SimulationCategory, SimulationBase, SimulationConnection
+from simulation.base import SimulationCategory, SimulationBase, SimulationConnection, SimulationEmotion
 
 
 class InternationalTradeSimulation(SimulationBase):
@@ -16,7 +16,8 @@ class InternationalTradeSimulation(SimulationBase):
 			"countries also indulge in 'protectionism' to defend politically sensitive industries against foreign "
 			"competition.",
 			SimulationCategory.foreign_policy,
-			1.0
+			1.0,
+			emotion=SimulationEmotion.high_good
 		)
 		
 		# input @todo

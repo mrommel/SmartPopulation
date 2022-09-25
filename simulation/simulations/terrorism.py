@@ -1,5 +1,5 @@
 """terrorism simulation"""
-from simulation.base import SimulationCategory, SimulationBase
+from simulation.base import SimulationCategory, SimulationBase, SimulationEmotion
 
 
 class TerrorismSimulation(SimulationBase):
@@ -12,7 +12,8 @@ class TerrorismSimulation(SimulationBase):
 			"Terrorism",
 			"hidden",
 			SimulationCategory.hidden,
-			0.5
+			0.5,
+			emotion=SimulationEmotion.high_bad
 		)
 		
 		# input

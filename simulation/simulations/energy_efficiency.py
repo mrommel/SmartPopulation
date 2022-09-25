@@ -1,5 +1,5 @@
 """energy efficiency simulation"""
-from simulation.base import SimulationCategory, SimulationBase, SimulationConnection
+from simulation.base import SimulationCategory, SimulationBase, SimulationConnection, SimulationEmotion
 
 
 class EnergyEfficiencySimulation(SimulationBase):
@@ -15,7 +15,8 @@ class EnergyEfficiencySimulation(SimulationBase):
 			"higher demand for fossil fuels such as oil. Reducing energy usage has become more urgent in recent times "
 			"due to concerns about climate change, and the drive to reduce CO2 emissions.",
 			SimulationCategory.economy,
-			0.5
+			0.5,
+			emotion=SimulationEmotion.high_good
 		)
 		
 		# connections:

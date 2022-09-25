@@ -1,5 +1,5 @@
 """environment simulation"""
-from simulation.base import SimulationCategory, SimulationBase, SimulationConnection
+from simulation.base import SimulationCategory, SimulationBase, SimulationConnection, SimulationEmotion
 
 
 class EnvironmentSimulation(SimulationBase):
@@ -13,7 +13,8 @@ class EnvironmentSimulation(SimulationBase):
 			"A general measurement of the quality of the environment, including air quality, but also measuring noise "
 			"pollution, litter, water quality and many other measures of pollution",
 			SimulationCategory.public_services,
-			0.50
+			0.50,
+			emotion=SimulationEmotion.high_good
 		)
 		
 		# connections:

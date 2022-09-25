@@ -1,5 +1,5 @@
 """working week simulation"""
-from simulation.base import SimulationCategory, SimulationBase, SimulationConnection
+from simulation.base import SimulationCategory, SimulationBase, SimulationConnection, SimulationEmotion
 
 
 class WorkingWeekSimulation(SimulationBase):
@@ -14,7 +14,8 @@ class WorkingWeekSimulation(SimulationBase):
 			"from the contracted hours as people give into pressure to work unpaid or paid overtime to keep their "
 			"jobs. To employees, shorter hours are seen as a good thing.",
 			SimulationCategory.economy,
-			0.5
+			0.5,
+			emotion=SimulationEmotion.unknown
 		)
 
 		# connections:

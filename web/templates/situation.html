@@ -7,7 +7,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">{{ situation.name }}</h1>
+                <h1 class="m-0"><i class="nav-icon fas fa-bolt"></i>&nbsp;{{ situation.name }}</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
@@ -64,11 +64,49 @@
                         <td>{{ situation.end_text }}</td>
                     </tr>
                     <tr>
+                        <td>Inputs</td>
+                        <td>
+                            <ul>
+                            {% for input in situation.input_list %}
+                                <li>
+                                    <div class="nav-sidebar nav-pills">
+                                        {% if input.base_type.value == 0 %}
+                                            <a href="/simulation/{{ input.key }}" class="nav-link p-0">
+                                                <i class="nav-icon fas fa-chart-bar"></i>&nbsp;<p>{{ input.name }}</p>
+                                            </a>
+                                        {% else %}
+                                            Not handled input: {{ input.key }} ({{ input.base_type.value }})
+                                        {% endif %}
+                                    </div>
+                                </li>
+                            {% endfor %}
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
                         <td>Effects</td>
                         <td>
                             <ul>
-                            {% for effect in situation.effects %}
-                                <li>{{ effect.target_name }}</li>
+                            {% for effect in situation.effect_list %}
+                                <li>
+                                    <div class="nav-sidebar nav-pills">
+                                        {% if effect.base_type.value == 0 %}
+                                            <a href="/simulation/{{ effect.key }}" class="nav-link p-0">
+                                                <i class="nav-icon fas fa-chart-bar"></i>&nbsp;<p>{{ effect.name }}</p>
+                                            </a>
+                                        {% elif effect.base_type.value == 1 %}
+                                            <a href="/situation/{{ effect.key }}" class="nav-link p-0">
+                                                <i class="nav-icon fas fa-bolt"></i>&nbsp;<p>{{ effect.name }}</p>
+                                            </a>
+                                        {% elif effect.base_type.value == 3 %}
+                                            <a href="/group/{{ effect.key }}" class="nav-link p-0">
+                                                <i class="nav-icon fas fa-users"></i>&nbsp;<p>{{ effect.name }}</p>
+                                            </a>
+                                        {% else %}
+                                            Not handled effect: {{ effect.key }} ({{ effect.base_type.value }})
+                                        {% endif %}
+                                    </div>
+                                </li>
                             {% endfor %}
                             </ul>
                         </td>
