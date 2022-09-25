@@ -36,6 +36,7 @@ from simulation.simulations.violent_crime_rate import ViolentCrimeRateSimulation
 from simulation.simulations.wages import WagesSimulation
 from simulation.simulations.worker_productivity import WorkerProductivitySimulation
 from simulation.simulations.working_week import WorkingWeekSimulation
+from simulation.situations.obesity import ObesitySituation
 from simulation.situations.pollution import PollutionSituation
 
 
@@ -102,7 +103,9 @@ class Simulation:
 		}
 		
 		self.situations = {
-			'pollution': PollutionSituation()
+			'pollution': PollutionSituation(),
+			# ...
+			'obesity': ObesitySituation(),
 		}
 		
 		self.policies = {

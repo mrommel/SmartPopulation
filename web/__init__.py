@@ -107,8 +107,8 @@ def create_app(test_config=None):
 		
 		simulation_item = sim.simulations[key]
 		
-		reversed_history = list(reversed(simulation_item.history))
-		d = {"iteration": range(0, len(reversed_history)), "history": reversed_history}
+		data = simulation_item.history # list(reversed(simulation_item.history))
+		d = {"iteration": range(0, len(data)), "history": data}
 		df = pd.DataFrame(d)
 		
 		fig = px.line(df, title="History", x="iteration", y="history", range_y=[0.0, 1.0], template="plotly_dark")
@@ -203,7 +203,25 @@ def create_app(test_config=None):
 		situation_item.input_list = situation_item.input_values(sim)
 		situation_item.effect_list = situation_item.effect_values(sim)
 		
-		return render_template('situation.html', situation=situation_item)
+		return render_template('situation.html', situation=situation_item, graph_json=situation_history(key))
+	
+	def situation_history(key):
+		sim = simulation_from_database()
+		
+		situation_item = sim.situations[key]
+		
+		data = situation_item.history  # list(reversed(simulation_item.history))
+		d = {
+			'iteration': range(0, len(data)),
+			'history': data,
+			'start': [situation_item.start_trigger] * len(data),
+			'end': [situation_item.end_trigger] * len(data)
+		}
+		df = pd.DataFrame(d)
+		
+		fig = px.line(df, title='History', x='iteration', y=['history', 'start', 'end'], range_y=[0.0, 1.0], template="plotly_dark")
+		graph_json = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
+		return graph_json
 	
 	@app.route("/policies")
 	def policies():
