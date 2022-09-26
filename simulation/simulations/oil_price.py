@@ -20,6 +20,6 @@ class OilPriceSimulation(SimulationBase):
 		
 		# connections:
 		self.effects.append(SimulationConnection('gdp', '0.22 - (0.4 * x)'))
-		# Motorist,0.3-(0.6*x),2
-		# Motorist_income,0.2-(0.4*x),2
-		# Motorist_freq,0.2-(0.4*x),12
+		self.effects.append(SimulationConnection('motorist_mood', '0.3 - (0.6 * x)', 2))
+		# self.effects.append(SimulationConnection('motorist_income,0.2-(0.4*x),2
+		self.effects.append(SimulationConnection('motorist_freq', '0.2 - (0.4 * x)', 12))

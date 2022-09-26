@@ -1,15 +1,34 @@
 """ simulation """
 from simulation.groups.all import AllGroup
+from simulation.groups.capitalist import CapitalistGroup
+from simulation.groups.commuter import CommuterGroup
 from simulation.groups.conservatives import ConservativesGroup
 from simulation.groups.environmentalists import EnvironmentalistGroup
+from simulation.groups.ethnic_minorities import EthnicMinoritiesGroup
+from simulation.groups.farmers import FarmersGroup
 from simulation.groups.liberal import LiberalGroup
 from simulation.groups.middle_income import MiddleIncomeGroup
+from simulation.groups.motorist import MotoristGroup
+from simulation.groups.parents import ParentsGroup
 from simulation.groups.patriot import PatriotGroup
 from simulation.groups.poor import PoorGroup
+from simulation.groups.religious import ReligiousGroup
 from simulation.groups.retired import RetiredGroup
+from simulation.groups.self_employed import SelfEmployedGroup
 from simulation.groups.socialists import SocialistGroup
+from simulation.groups.state_employees import StateEmployeesGroup
+from simulation.groups.trade_unionist import TradeUnionistGroup
+from simulation.groups.wealthy import WealthyGroup
+from simulation.groups.young import YoungGroup
 from simulation.policies.armed_police import ArmedPolicePolicy
+from simulation.policies.income_tax import IncomeTaxPolicy
 from simulation.policies.policy_force import PoliceForcePolicy
+from simulation.policies.prisons import PrisonsPolicy
+from simulation.policies.property_tax import PropertyTaxPolicy
+from simulation.policies.recycling import RecyclingPolicy
+from simulation.policies.sales_tax import SalesTaxPolicy
+from simulation.policies.state_pensions import StatePensionsPolicy
+from simulation.policies.state_schools import StateSchoolsPolicy
 from simulation.simulations.air_travel import AirTravelSimulation
 from simulation.simulations.bus_usage import BusUsageSimulation
 from simulation.simulations.car_usage import CarUsageSimulation
@@ -57,25 +76,25 @@ class Simulation:
 		# people / groups
 		self.groups = {
 			'socialist': SocialistGroup(),
-			# 'capitalist':
+			'capitalist': CapitalistGroup(),
 			'retired': RetiredGroup(),
-			# 'commuter':
+			'commuter': CommuterGroup(),
 			'patriot': PatriotGroup(),
-			# 'motorist':
+			'motorist': MotoristGroup(),
 			'liberal': LiberalGroup(),
-			# 'religious':
-			# 'trade_unionist':
-			# 'self_employed':
+			'religious': ReligiousGroup(),
+			'trade_unionist': TradeUnionistGroup(),
+			'self_employed': SelfEmployedGroup(),
 			'environmentalist': EnvironmentalistGroup(),
-			# 'wealthy':
+			'wealthy': WealthyGroup(),
 			'poor': PoorGroup(),
 			'middle_income': MiddleIncomeGroup(),
-			# 'parents':
-			# 'farmers':
-			# 'state_employees':
+			'parents': ParentsGroup(),
+			'farmers': FarmersGroup(),
+			'state_employees': StateEmployeesGroup(),
 			'conservatives': ConservativesGroup(),
-			# 'young':
-			# 'ethnic_minorities':
+			'young': YoungGroup(),
+			'ethnic_minorities': EthnicMinoritiesGroup(),
 			'all': AllGroup(),
 		}
 		
@@ -179,7 +198,7 @@ class Simulation:
 			# HybridCarsInitiative
 			# IDCards
 			# ImportTarrifs
-			# IncomeTax
+			'income_tax': IncomeTaxPolicy(),
 			# FlatTax
 			# CapitalGainsTax
 			# InheritanceTax
@@ -207,16 +226,40 @@ class Simulation:
 			'policy_force': PoliceForcePolicy(),
 			# PollutionControls
 			# PrisonerTagging
-			# Prisons
-			# PropertyTax
+			'prisons': PrisonsPolicy(),
+			'property_tax': PropertyTaxPolicy(),
 			# PublicLibraries
 			# RacialProfiling
 			# RaceDiscriminationAct
 			# RailSubsidies
-			# Recycling
+			'recycling': RecyclingPolicy(),
 			# RoadBuilding
 			# RuralDevelopmentGrants
-			# SalesTax
+			'sales_tax': SalesTaxPolicy(),
+			# SateliteRoadPricing
+			# SchoolBuses
+			# SchoolPrayers
+			# ScienceFunding
+			# SmallBusinessGrants
+			# SpaceProgram
+			# SpeedCameras
+			# StateHealthService
+			# StateHousing
+			'state_pensions': StatePensionsPolicy(),
+			'state_schools': StateSchoolsPolicy(),
+			# StemCells
+			# TaxShelters
+			# TechnologyColleges
+			# TechnologyGrants
+			# TelecommutingInitiative
+			# TobaccoTax
+			# TollRoads
+			# UnemployedBenefit
+			# UniversityGrants
+			# WelfareFraudDept
+			# WinterFuelSubsidy
+			# WorkSafetyLaw
+			# YouthClubSubsidies
 			# ...
 		}
 		

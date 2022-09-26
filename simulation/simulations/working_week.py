@@ -19,5 +19,5 @@ class WorkingWeekSimulation(SimulationBase):
 		)
 
 		# connections:
-		# trade_unionist_mood, 0.1 - (0.1 * x)
+		self.effects.append(SimulationConnection('trade_unionist_mood', '0.1 - (0.1 * x)'))
 		self.effects.append(SimulationConnection('health', '-0.24 * (x ** 8)'))

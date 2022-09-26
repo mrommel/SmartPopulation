@@ -24,7 +24,7 @@ class ImmigrationSimulation(SimulationBase):
 		self.effects.append(SimulationConnection('racial_tension', '1.4 * (x ** 3)', 8))
 		self.effects.append(SimulationConnection('unemployment', '0.3 * (x ** 3)', 2))
 		self.effects.append(SimulationConnection('gdp', '-0.035 + (0.035 * x)'))
-		# ethnic_minorities_freq, -0.7 + (1.4 * x), 8
+		self.effects.append(SimulationConnection('ethnic_minorities_freq', '-0.7 + (1.4 * x)', 8))
 		self.effects.append(SimulationConnection('wages', '-0.0 - (0.22 * x)'))
 		# StateHealthService_cost, 0 + (0.07 * x)
 		# StateHousing_cost, 0 + (0.07 * x)

@@ -19,9 +19,9 @@ class UnemploymentSimulation(SimulationBase):
 		
 		# connections:
 		self.effects.append(SimulationConnection('working_week', '0+(0.2*x)'))
-		# trade_unionist_mood,0-(0.21*x)
-		# commuter_freq,0-(0.28*x)
-		# socialist_mood,-0.2*(x^4)
+		self.effects.append(SimulationConnection('trade_unionist_mood', '0.0 - (0.21 * x)'))
+		self.effects.append(SimulationConnection('commuter_freq', '0.0 - (0.28 * x)'))
+		self.effects.append(SimulationConnection('socialist_mood', '-0.2 * (x ** 4)'))
 		self.effects.append(SimulationConnection('racial_tension', '0.7 * (x ** 3)', 2))
 		self.effects.append(SimulationConnection('poverty_rate', '0.24 * (x ** 8)'))
 		self.effects.append(SimulationConnection('crime_rate', '0.17 * (x ** 5)'))

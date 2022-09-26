@@ -20,7 +20,7 @@ class GDPSimulation(SimulationBase):
         )
 
         # connections:
-        # self.effects.append(SimulationConnection('capitalist_mood', '-0.2 + (0.65 * x)'))
+        self.effects.append(SimulationConnection('capitalist_mood', '-0.2 + (0.65 * x)'))
         self.effects.append(SimulationConnection('co2_emissions', '0.0 + (0.6 * x)'))
         self.effects.append(SimulationConnection('air_travel', '0.0 + (1.0 * x)'))
         self.effects.append(SimulationConnection('immigration', '0.98 * (x ** 4)', 4))

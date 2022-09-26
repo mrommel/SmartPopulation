@@ -32,6 +32,7 @@ class SimulationCategory(Enum):
 	foreign_policy = 3
 	welfare = 4
 	transport = 5
+	tax = 6
 	
 	hidden = 10
 	people = 20
@@ -53,6 +54,8 @@ class SimulationCategory(Enum):
 			return 'Welfare'
 		elif self.value == SimulationCategory.transport.value:
 			return 'Transport'
+		elif self.value == SimulationCategory.tax.value:
+			return 'Taxes'
 		elif self.value == SimulationCategory.people.value:
 			return 'People'
 		else:
@@ -209,11 +212,19 @@ class SimulationBase:
 		"""
 			print the current name and value
 		
-			:return: (nothing)
+			:returns: (nothing)
 		"""
 		print(f'{self.name:24}: \t{self.value:.2f}')
 	
 	def input_values(self, sim) -> [ValueBase]:
+		"""
+			get the simulations, situations or policies that have impact on this simulation
+		
+			:param sim: the Simulation to find the connections in
+			:type sim: Simulation
+			:returns: list of (ValueBase)
+			:rtype: [ValueBase]
+		"""
 		
 		input_list = []
 		
