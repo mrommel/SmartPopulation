@@ -31,4 +31,5 @@ class UnemploymentSimulation(SimulationBase):
 		self.effects.append(SimulationConnection('immigration', '-0.2 * (x ** 2) + 0.05'))
 		self.effects.append(SimulationConnection('obesity', '0.0 + (0.06 * x)', 4))
 		self.effects.append(SimulationConnection('homelessness', '0.0 + (0.9 * x)'))
+		self.effects.append(SimulationConnection('street_gangs', '0.1 + (0.6 * x)'))
 	

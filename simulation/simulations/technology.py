@@ -24,3 +24,4 @@ class TechnologySimulation(SimulationBase):
 		self.effects.append(SimulationConnection('education', '-0.1 + (0.16 * x)'))
 		self.effects.append(SimulationConnection('unemployment', '0.2 * (x ** 8.0)', 2))
 		self.effects.append(SimulationConnection('retired_freq', '0.10 * (x ** 4.0)', 16))
+		self.effects.append(SimulationConnection('skills_shortage', '0.25 * (x ** 2)'))

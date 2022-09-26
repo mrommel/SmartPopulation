@@ -34,7 +34,9 @@ class IncomeTaxPolicy(PolicyBase):
 		)
 		
 		self.cost_multiplier = []  #
-		# income multiplier GDP,0.5+(0.5*x);TaxEvasion,1.0-(0.2*x)
+		# income multiplier
+		#   GDP,0.5+(0.5*x);
+		#   TaxEvasion,1.0-(0.2*x)
 		
 		# https://github.com/Thalassicus/Democracy-3/blob/d7d51b848675cae9d6a7a193e040b2f01a83d463/data/missions/germany/germany.txt
 		self.slider_value = 'TAX75'
@@ -49,3 +51,5 @@ class IncomeTaxPolicy(PolicyBase):
 		self.effects.append(SimulationConnection('_low_income', '0.0 - (0.10 * x)'))
 		self.effects.append(SimulationConnection('_middle_income', '0.0 - (0.14 * x)'))
 		self.effects.append(SimulationConnection('_high_income', '0.0 - (0.20 * x)'))
+		self.effects.append(SimulationConnection('black_market', '-0.13+(0.72*x)', 4))
+		self.effects.append(SimulationConnection('tax_evasion', '0.5 * (x ** 2)', 4))

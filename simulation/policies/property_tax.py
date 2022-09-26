@@ -50,4 +50,5 @@ class PropertyTaxPolicy(PolicyBase):
 		self.effects.append(SimulationConnection('middle_income_mood', '0.0 - (0.32 * x)'))
 		self.effects.append(SimulationConnection('wealthy_mood', '0.0 - (x ** 11)'))
 		self.effects.append(SimulationConnection('retired_mood', '0.0 - (0.28 * x)'))
+		self.effects.append(SimulationConnection('homelessness', '0.0 + (0.04 * x)'))
 	

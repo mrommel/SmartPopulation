@@ -22,3 +22,4 @@ class EducationSimulation(SimulationBase):
 		self.effects.append(SimulationConnection('racial_tension', '0 - (0.08 * x)'))
 		self.effects.append(SimulationConnection('crime_rate', '-0.12 * (x ** 6.0)'))
 		self.effects.append(SimulationConnection('violent_crime_rate', '-0.12 * (x ** 4.0)'))
+		self.effects.append(SimulationConnection('skills_shortage', '0.0 - (0.4 * x)'))

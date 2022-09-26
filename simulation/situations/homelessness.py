@@ -30,11 +30,11 @@ class HomelessnessSituation(SituationBase):
 		# PrivateHousing,0-(0.4*x)	homelessness
 		# UnemployedBenefit,0-(0.3*x)	homelessness
 		# MortgageTaxRelief,-0.04-(0.04*x)	homelessness
-		# PropertyTax,0+(0.04*x)	homelessness
 	
 		# effects
 		self.effects.append(SimulationConnection('liberal_mood', '-0.09 - (0.09 * x)'))
 		self.effects.append(SimulationConnection('poor_mood', '-0.24 - (0.3 * x)'))
 		self.effects.append(SimulationConnection('middle_income_mood', '-0.06 - (0.05 * x)'))
 		self.effects.append(SimulationConnection('crime_rate', '0.04 + (0.04 * x)'))
+		self.effects.append(SimulationConnection('street_gangs', '0.0 + (0.1 * x)', 2))
 		

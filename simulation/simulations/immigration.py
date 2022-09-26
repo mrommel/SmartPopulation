@@ -29,4 +29,5 @@ class ImmigrationSimulation(SimulationBase):
 		# StateHealthService_cost, 0 + (0.07 * x)
 		# StateHousing_cost, 0 + (0.07 * x)
 		self.effects.append(SimulationConnection('homelessness', '0.0 + (0.06 * x)', 4))
+		self.effects.append(SimulationConnection('skills_shortage', '0.0 - (0.2 * x)'))
 	

@@ -24,16 +24,16 @@ class ObesitySituation(SituationBase):
 		)
 		
 		# input @todo move to each simulation
-		# AgricultureSubsidies,0.1+(0.32*x),8
-		# StateHealthService,-0.2*(x^6),12
-		# PrivateHealthcare,-0.2*(x^6),12
-		# JunkFoodTax,-0.16-(0.15*x),10
-		# OrganicSubsidy,-0.05-(0.072*x),8
-		# HealthFoodSubsidies,-0.12-(0.14*x),9
+		# AgricultureSubsidies,0.1+(0.32*x),8 # obesity
+		# StateHealthService,-0.2*(x^6),12 # obesity
+		# PrivateHealthcare,-0.2*(x^6),12 # obesity
+		# JunkFoodTax,-0.16-(0.15*x),10 # obesity
+		# OrganicSubsidy,-0.05-(0.072*x),8 # obesity
+		# HealthFoodSubsidies,-0.12-(0.14*x),9 # obesity
 
 		# effect connections
 		self.effects.append(SimulationConnection('health', '0 - (0.16 * x)'))
-		# StateHealthService_cost,0.05+(0.15*x),6
+		# state_health_service_cost,0.05+(0.15*x),6
 		# HealthTaxCredits_cost,0.05+(0.15*x),6
 		# HealthcareVouchers_cost,0.05+(0.15*x),6
 

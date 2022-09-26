@@ -24,3 +24,4 @@ class PovertySimulation(SimulationBase):
 		# _global_socialism,0.2*(x^5)
 		self.effects.append(SimulationConnection('socialist_mood', '-0.35 * (x ** 2)'))
 		self.effects.append(SimulationConnection('homelessness', '0.0 + (0.9 * x)'))
+		self.effects.append(SimulationConnection('street_gangs', '0.0 + (0.84 * x)'))

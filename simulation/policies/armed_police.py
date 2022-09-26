@@ -39,3 +39,4 @@ class ArmedPolicePolicy(PolicyBase):
 		self.effects.append(SimulationConnection('liberal_mood', '-0.05 - (0.25 * x)'))
 		self.effects.append(SimulationConnection('crime_rate', '-0.10 - (0.10 * x)'))
 		self.effects.append(SimulationConnection('violent_crime_rate', '0.00 - (0.20 * x)'))
+		self.effects.append(SimulationConnection('street_gangs', '-0.1 - (0.3 * x)', 2))

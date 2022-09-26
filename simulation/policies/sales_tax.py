@@ -47,4 +47,6 @@ class SalesTaxPolicy(PolicyBase):
 		self.effects.append(SimulationConnection('equality', '-0.02 - (0.32 * x)'))
 		self.effects.append(SimulationConnection('_low_income', '0.0 - (0.12 * x)'))
 		self.effects.append(SimulationConnection('_middle_income', '0.0 - (0.06 * x)'))
+		self.effects.append(SimulationConnection('black_market', '0.0 + (0.34 * x)', 4))
+		self.effects.append(SimulationConnection('tax_evasion', '0.22 * (x ** 2)', 4))
 		

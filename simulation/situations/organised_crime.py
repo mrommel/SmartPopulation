@@ -24,14 +24,13 @@ class OrganisedCrimeSituation(SituationBase):
 		)
 
 		# input @todo move to each simulation inputs
-		# IDCards,0-(0.1*x)
-		# IntelligenceServices,0-(0.3*x)
-		# PhoneTapping,0-(0.24*x)
-		# Gambling,0+(0.45*x)
-		# ArmedPolice,0-(0.17*x)
-		# Narcotics,0-(0.15*x)
-		# PoliceDrones,-0.1-(0.05*x)
-		# LegaliseProstitution,-0.05-(0.1*x)
+		# IDCards,0-(0.1*x) # organised_crime
+		# IntelligenceServices,0-(0.3*x) # organised_crime
+		# PhoneTapping,0-(0.24*x) # organised_crime
+		# ArmedPolice,0-(0.17*x) # organised_crime
+		# Narcotics,0-(0.15*x) # organised_crime
+		# PoliceDrones,-0.1-(0.05*x) # organised_crime
+		# LegaliseProstitution,-0.05-(0.1*x) # organised_crime
 
 		# effects
 		self.effects.append(SimulationConnection('crime_rate', '0.1 + (0.2 * x)'))

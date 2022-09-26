@@ -43,3 +43,4 @@ class UnemployedBenefitPolicy(PolicyBase):
 		self.effects.append(SimulationConnection('socialist_mood', '0.0 + (0.15 * x)'))
 		self.effects.append(SimulationConnection('poverty_rate', '0.0 - (0.12 * x)'))
 		self.effects.append(SimulationConnection('_low_income', '0.0 + (0.15 * x)'))
+		self.effects.append(SimulationConnection('black_market', '0.0 - (0.2 * x)'))

@@ -67,10 +67,16 @@ from simulation.simulations.wages import WagesSimulation
 from simulation.simulations.worker_productivity import WorkerProductivitySimulation
 from simulation.simulations.working_week import WorkingWeekSimulation
 from simulation.situations.alcoholism import AlcoholismSituation
+from simulation.situations.black_market import BlackMarketSituation
+from simulation.situations.high_productivity import HighProductivitySituation
 from simulation.situations.homelessness import HomelessnessSituation
 from simulation.situations.obesity import ObesitySituation
 from simulation.situations.organised_crime import OrganisedCrimeSituation
 from simulation.situations.pollution import PollutionSituation
+from simulation.situations.skills_shortage import SkillsShortageSituation
+from simulation.situations.street_gangs import StreetGangsSituation
+from simulation.situations.tax_evasion import TaxEvasionSituation
+from simulation.situations.uncompetitive_economy import UncompetitiveEconomySituation
 
 
 class Simulation:
@@ -152,10 +158,18 @@ class Simulation:
 		
 		# https://github.com/bakster55/W3JsonToExcel/blob/master/democracy3/data/simulation/situations.csv
 		self.situations = {
+			'skills_shortage': SkillsShortageSituation(),
 			'pollution': PollutionSituation(),
+			'uncompetitive_economy': UncompetitiveEconomySituation(),
+			# ...
+			'high_productivity': HighProductivitySituation(),
+			'street_gangs': StreetGangsSituation(),
 			# ...
 			'organised_crime': OrganisedCrimeSituation(),
 			'alcoholism': AlcoholismSituation(),
+			# ...
+			'black_market': BlackMarketSituation(),
+			'tax_evasion': TaxEvasionSituation(),
 			# ...
 			'homelessness': HomelessnessSituation(),
 			# ...

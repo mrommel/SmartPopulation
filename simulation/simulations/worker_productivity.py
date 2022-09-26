@@ -21,3 +21,5 @@ class WorkerProductivitySimulation(SimulationBase):
 		self.effects.append(SimulationConnection('gdp', '-0.22 + (x * 0.44)'))
 		self.effects.append(SimulationConnection('international_trade', '-0.2 + (0.4 * x)', 4))
 		self.effects.append(SimulationConnection('unemployment', '-0.08 + (0.16 * x)', 2))
+		self.effects.append(SimulationConnection('uncompetitive_economy', '0.0 - (0.7 * x)'))
+		self.effects.append(SimulationConnection('high_productivity', '0.95 * (x ** 2)'))

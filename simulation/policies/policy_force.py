@@ -45,3 +45,4 @@ class PoliceForcePolicy(PolicyBase):
 		# state_employees_income,-0.3+(0.09*x)
 		self.effects.append(SimulationConnection('unemployment', '0 - (0.03 * x)'))
 		self.effects.append(SimulationConnection('alcoholism', '0 - (0.6 * x) '))
+		self.effects.append(SimulationConnection('street_gangs', '0-(0.17*x)', 4))

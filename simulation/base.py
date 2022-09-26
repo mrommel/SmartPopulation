@@ -440,12 +440,14 @@ class SituationBase:
 			
 			if effect.target_name in simulation.simulations:
 				simulation.simulations[effect.target_name].new_value += effect.evaluate(tmp_value)
+			elif effect.target_name in simulation.situations:
+				simulation.situations[effect.target_name].new_value += effect.evaluate(tmp_value)
 			elif without_mood in simulation.groups:
 				simulation.groups[without_mood].mood.new_value += effect.evaluate(tmp_value)
 			elif without_freq in simulation.groups:
 				simulation.groups[without_freq].freq.new_value += effect.evaluate(tmp_value)
 			else:
-				raise Exception(f'cant get {effect.target_name} as simulation value')
+				raise Exception(f'cant get "{effect.target_name}" as simulation value')
 	
 	def finish(self):
 		"""

@@ -41,3 +41,5 @@ class GamblingPolicy(PolicyBase):
 		self.effects.append(SimulationConnection('gdp', '0.00 + (0.04 * x)', 6))
 		self.effects.append(SimulationConnection('unemployment', '0.00 - (0.03 * x)', 4))
 		self.effects.append(SimulationConnection('capitalist_mood', '0.01 + (0.04 * x)'))
+		self.effects.append(SimulationConnection('organised_crime', '0.0 + (0.45 * x)'))
+		
