@@ -58,6 +58,14 @@ def populate_db():
 			(key, policy.is_active, policy.slider_value, policy.value)
 		)
 		database.commit()
+		
+	for key, _ in sim.policies.items():
+		database.execute(
+			'INSERT INTO groups (key)'
+			' VALUES (?)',
+			(key, )
+		)
+		database.commit()
 
 
 @click.command('init-db')
@@ -133,6 +141,15 @@ def simulation_from_database() -> Simulation:
 		for policy_histories_item in policy_histories_items:
 			history_value = policy_histories_item["value"]
 			sim.policies[policy_key].history.append(history_value)
+		
+	# populate groups
+	group_items = database.execute(
+		'SELECT g.id, g.key FROM groups AS g'
+	).fetchall()
+	
+	for group_item in group_items:
+		group_key = group_item['key']
+		group_id = group_item['id']
 	
 	return sim
 
