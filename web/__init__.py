@@ -96,7 +96,7 @@ def create_app(test_config=None):
 			simulation_item.prop = 'bg-orange'
 		else:
 			simulation_item.prop = 'bg-danger'
-			
+		
 		simulation_item.input_list = simulation_item.input_values(sim)
 		simulation_item.effect_list = simulation_item.effect_values(sim)
 		
@@ -107,7 +107,7 @@ def create_app(test_config=None):
 		
 		simulation_item = sim.simulations[key]
 		
-		data = simulation_item.history # list(reversed(simulation_item.history))
+		data = simulation_item.history  # list(reversed(simulation_item.history))
 		d = {"iteration": range(0, len(data)), "history": data}
 		df = pd.DataFrame(d)
 		
@@ -202,7 +202,7 @@ def create_app(test_config=None):
 			situation_item.prop = 'bg-success'
 		else:
 			situation_item.prop = 'bg-danger'
-			
+		
 		situation_item.input_list = situation_item.input_values(sim)
 		situation_item.effect_list = situation_item.effect_values(sim)
 		
@@ -222,7 +222,8 @@ def create_app(test_config=None):
 		}
 		df = pd.DataFrame(d)
 		
-		fig = px.line(df, title='History', x='iteration', y=['history', 'start', 'end'], range_y=[0.0, 1.0], template="plotly_dark")
+		fig = px.line(df, title='History', x='iteration', y=['history', 'start', 'end'], range_y=[0.0, 1.0],
+		              template="plotly_dark")
 		graph_json = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
 		return graph_json
 	
@@ -279,11 +280,15 @@ def create_app(test_config=None):
 		sim = simulation_from_database()
 		category_item = SimulationCategory[key]
 		
-		# {k: v for k, v in points.items() if v[0] < 5 and v[1] < 5}
-		category_item.simulations = {k: simulation_item for k, simulation_item in sim.simulations.items() if
-		                             simulation_item.category.value == category_item.value}
-		category.situations = []
-		category.policies = []
+		category_item.simulations = {
+			k: simulation_item for k, simulation_item in sim.simulations.items() if simulation_item.category.value == category_item.value
+		}
+		category_item.situations = {
+			k: situation_item for k, situation_item in sim.situations.items() if situation_item.category.value == category_item.value
+		}
+		category_item.policies = {
+			k: policy_item for k, policy_item in sim.policies.items() if policy_item.category.value == category_item.value
+		}
 		
 		return render_template('category.html', category=category_item)
 	

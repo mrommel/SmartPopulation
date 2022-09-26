@@ -11,7 +11,7 @@ class ArmedPolicePolicy(PolicyBase):
 	
 	def __init__(self):
 		super().__init__(
-			"Armed Police	",
+			"Armed Police",
 			"Arming police officers can be an effective strategy in deterring crime and maintaining order. Opponents "
 			"would argue that it encourages criminals to use firearms in a 'criminal arms race'. Critics also worry "
 			"that arming the police will distance them from law-abiding citizens.",

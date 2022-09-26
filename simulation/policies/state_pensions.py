@@ -11,7 +11,7 @@ class StatePensionsPolicy(PolicyBase):
 	
 	def __init__(self):
 		super().__init__(
-			"State Pensions	",
+			"State Pensions",
 			"Rather than leave it up to the individual to provide for themselves after retirement, state pensions can "
 			"guarantee a minimum standard of living for the elderly. Be aware that as life expectancy rises, "
 			"the cost to the state of paying out pensions increases hugely. The level of state pension may encourage "

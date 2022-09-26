@@ -60,13 +60,34 @@
                     <tr>
                         <td>Situations</td>
                         <td>
-                            {{ category.situations }}
-
+                            <ul>
+                            {% for key, situation_item in category.situations.items() %}
+                                <li>
+                                    <div class="nav-sidebar nav-pills">
+                                        <a href="/situation/{{ key }}" class="nav-link p-0">
+                                            <i class="nav-icon fas fa-bolt"></i>&nbsp;<p>{{ situation_item.name }}</p>
+                                        </a>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                            </ul>
                         </td>
                     </tr>
                     <tr>
                         <td>Policies</td>
-                        <td>{{ category.policies }}</td>
+                        <td>
+                            <ul>
+                            {% for key, policy_item in category.policies.items() %}
+                                <li>
+                                    <div class="nav-sidebar nav-pills">
+                                        <a href="/simulation/{{ key }}" class="nav-link p-0">
+                                            <i class="nav-icon fas fa-sliders-h"></i>&nbsp;<p>{{ policy_item.name }}</p>
+                                        </a>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                            </ul>
+                        </td>
                     </tr>
                     </tbody>
                 </table>

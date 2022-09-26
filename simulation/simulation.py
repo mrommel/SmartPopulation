@@ -21,14 +21,20 @@ from simulation.groups.trade_unionist import TradeUnionistGroup
 from simulation.groups.wealthy import WealthyGroup
 from simulation.groups.young import YoungGroup
 from simulation.policies.armed_police import ArmedPolicePolicy
+from simulation.policies.border_controls import BorderControlsPolicy
+from simulation.policies.gambling import GamblingPolicy
 from simulation.policies.income_tax import IncomeTaxPolicy
+from simulation.policies.inheritance_tax import InheritanceTaxPolicy
 from simulation.policies.policy_force import PoliceForcePolicy
 from simulation.policies.prisons import PrisonsPolicy
 from simulation.policies.property_tax import PropertyTaxPolicy
 from simulation.policies.recycling import RecyclingPolicy
 from simulation.policies.sales_tax import SalesTaxPolicy
+from simulation.policies.state_health_service import StateHealthServicePolicy
 from simulation.policies.state_pensions import StatePensionsPolicy
 from simulation.policies.state_schools import StateSchoolsPolicy
+from simulation.policies.unemployed_benefit import UnemployedBenefitPolicy
+from simulation.policies.work_safety_law import WorkSafetyLawPolicy
 from simulation.simulations.air_travel import AirTravelSimulation
 from simulation.simulations.bus_usage import BusUsageSimulation
 from simulation.simulations.car_usage import CarUsageSimulation
@@ -166,7 +172,7 @@ class Simulation:
 			'armed_police': ArmedPolicePolicy(),
 			# BanSundayShopping
 			# BiofuelSubsidies
-			# BorderControls
+			'border_controls': BorderControlsPolicy(),
 			# BusLanes
 			# BusSubsidies
 			# CarbonTax
@@ -191,7 +197,7 @@ class Simulation:
 			# FreeBusPasses
 			# FreeEyeTests
 			# FreeSchoolMeals
-			# Gambling
+			'gambling': GamblingPolicy(),
 			# GatedCommunities
 			# GraduateTax
 			# HandgunLaws
@@ -201,7 +207,7 @@ class Simulation:
 			'income_tax': IncomeTaxPolicy(),
 			# FlatTax
 			# CapitalGainsTax
-			# InheritanceTax
+			'inheritance_tax': InheritanceTaxPolicy(),
 			# IntelligenceServices
 			# InternetCensorship
 			# InternetTax
@@ -243,7 +249,7 @@ class Simulation:
 			# SmallBusinessGrants
 			# SpaceProgram
 			# SpeedCameras
-			# StateHealthService
+			'state_health_service': StateHealthServicePolicy(),
 			# StateHousing
 			'state_pensions': StatePensionsPolicy(),
 			'state_schools': StateSchoolsPolicy(),
@@ -254,11 +260,11 @@ class Simulation:
 			# TelecommutingInitiative
 			# TobaccoTax
 			# TollRoads
-			# UnemployedBenefit
+			'unemployed_benefit': UnemployedBenefitPolicy(),
 			# UniversityGrants
 			# WelfareFraudDept
 			# WinterFuelSubsidy
-			# WorkSafetyLaw
+			'work_safety_law': WorkSafetyLawPolicy(),
 			# YouthClubSubsidies
 			# ...
 		}

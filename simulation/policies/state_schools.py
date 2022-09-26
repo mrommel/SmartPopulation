@@ -11,7 +11,7 @@ class StateSchoolsPolicy(PolicyBase):
 	
 	def __init__(self):
 		super().__init__(
-			"State Schools	",
+			"State Schools",
 			"Free education for all ensures high levels of literacy and can be beneficial to the economy, especially "
 			"those parts of the economy requiring a skilled workforce. The flipside of this is that state education "
 			"can be expensive for the government. Wealthy individuals, not making use of state schools, may resent "
@@ -37,7 +37,6 @@ class StateSchoolsPolicy(PolicyBase):
 		self.value = 0.8
 		
 		# connections:
-		self.effects.append(SimulationConnection('', ''))
 		self.effects.append(SimulationConnection('poor_mood', '0.04 + (0.11 * x)'))
 		self.effects.append(SimulationConnection('socialist_mood', '0.0 + (0.20 * x)'))
 		self.effects.append(SimulationConnection('education', '0.3 * (x ** 0.6) + 0.07', 8))
