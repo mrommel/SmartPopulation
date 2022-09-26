@@ -19,3 +19,6 @@ class PoorGroup(GroupBase):
 			0.0,  # mood
 			0.25  # freq
 		)
+
+		# influences
+		# none

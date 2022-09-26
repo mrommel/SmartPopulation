@@ -18,3 +18,10 @@ class RetiredGroup(GroupBase):
 			0.0,  # mood
 			0.19  # freq
 		)
+
+		# influences
+		# Commuter,-1.0
+		# SelfEmployed,-1.0
+		# StateEmployees, -1.0
+		# Parents,-1.0
+		# Young,-1.0

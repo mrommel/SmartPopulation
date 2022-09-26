@@ -17,9 +17,6 @@ class CarUsageSimulation(SimulationBase):
 			emotion=SimulationEmotion.high_good
 		)
 		
-		# input @todo
-		# GDP,0+(0.4 * x)
-		
 		# connections:
 		self.effects.append(SimulationConnection('environment', '0.0 - (0.22 * x)'))
 		# Motorist_freq,-0.4+(0.8*x)

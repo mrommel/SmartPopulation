@@ -18,3 +18,6 @@ class EnvironmentalistGroup(GroupBase):
 			0.2,  # mood
 			0.09  # freq
 		)
+		
+		# influences
+		# Motorist,-0.2

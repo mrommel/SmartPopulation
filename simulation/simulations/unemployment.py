@@ -29,4 +29,6 @@ class UnemploymentSimulation(SimulationBase):
 		self.effects.append(SimulationConnection('wages', '0.2 - (0.4 * x)'))
 		self.effects.append(SimulationConnection('poor_mood', '-0.10 * (x ** 2)'))
 		self.effects.append(SimulationConnection('immigration', '-0.2 * (x ** 2) + 0.05'))
-		# self.effects.append(SimulationConnection('obesity', '0.0 + (0.06 * x)', 4)) -- simulation does not exist
+		self.effects.append(SimulationConnection('obesity', '0.0 + (0.06 * x)', 4))
+		self.effects.append(SimulationConnection('homelessness', '0.0 + (0.9 * x)'))
+	

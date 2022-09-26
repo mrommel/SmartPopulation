@@ -18,9 +18,6 @@ class BusUsageSimulation(SimulationBase):
 			emotion=SimulationEmotion.high_good
 		)
 		
-		# input @todo
-		# GDP,0+(0.1 * x)
-		
 		# connections:
 		self.effects.append(SimulationConnection('car_usage', '0.0 - (0.35 * x)'))
 		self.effects.append(SimulationConnection('rail_usage', '0.0 - (0.28 * x)'))

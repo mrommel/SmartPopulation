@@ -224,12 +224,17 @@ class SimulationBase:
 				if effect.target_name == own_key:
 					input_list.append(ValueBase(key, simulation_item.name, BasicType.simulation, 0.0))
 		
+		for key, situation_item in sim.situations.items():
+			for effect in situation_item.effects:
+				if effect.target_name == own_key:
+					input_list.append(ValueBase(key, situation_item.name, BasicType.situation, 0.0))
+		
 		return input_list
 	
 	def effect_values(self, simulation) -> [ValueBase]:
 		
 		effect_list = []
-
+		
 		for effect in self.effects:
 			tmp_value = self.value
 			tmp_sum = 1.0
@@ -247,17 +252,21 @@ class SimulationBase:
 			
 			if effect.target_name in simulation.simulations:
 				simulation_name = simulation.simulations[effect.target_name].name
-				effect_list.append(ValueBase(effect.target_name, simulation_name, BasicType.simulation, effect.evaluate(tmp_value)))
+				effect_list.append(
+					ValueBase(effect.target_name, simulation_name, BasicType.simulation, effect.evaluate(tmp_value)))
 			elif effect.target_name in simulation.situations:
 				situation_name = simulation.situations[effect.target_name].name
-				effect_list.append(ValueBase(effect.target_name, situation_name, BasicType.situation, effect.evaluate(tmp_value)))
+				effect_list.append(
+					ValueBase(effect.target_name, situation_name, BasicType.situation, effect.evaluate(tmp_value)))
 			elif without_mood in simulation.groups:
 				voter_name = f'{simulation.groups[without_mood].name} (Mood)'
-				effect_list.append(ValueBase(without_mood, voter_name, BasicType.voter_group, effect.evaluate(tmp_value)))
+				effect_list.append(
+					ValueBase(without_mood, voter_name, BasicType.voter_group, effect.evaluate(tmp_value)))
 			elif without_freq in simulation.groups:
 				voter_name = f'{simulation.groups[without_freq].name} (Frequency)'
-				effect_list.append(ValueBase(without_freq, voter_name, BasicType.voter_group, effect.evaluate(tmp_value)))
-				
+				effect_list.append(
+					ValueBase(without_freq, voter_name, BasicType.voter_group, effect.evaluate(tmp_value)))
+		
 		return effect_list
 
 
@@ -386,10 +395,10 @@ class SituationBase:
 		
 		if self.is_active and self.value < self.end_trigger:
 			self.is_active = False
-			simulation.started_situations.append(self)
+			simulation.ended_situations.append(self)
 		elif not self.is_active and self.value > self.start_trigger:
 			self.is_active = True
-			simulation.ended_situations.append(self)
+			simulation.started_situations.append(self)
 		
 		# effects are sent, when the situation is active
 		for effect in self.effects:
@@ -443,7 +452,7 @@ class SituationBase:
 	def effect_values(self, simulation) -> [ValueBase]:
 		
 		effect_list = []
-
+		
 		for effect in self.effects:
 			tmp_value = self.value
 			tmp_sum = 1.0
@@ -477,4 +486,108 @@ class SituationBase:
 					ValueBase(without_freq, voter_name, BasicType.voter_group, effect.evaluate(tmp_value)))
 		
 		return effect_list
+
+
+class PolicyBase:
+	"""
+		base class for policies
+	"""
+	
+	def __init__(
+			self,
+			name: str,
+			description: str,
+			category: SimulationCategory,
+			slider: [str],
+			can_be_cancelled: bool,
+			introduce: int,
+			cancel: int,
+			raise_cost: int,
+			lower_cost: int,
+			min_cost: int,
+			max_cost: int,
+			implementation: int,
+			min_income: int,
+			max_income: int
+	):
+		"""
+			value constructor
+
+			:param name: name of the simulation
+			:param description: description of the simulation
+		"""
+		self.name = name
+		self.description = description
+		self.category = category
+		self.slider = slider
+		self.can_be_cancelled = can_be_cancelled
+		self.introduce = introduce
+		self.cancel = cancel
+		self.raise_cost = raise_cost
+		self.lower_cost = lower_cost
+		self.min_cost = min_cost
+		self.max_cost = max_cost
+		self.implementation = implementation
+		self.min_income = min_income
+		self.max_income = max_income
+		
+		self.is_active = not can_be_cancelled  # if it cant be cancelled, it must be active
+		self.slider_value = 'NONE'
+		self.value = 0.0
+
+		self.cost_multiplier = []
+		self.income_multiplier = []
+		self.effects = []
+		self.history = []
+		
+	def prepare(self):
+		"""
+			prepares the values for iteration
+
+			:return: (nothing)
+		"""
+	
+	def iterate(self, simulation):
+		"""
+			evaluates the values during iteration
+
+			:param simulation: simulation that is updated
+			:return: (nothing)
+		"""
+		if not self.is_active:
+			return
+		
+		# effects are sent, when the situation is active
+		for effect in self.effects:
+			
+			without_mood = effect.target_name.replace('_mood', '')
+			without_freq = effect.target_name.replace('_freq', '')
+			
+			if effect.target_name in simulation.simulations:
+				simulation.simulations[effect.target_name].new_value += effect.evaluate(self.value)
+			elif effect.target_name in simulation.situations:
+				simulation.situations[effect.target_name].new_value += effect.evaluate(self.value)
+			elif without_mood in simulation.groups:
+				simulation.groups[without_mood].mood.new_value += effect.evaluate(self.value)
+			elif without_freq in simulation.groups:
+				simulation.groups[without_freq].freq.new_value += effect.evaluate(self.value)
+			else:
+				raise Exception(f'cant get {effect.target_name} as simulation value')
+	
+	def finish(self):
+		"""
+			post processes values after iteration
+
+			:return: (nothing)
+		"""
+		# put to history
+		self.history.insert(0, self.value)
+	
+	def print(self):
+		"""
+			print the current name and value
+
+			:return: (nothing)
+		"""
+		print(f'{self.name:24}: \t{self.value:.2f}')
 	

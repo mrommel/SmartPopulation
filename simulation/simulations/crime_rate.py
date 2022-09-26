@@ -20,3 +20,6 @@ class CrimeRateSimulation(SimulationBase):
 		# connections:
 		self.effects.append(SimulationConnection('all_mood', '0 - (0.13 * x)'))
 		self.effects.append(SimulationConnection('gdp', '0 - (0.08 * x)'))
+		self.effects.append(SimulationConnection('tourism', '0 -(0.1 * x)', 8))
+		self.effects.append(SimulationConnection('alcoholism', '0 + (1.0 * x)'))
+		

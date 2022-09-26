@@ -19,3 +19,7 @@ class SocialistGroup(GroupBase):
 			-0.3,  # mood
 			0.1  # freq
 		)
+
+		# influences
+		# StateEmployees,0.2
+		# TradeUnionist,0.25

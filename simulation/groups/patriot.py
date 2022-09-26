@@ -18,3 +18,6 @@ class PatriotGroup(GroupBase):
 			0.0,  # mood
 			0.1  # freq
 		)
+
+		# influences
+		# EthnicMinorities,-0.2

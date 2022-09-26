@@ -29,3 +29,6 @@ class GDPSimulation(SimulationBase):
         self.effects.append(SimulationConnection('equality', '-0.15 * (x ** 4)'))
         self.effects.append(SimulationConnection('oil_demand', '0.0 + (0.4 * x)'))
         self.effects.append(SimulationConnection('obesity', '0 + (0.45 * x)', 8))
+        self.effects.append(SimulationConnection('rail_usage', '0 + (0.1 * x)'))
+        self.effects.append(SimulationConnection('car_usage', '0 + (0.4 * x)'))
+        self.effects.append(SimulationConnection('bus_usage', '0 + (0.1 * x)'))

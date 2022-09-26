@@ -229,6 +229,42 @@ def create_app(test_config=None):
 		
 		return render_template('policies.html', policies=sim.policies)
 	
+	@app.route('/policy/<key>', methods=('GET', 'POST'))
+	def policy(key):
+		if request.method == 'POST':
+			action = request.form['action']
+			slider_value = request.form['slider']
+			
+			if action == 'change':
+				sim = simulation_from_database()
+				
+				policy_item = sim.policies[key]
+				policy_item.slider_value = slider_value
+				
+				# determine value
+				step_value = 1.0 / len(policy_item.slider)
+				
+				try:
+					slider_index = policy_item.slider.index(slider_value)
+					policy_item.value = step_value * (slider_index + 1.0)
+					print(f'Update policy value of {key} to {policy_item.value}')
+				except ValueError:
+					print(f'Could not find {slider_value} in {policy_item.slider}')
+				
+				simulation_to_database(sim)
+			else:
+				print(f'unknown action: {action}')
+				sim = simulation_from_database()
+		else:
+			sim = simulation_from_database()
+		
+		policy_item = sim.policies[key]
+		
+		# situation_item.input_list = situation_item.input_values(sim)
+		# situation_item.effect_list = situation_item.effect_values(sim)
+		
+		return render_template('policy.html', policy=policy_item)
+	
 	@app.route("/categories")
 	def categories():
 		category_items = SimulationCategory

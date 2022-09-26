@@ -20,9 +20,6 @@ class InternationalTradeSimulation(SimulationBase):
 			emotion=SimulationEmotion.high_good
 		)
 		
-		# input @todo
-		# ForeignRelations,-0.2+(0.2*x),4
-		
 		# connections:
 		self.effects.append(SimulationConnection('gdp', '0 + (0.15 * x)'))
 		self.effects.append(SimulationConnection('air_travel', '0 + (0.2 * x)'))

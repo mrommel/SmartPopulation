@@ -2,7 +2,6 @@ import sqlite3
 import click
 from flask import current_app, g
 
-from simulation.base import SimulationCategory, SimulationBase, SituationBase
 from simulation.simulation import Simulation
 
 
@@ -51,6 +50,14 @@ def populate_db():
 			(key, situation.is_active)
 		)
 		database.commit()
+		
+	for key, policy in sim.policies.items():
+		database.execute(
+			'INSERT INTO policies (key, is_active, value)'
+			' VALUES (?, ?, ?)',
+			(key, policy.is_active, policy.value)
+		)
+		database.commit()
 
 
 @click.command('init-db')
@@ -78,7 +85,6 @@ def simulation_from_database() -> Simulation:
 	
 	for simulation_item in simulation_items:
 		sim.simulations[simulation_item['key']].value = simulation_item['value']
-		# print(f"updated: {simulation_item['key']} = {simulation_item['value']}")
 		
 		# handle loading historic simulation values
 		simulation_histories_items = database.execute(
@@ -97,19 +103,35 @@ def simulation_from_database() -> Simulation:
 		situation_key = situation_item['key']
 		situation_id = situation_item['id']
 		sim.situations[situation_key].is_active = situation_item['is_active']
-		# print(f"updated: {situation_item['key']} = {situation_item['is_active']}")
 		
 		# handle loading historic situation values
-		print(f'situation_item.id = {situation_id}')
 		situation_histories_items = database.execute(
 			'SELECT s.value FROM situation_histories AS s WHERE situation_id = ?', (situation_id,)
 		).fetchall()
 		
-		print(f'history items = {len(situation_histories_items)}')
 		for situation_histories_item in situation_histories_items:
 			history_value = situation_histories_item["value"]
-			print(f'history for {situation_key} => {history_value}')
 			sim.situations[situation_key].history.append(history_value)
+	
+	# populate policies
+	policy_items = database.execute(
+		'SELECT p.id, p.key, p.is_active, p.value FROM policies AS p'
+	).fetchall()
+	
+	for policy_item in policy_items:
+		policy_key = policy_item['key']
+		policy_id = policy_item['id']
+		sim.policies[policy_key].is_active = policy_item['is_active']
+		sim.policies[policy_key].value = policy_item['value']
+		
+		# handle loading historic policy values
+		policy_histories_items = database.execute(
+			'SELECT s.value FROM policy_histories AS s WHERE policy_id = ?', (policy_id,)
+		).fetchall()
+		
+		for policy_histories_item in policy_histories_items:
+			history_value = policy_histories_item["value"]
+			sim.policies[policy_key].history.append(history_value)
 	
 	return sim
 
@@ -130,9 +152,11 @@ def simulation_to_database(sim: Simulation):
 			'SELECT s.id FROM simulations AS s WHERE key = ?',
 			(key,)
 		).fetchone()
+		if simulation_row is None:
+			raise Exception(f'cant find simulation "{key}" in db')
+		
 		simulation_id = simulation_row[0]
 		
-		# print(f'situation_id={situation_id}')
 		database.execute(
 			'DELETE FROM simulation_histories WHERE simulation_id = ?',
 			(simulation_id,)
@@ -167,9 +191,39 @@ def simulation_to_database(sim: Simulation):
 		database.commit()
 	
 		for situation_history_value in situation.history:
-			print(f'store in {situation_history_value} situation_histories table for {key} ({situation_id})')
 			database.execute(
 				'INSERT INTO situation_histories (situation_id, value) VALUES (?, ?)',
 				(situation_id, situation_history_value)
 			)
 			database.commit()
+
+	# polices
+	for key, policy in sim.policies.items():
+		database.execute(
+			'UPDATE policies SET is_active = ?, value = ? WHERE key = ?',
+			(policy.is_active, policy.value, key)
+		)
+		database.commit()
+		
+		policy_row = database.execute(
+			'SELECT p.id FROM policies AS p WHERE key = ?',
+			(key,)
+		).fetchone()
+		if policy_row is None:
+			raise Exception(f'cant find policy "{key}" in db')
+		
+		policy_id = policy_row[0]
+		
+		database.execute(
+			'DELETE FROM policy_histories WHERE policy_id = ?',
+			(policy_id,)
+		)
+		database.commit()
+		
+		for policy_history_value in policy.history:
+			database.execute(
+				'INSERT INTO policy_histories (policy_id, value) VALUES (?, ?)',
+				(policy_id, policy_history_value)
+			)
+			database.commit()
+	

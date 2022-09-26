@@ -1,10 +1,15 @@
 """ simulation """
 from simulation.groups.all import AllGroup
+from simulation.groups.conservatives import ConservativesGroup
 from simulation.groups.environmentalists import EnvironmentalistGroup
+from simulation.groups.liberal import LiberalGroup
+from simulation.groups.middle_income import MiddleIncomeGroup
 from simulation.groups.patriot import PatriotGroup
 from simulation.groups.poor import PoorGroup
 from simulation.groups.retired import RetiredGroup
 from simulation.groups.socialists import SocialistGroup
+from simulation.policies.armed_police import ArmedPolicePolicy
+from simulation.policies.policy_force import PoliceForcePolicy
 from simulation.simulations.air_travel import AirTravelSimulation
 from simulation.simulations.bus_usage import BusUsageSimulation
 from simulation.simulations.car_usage import CarUsageSimulation
@@ -36,7 +41,10 @@ from simulation.simulations.violent_crime_rate import ViolentCrimeRateSimulation
 from simulation.simulations.wages import WagesSimulation
 from simulation.simulations.worker_productivity import WorkerProductivitySimulation
 from simulation.simulations.working_week import WorkingWeekSimulation
+from simulation.situations.alcoholism import AlcoholismSituation
+from simulation.situations.homelessness import HomelessnessSituation
 from simulation.situations.obesity import ObesitySituation
+from simulation.situations.organised_crime import OrganisedCrimeSituation
 from simulation.situations.pollution import PollutionSituation
 
 
@@ -48,12 +56,27 @@ class Simulation:
 	def __init__(self):
 		# people / groups
 		self.groups = {
-			'all': AllGroup(),
-			'poor': PoorGroup(),
-			'environmentalist': EnvironmentalistGroup(),
-			'retired': RetiredGroup(),
 			'socialist': SocialistGroup(),
+			# 'capitalist':
+			'retired': RetiredGroup(),
+			# 'commuter':
 			'patriot': PatriotGroup(),
+			# 'motorist':
+			'liberal': LiberalGroup(),
+			# 'religious':
+			# 'trade_unionist':
+			# 'self_employed':
+			'environmentalist': EnvironmentalistGroup(),
+			# 'wealthy':
+			'poor': PoorGroup(),
+			'middle_income': MiddleIncomeGroup(),
+			# 'parents':
+			# 'farmers':
+			# 'state_employees':
+			'conservatives': ConservativesGroup(),
+			# 'young':
+			# 'ethnic_minorities':
+			'all': AllGroup(),
 		}
 		
 		# simulations
@@ -102,14 +125,99 @@ class Simulation:
 			# Currency Strength
 		}
 		
+		# https://github.com/bakster55/W3JsonToExcel/blob/master/democracy3/data/simulation/situations.csv
 		self.situations = {
 			'pollution': PollutionSituation(),
+			# ...
+			'organised_crime': OrganisedCrimeSituation(),
+			'alcoholism': AlcoholismSituation(),
+			# ...
+			'homelessness': HomelessnessSituation(),
 			# ...
 			'obesity': ObesitySituation(),
 		}
 		
+		# https://github.com/bakster55/W3JsonToExcel/blob/master/democracy3/data/simulation/policies.csv
 		self.policies = {
-			# taxes etc
+			# AdultEducationSubsidies
+			# AgricultureSubsidies
+			# AirlineTax
+			# AlcoholLaw
+			# AlcoholTax
+			'armed_police': ArmedPolicePolicy(),
+			# BanSundayShopping
+			# BiofuelSubsidies
+			# BorderControls
+			# BusLanes
+			# BusSubsidies
+			# CarbonTax
+			# CarEmmissionsLimits
+			# CarTax
+			# CCTVCameras
+			# ChildBenefit
+			# ChildcareProvision
+			# CitizenshipTests
+			# CleanEnergySubsidies
+			# CleanFuelSubsidy
+			# CommunityPolicing
+			# ConsumerRights
+			# CorporationTax
+			# Creationism
+			# Curfews
+			# DeathPenalty
+			# DetentionWithoutTrial
+			# DisabilityBenefit
+			# FaithSchoolSubsidies
+			# ForeignAid
+			# FreeBusPasses
+			# FreeEyeTests
+			# FreeSchoolMeals
+			# Gambling
+			# GatedCommunities
+			# GraduateTax
+			# HandgunLaws
+			# HybridCarsInitiative
+			# IDCards
+			# ImportTarrifs
+			# IncomeTax
+			# FlatTax
+			# CapitalGainsTax
+			# InheritanceTax
+			# IntelligenceServices
+			# InternetCensorship
+			# InternetTax
+			# JuryTrial
+			# LabourLaws
+			# LegalAid
+			# LegaliseProstitution
+			# LuxuryGoodsTax
+			# MarriedTaxAllowance
+			# MaternityLeave
+			# MicrogenerationGrants
+			# MilitarySpending
+			# Monorail
+			# MortgageTaxRelief
+			# Narcotics
+			# NationalService
+			# OrganDonation
+			# OrganicSubsidy
+			# PetrolTax
+			# PhoneTapping
+			# PlasticBagTax
+			'policy_force': PoliceForcePolicy(),
+			# PollutionControls
+			# PrisonerTagging
+			# Prisons
+			# PropertyTax
+			# PublicLibraries
+			# RacialProfiling
+			# RaceDiscriminationAct
+			# RailSubsidies
+			# Recycling
+			# RoadBuilding
+			# RuralDevelopmentGrants
+			# SalesTax
+			# ...
 		}
 		
 		self.started_situations = []
@@ -130,6 +238,9 @@ class Simulation:
 			
 		for _, situation_item in self.situations.items():
 			situation_item.prepare()
+			
+		for _, policy_item in self.policies.items():
+			policy_item.prepare()
 		
 		# -------- iterate --------------
 		for _, simulation_item in self.simulations.items():
@@ -140,6 +251,9 @@ class Simulation:
 			
 		for _, situation_item in self.situations.items():
 			situation_item.iterate(self)
+			
+		for _, policy_item in self.policies.items():
+			policy_item.iterate(self)
 		
 		# -------- finish --------------
 		for _, simulation_item in self.simulations.items():
@@ -150,6 +264,9 @@ class Simulation:
 			
 		for _, situation_item in self.situations.items():
 			situation_item.finish()
+			
+		for _, policy_item in self.policies.items():
+			policy_item.finish()
 		
 		# -------- show situations --------------
 		for started_situation in self.started_situations:
@@ -158,7 +275,7 @@ class Simulation:
 		
 		for ended_situation in self.ended_situations:
 			print(f'situation {ended_situation.name} ended:')
-			print(f'=> {ended_situation.start_text}')
+			print(f'=> {ended_situation.end_text}')
 			
 		self.started_situations = []
 		self.ended_situations = []

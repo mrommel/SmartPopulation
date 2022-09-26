@@ -24,3 +24,4 @@ class RacialTensionSimulation(SimulationBase):
 		self.effects.append(SimulationConnection('patriot_freq', '-0.12 + (0.24 * x)'))
 		# liberal_freq,0.1-(0.2*x)
 		# ethnic_minorities_mood,0-(0.4*x)
+		self.effects.append(SimulationConnection('alcoholism', '0.0 + (0.1 * x)'))

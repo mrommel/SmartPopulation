@@ -20,3 +20,4 @@ class EnvironmentSimulation(SimulationBase):
 		# connections:
 		self.effects.append(SimulationConnection('environmentalist_mood', '0.4 - (x * 0.8)'))
 		self.effects.append(SimulationConnection('pollution', '1.0 - (1.0 * x)'))
+		self.effects.append(SimulationConnection('tourism', '-0.1 + (0.1 * x)', 8))

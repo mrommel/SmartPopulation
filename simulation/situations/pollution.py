@@ -28,4 +28,5 @@ class PollutionSituation(SituationBase):
 		self.effects.append(SimulationConnection('health', '0 - (0.48 * x) ** 1.5'))
 		self.effects.append(SimulationConnection('environmentalist_mood', '-0.1 - (0.3 * x)'))
 		self.effects.append(SimulationConnection('environmentalist_freq', '0.1 + (0.1 * x)'))
+		self.effects.append(SimulationConnection('tourism', '-0.03 - (0.03 * x)', 4))
 	
