@@ -78,6 +78,10 @@
                                             <a href="/simulation/{{ input.key }}" class="nav-link p-0">
                                                 <i class="nav-icon fas fa-chart-bar"></i>&nbsp;<p>{{ input.name }}</p>
                                             </a>
+                                        {% elif input.base_type.value == 2 %}
+                                            <a href="/policy/{{ input.key }}" class="nav-link p-0">
+                                                <i class="nav-icon fas fa-sliders-h"></i>&nbsp;<p>{{ input.name }}</p>
+                                            </a>
                                         {% else %}
                                             Not handled input: {{ input.key }} ({{ input.base_type.value }})
                                         {% endif %}

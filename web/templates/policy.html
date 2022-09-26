@@ -72,9 +72,48 @@
                                             {% endif %}
                                         {% endfor %}
                                     </select>
+                                    <br />
                                     <button type="submit" class="btn btn-primary">Change</button>
                                 </div>
                             </form>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Effects</td>
+                        <td>
+                            <ul>
+                            {% for effect in policy.effect_list %}
+                                <li>
+                                    <div class="nav-sidebar nav-pills">
+                                        {% if effect.base_type.value == 0 %}
+                                            <a href="/simulation/{{ effect.key }}" class="nav-link p-0">
+                                                <i class="nav-icon fas fa-chart-bar"></i>&nbsp;<p>{{ effect.name }}</p>
+                                            </a>
+                                        {% elif effect.base_type.value == 1 %}
+                                            <a href="/situation/{{ effect.key }}" class="nav-link p-0">
+                                                <i class="nav-icon fas fa-bolt"></i>&nbsp;<p>{{ effect.name }}</p>
+                                            </a>
+                                        {% elif effect.base_type.value == 3 %}
+                                            <a href="/group/{{ effect.key }}" class="nav-link p-0">
+                                                <i class="nav-icon fas fa-users"></i>&nbsp;<p>{{ effect.name }}</p>
+                                            </a>
+                                        {% else %}
+                                            Not handled effect: {{ effect.key }} ({{ effect.base_type.value }})
+                                        {% endif %}
+                                    </div>
+                                </li>
+                            {% endfor %}
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>History</td>
+                        <td>
+                            {% for history_item in policy.history %}
+                                {{ "%.2f"|format(history_item) }}{% if not loop.last %}, {% endif %}
+                            {% endfor %}
+                            <input type="hidden" id="fname" name="fname" onchange="cb(this.value)">
+                            <div id='chart' class='chart'></div>
                         </td>
                     </tr>
                     </tbody>

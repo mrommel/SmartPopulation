@@ -219,6 +219,16 @@ class SimulationBase:
 		
 		own_key = next((key for key, sim_item in sim.simulations.items() if sim_item.name == self.name), None)
 		
+		if own_key is None:
+			own_key = next((key for key, group_item in sim.groups.items() if group_item.mood.name == self.name), None)
+			if own_key is not None:
+				own_key = f'{own_key}_mood'
+			
+		if own_key is None:
+			own_key = next((key for key, group_item in sim.groups.items() if group_item.freq.name == self.name), None)
+			if own_key is not None:
+				own_key = f'{own_key}_freq'
+		
 		for key, simulation_item in sim.simulations.items():
 			for effect in simulation_item.effects:
 				if effect.target_name == own_key:
@@ -228,6 +238,13 @@ class SimulationBase:
 			for effect in situation_item.effects:
 				if effect.target_name == own_key:
 					input_list.append(ValueBase(key, situation_item.name, BasicType.situation, 0.0))
+		
+		for key, policy_item in sim.policies.items():
+			for effect in policy_item.effects:
+				if effect.target_name == own_key:
+					input_list.append(ValueBase(key, policy_item.name, BasicType.policy, 0.0))
+		
+		print(f'input_values of {own_key} of {self.name} => {len(input_list)}')
 		
 		return input_list
 	
@@ -447,6 +464,11 @@ class SituationBase:
 				if effect.target_name == own_key:
 					input_list.append(ValueBase(key, simulation_item.name, BasicType.simulation, 0.0))
 		
+		for key, policy_item in sim.policies.items():
+			for effect in policy_item.effects:
+				if effect.target_name == own_key:
+					input_list.append(ValueBase(key, policy_item.name, BasicType.policy, 0.0))
+		
 		return input_list
 	
 	def effect_values(self, simulation) -> [ValueBase]:
@@ -590,4 +612,42 @@ class PolicyBase:
 			:return: (nothing)
 		"""
 		print(f'{self.name:24}: \t{self.value:.2f}')
+	
+	def effect_values(self, simulation) -> [ValueBase]:
+		
+		effect_list = []
+		
+		for effect in self.effects:
+			tmp_value = self.value
+			tmp_sum = 1.0
+			for index in range(0, effect.inertia - 1):
+				if index < len(self.history):
+					tmp_value += self.history[index]
+				else:
+					tmp_value += self.value
+				tmp_sum += 1.0
+			
+			tmp_value /= tmp_sum
+			
+			without_mood = effect.target_name.replace('_mood', '')
+			without_freq = effect.target_name.replace('_freq', '')
+			
+			if effect.target_name in simulation.simulations:
+				simulation_name = simulation.simulations[effect.target_name].name
+				effect_list.append(
+					ValueBase(effect.target_name, simulation_name, BasicType.simulation, effect.evaluate(tmp_value)))
+			elif effect.target_name in simulation.situations:
+				situation_name = simulation.situations[effect.target_name].name
+				effect_list.append(
+					ValueBase(effect.target_name, situation_name, BasicType.situation, effect.evaluate(tmp_value)))
+			elif without_mood in simulation.groups:
+				voter_name = f'{simulation.groups[without_mood].name} (Mood)'
+				effect_list.append(
+					ValueBase(without_mood, voter_name, BasicType.voter_group, effect.evaluate(tmp_value)))
+			elif without_freq in simulation.groups:
+				voter_name = f'{simulation.groups[without_freq].name} (Frequency)'
+				effect_list.append(
+					ValueBase(without_freq, voter_name, BasicType.voter_group, effect.evaluate(tmp_value)))
+		
+		return effect_list
 	

@@ -173,6 +173,9 @@ def create_app(test_config=None):
 		else:
 			group_item.freq_prop = 'bg-danger'
 		
+		group_item.mood.input_list = group_item.mood.input_values(sim)
+		group_item.freq.input_list = group_item.freq.input_values(sim)
+		
 		return render_template('group.html', group=group_item)
 	
 	@app.route("/situations")
@@ -261,7 +264,7 @@ def create_app(test_config=None):
 		policy_item = sim.policies[key]
 		
 		# situation_item.input_list = situation_item.input_values(sim)
-		# situation_item.effect_list = situation_item.effect_values(sim)
+		policy_item.effect_list = policy_item.effect_values(sim)
 		
 		return render_template('policy.html', policy=policy_item)
 	

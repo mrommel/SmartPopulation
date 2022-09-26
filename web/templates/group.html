@@ -50,12 +50,76 @@
                         <td>{{ group.category.name }}</td>
                     </tr>
                     <tr>
+                        <td>Mood Inputs</td>
+                        <td>
+                            <ul>
+                            {% for input in group.mood.input_list %}
+                                <li>
+                                    <div class="nav-sidebar nav-pills">
+                                        {% if input.base_type.value == 0 %}
+                                            <a href="/simulation/{{ input.key }}" class="nav-link p-0">
+                                                <i class="nav-icon fas fa-chart-bar"></i>&nbsp;<p>{{ input.name }}</p>
+                                            </a>
+                                        {% elif input.base_type.value == 1 %}
+                                            <a href="/situation/{{ input.key }}" class="nav-link p-0">
+                                                <i class="nav-icon fas fa-bolt"></i>&nbsp;<p>{{ input.name }}</p>
+                                            </a>
+                                        {% elif input.base_type.value == 2 %}
+                                            <a href="/policy/{{ input.key }}" class="nav-link p-0">
+                                                <i class="nav-icon fas fa-sliders-h"></i>&nbsp;<p>{{ input.name }}</p>
+                                            </a>
+                                        {% else %}
+                                            Not handled input: {{ input.key }} ({{ input.base_type.value }})
+                                        {% endif %}
+                                    </div>
+                                </li>
+                            {% endfor %}
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
                         <td>Mood Value</td>
                         <td>
                             <div class="progress progress-xs">
                                 <div class="progress-bar {{ group.prop_mood }}" style="width: {{ (group.mood.value * 100)|int }}%"></div>
                             </div>
                             {{ (group.mood.value * 100)|int }}%
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Mood History</td>
+                        <td>
+                            {% for history_item in group.mood.history %}
+                                {{ "%.2f"|format(history_item) }}{% if not loop.last %}, {% endif %}
+                            {% endfor %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Freq Inputs</td>
+                        <td>
+                            <ul>
+                            {% for input in group.freq.input_list %}
+                                <li>
+                                    <div class="nav-sidebar nav-pills">
+                                        {% if input.base_type.value == 0 %}
+                                            <a href="/simulation/{{ input.key }}" class="nav-link p-0">
+                                                <i class="nav-icon fas fa-chart-bar"></i>&nbsp;<p>{{ input.name }}</p>
+                                            </a>
+                                        {% elif input.base_type.value == 1 %}
+                                            <a href="/situation/{{ input.key }}" class="nav-link p-0">
+                                                <i class="nav-icon fas fa-bolt"></i>&nbsp;<p>{{ input.name }}</p>
+                                            </a>
+                                        {% elif input.base_type.value == 2 %}
+                                            <a href="/policy/{{ input.key }}" class="nav-link p-0">
+                                                <i class="nav-icon fas fa-sliders-h"></i>&nbsp;<p>{{ input.name }}</p>
+                                            </a>
+                                        {% else %}
+                                            Not handled input: {{ input.key }} ({{ input.base_type.value }})
+                                        {% endif %}
+                                    </div>
+                                </li>
+                            {% endfor %}
+                            </ul>
                         </td>
                     </tr>
                     <tr>
@@ -68,9 +132,9 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>History</td>
+                        <td>Freq History</td>
                         <td>
-                            {% for history_item in group.history %}
+                            {% for history_item in group.freq.history %}
                                 {{ "%.2f"|format(history_item) }}{% if not loop.last %}, {% endif %}
                             {% endfor %}
                         </td>
