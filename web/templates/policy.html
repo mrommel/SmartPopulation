@@ -58,15 +58,22 @@
                     <tr>
                         <td>Value</td>
                         <td>
-                            {{ (policy.value * 100)|int }}%
+                            {# {{ (policy.value * 100)|int }}% #}
                             <form method="post">
                                 <input type="hidden" name="action" value="change">
-                                <select name="slider">
-                                    {% for slider_value in policy.slider %}
-                                         <option>{{ slider_value }}</option>
-                                    {% endfor %}
-                                </select>
-                                <button type="submit" class="btn btn-block btn-primary">Change</button>
+                                <div class="form-group">
+                                    <label>Policy Value</label>
+                                    <select name="slider" class="form-control">
+                                        {% for slider_value in policy.slider %}
+                                            {% if policy.slider_value == slider_value %}
+                                                <option selected>{{ slider_value }}</option>
+                                            {% else %}
+                                                <option>{{ slider_value }}</option>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </select>
+                                    <button type="submit" class="btn btn-primary">Change</button>
+                                </div>
                             </form>
                         </td>
                     </tr>

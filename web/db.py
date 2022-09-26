@@ -53,9 +53,9 @@ def populate_db():
 		
 	for key, policy in sim.policies.items():
 		database.execute(
-			'INSERT INTO policies (key, is_active, value)'
-			' VALUES (?, ?, ?)',
-			(key, policy.is_active, policy.value)
+			'INSERT INTO policies (key, is_active, slider_value, value)'
+			' VALUES (?, ?, ?, ?)',
+			(key, policy.is_active, policy.slider_value, policy.value)
 		)
 		database.commit()
 
@@ -115,13 +115,14 @@ def simulation_from_database() -> Simulation:
 	
 	# populate policies
 	policy_items = database.execute(
-		'SELECT p.id, p.key, p.is_active, p.value FROM policies AS p'
+		'SELECT p.id, p.key, p.is_active, p.slider_value, p.value FROM policies AS p'
 	).fetchall()
 	
 	for policy_item in policy_items:
 		policy_key = policy_item['key']
 		policy_id = policy_item['id']
 		sim.policies[policy_key].is_active = policy_item['is_active']
+		sim.policies[policy_key].slider_value = policy_item['slider_value']
 		sim.policies[policy_key].value = policy_item['value']
 		
 		# handle loading historic policy values
@@ -200,8 +201,8 @@ def simulation_to_database(sim: Simulation):
 	# polices
 	for key, policy in sim.policies.items():
 		database.execute(
-			'UPDATE policies SET is_active = ?, value = ? WHERE key = ?',
-			(policy.is_active, policy.value, key)
+			'UPDATE policies SET is_active = ?, slider_value = ?, value = ? WHERE key = ?',
+			(policy.is_active, policy.slider_value, policy.value, key)
 		)
 		database.commit()
 		

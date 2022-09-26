@@ -247,7 +247,7 @@ def create_app(test_config=None):
 				try:
 					slider_index = policy_item.slider.index(slider_value)
 					policy_item.value = step_value * (slider_index + 1.0)
-					print(f'Update policy value of {key} to {policy_item.value}')
+					print(f'Update policy "{key}" to {policy_item.value} / index: {slider_index} / {slider_value}')
 				except ValueError:
 					print(f'Could not find {slider_value} in {policy_item.slider}')
 				

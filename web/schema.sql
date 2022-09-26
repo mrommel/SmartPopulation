@@ -35,6 +35,7 @@ CREATE TABLE policies (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   key TEXT UNIQUE NOT NULL,
   is_active BOOL NOT NULL,
+  slider_value TEXT NOT NULL,
   value FLOAT NOT NULL
 );
 
