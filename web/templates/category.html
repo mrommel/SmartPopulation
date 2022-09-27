@@ -45,7 +45,7 @@
                         <td>Simulations</td>
                         <td>
                             <ul>
-                            {% for key, simulation_item in category.simulations.items() %}
+                            {% for key, simulation_item in category.simulation_list.items() %}
                                 <li>
                                     <div class="nav-sidebar nav-pills">
                                         <a href="/simulation/{{ key }}" class="nav-link p-0">
@@ -61,7 +61,7 @@
                         <td>Situations</td>
                         <td>
                             <ul>
-                            {% for key, situation_item in category.situations.items() %}
+                            {% for key, situation_item in category.situation_list.items() %}
                                 <li>
                                     <div class="nav-sidebar nav-pills">
                                         <a href="/situation/{{ key }}" class="nav-link p-0">
@@ -77,7 +77,7 @@
                         <td>Policies</td>
                         <td>
                             <ul>
-                            {% for key, policy_item in category.policies.items() %}
+                            {% for key, policy_item in category.policy_list.items() %}
                                 <li>
                                     <div class="nav-sidebar nav-pills">
                                         <a href="/simulation/{{ key }}" class="nav-link p-0">

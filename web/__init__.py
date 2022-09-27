@@ -103,7 +103,11 @@ def create_app(test_config=None):
 	@app.route('/simulation_callback', methods=[' POST', 'GET'])
 	def cb():
 		# request.args.get('data')
-		return simulation_history('key')
+		sim = simulation_from_database()
+		
+		key = 'air_travel'
+		simulation_item = sim.simulations[key]
+		return simulation_history(simulation_item)
 	
 	@app.route('/simulation/<key>')
 	def simulation(key):
@@ -126,12 +130,10 @@ def create_app(test_config=None):
 		simulation_item.input_list = simulation_item.input_values(sim)
 		simulation_item.effect_list = simulation_item.effect_values(sim)
 		
-		return render_template('simulation.html', simulation=simulation_item, graph_json=simulation_history(key))
+		return render_template(
+			'simulation.html', simulation=simulation_item, graph_json=simulation_history(simulation_item))
 	
-	def simulation_history(key):
-		sim = simulation_from_database()
-		
-		simulation_item = sim.simulations[key]
+	def simulation_history(simulation_item):
 		
 		data = simulation_item.history  # list(reversed(simulation_item.history))
 		d = {"iteration": range(0, len(data)), "history": data}
@@ -232,12 +234,9 @@ def create_app(test_config=None):
 		situation_item.input_list = situation_item.input_values(sim)
 		situation_item.effect_list = situation_item.effect_values(sim)
 		
-		return render_template('situation.html', situation=situation_item, graph_json=situation_history(key))
+		return render_template('situation.html', situation=situation_item, graph_json=situation_history(situation_item))
 	
-	def situation_history(key):
-		sim = simulation_from_database()
-		
-		situation_item = sim.situations[key]
+	def situation_history(situation_item):
 		
 		data = situation_item.history  # list(reversed(simulation_item.history))
 		d = {
@@ -248,8 +247,14 @@ def create_app(test_config=None):
 		}
 		df = pd.DataFrame(d)
 		
-		fig = px.line(df, title='History', x='iteration', y=['history', 'start', 'end'], range_y=[0.0, 1.0],
-		              template="plotly_dark")
+		fig = px.line(
+			df,
+			title='History',
+			x='iteration',
+			y=['history', 'start', 'end'],
+			range_y=[0.0, 1.0],
+			template='plotly_dark'
+		)
 		graph_json = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
 		return graph_json
 	
@@ -277,7 +282,7 @@ def create_app(test_config=None):
 				try:
 					slider_index = policy_item.slider.index(slider_value)
 					policy_item.value = step_value * (slider_index + 1.0)
-					print(f'Update policy "{key}" to {policy_item.value} / index: {slider_index} / {slider_value}')
+					# print(f'Update policy "{key}" to {policy_item.value} / index: {slider_index} / {slider_value}')
 				except ValueError:
 					print(f'Could not find {slider_value} in {policy_item.slider}')
 				
@@ -290,7 +295,6 @@ def create_app(test_config=None):
 		
 		policy_item = sim.policies[key]
 		
-		# situation_item.input_list = situation_item.input_values(sim)
 		policy_item.effect_list = policy_item.effect_values(sim)
 		
 		return render_template('policy.html', policy=policy_item)
@@ -306,17 +310,10 @@ def create_app(test_config=None):
 		sim = simulation_from_database()
 		category_item = SimulationCategory[key]
 		
-		category_item.simulations = {
-			k: simulation_item for k, simulation_item in sim.simulations.items() if simulation_item.category.value == category_item.value
-		}
-		category_item.situations = {
-			k: situation_item for k, situation_item in sim.situations.items() if situation_item.category.value == category_item.value
-		}
-		category_item.policies = {
-			k: policy_item for k, policy_item in sim.policies.items() if policy_item.category.value == category_item.value
-		}
+		category_item.simulation_list = category_item.simulations(sim)
+		category_item.situation_list = category_item.situations(sim)
+		category_item.policy_list = category_item.policies(sim)
 		
 		return render_template('category.html', category=category_item)
 	
 	return app
-

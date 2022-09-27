@@ -60,6 +60,24 @@ class SimulationCategory(Enum):
 			return 'People'
 		else:
 			return 'default'
+		
+	def simulations(self, sim):
+		return {
+			k: simulation_item for k, simulation_item in sim.simulations.items() if
+			simulation_item.category.value == self.value
+		}
+	
+	def situations(self, sim):
+		return {
+			k: situation_item for k, situation_item in sim.situations.items() if
+			situation_item.category.value == self.value
+		}
+	
+	def policies(self, sim):
+		return {
+			k: policy_item for k, policy_item in sim.policies.items() if
+			policy_item.category.value == self.value
+		}
 
 
 class SimulationConnection:
@@ -243,17 +261,17 @@ class SimulationBase:
 		for key, simulation_item in sim.simulations.items():
 			for effect in simulation_item.effects:
 				if effect.target_name == own_key:
-					input_list.append(ValueBase(key, simulation_item.name, BasicType.simulation, 0.0))
+					input_list.append(ValueBase(key, simulation_item.name, BasicType.simulation, effect.evaluate(self.value)))
 		
 		for key, situation_item in sim.situations.items():
 			for effect in situation_item.effects:
 				if effect.target_name == own_key:
-					input_list.append(ValueBase(key, situation_item.name, BasicType.situation, 0.0))
+					input_list.append(ValueBase(key, situation_item.name, BasicType.situation, effect.evaluate(self.value)))
 		
 		for key, policy_item in sim.policies.items():
 			for effect in policy_item.effects:
 				if effect.target_name == own_key:
-					input_list.append(ValueBase(key, policy_item.name, BasicType.policy, 0.0))
+					input_list.append(ValueBase(key, policy_item.name, BasicType.policy, effect.evaluate(self.value)))
 		
 		print(f'input_values of {own_key} of {self.name} => {len(input_list)}')
 		
