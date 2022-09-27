@@ -346,6 +346,11 @@ class GroupBase:
 		"""
 		self.mood.finish()
 		self.freq.finish()
+		
+		# debug
+		# print(f'Group "{self.name}" with')
+		# print(f'  * mood: {self.mood.value} => {self.mood.history}')
+		# print(f'  * freq: {self.freq.value} => {self.freq.history}')
 	
 	def print(self):
 		"""

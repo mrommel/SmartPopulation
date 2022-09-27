@@ -37,33 +37,26 @@ def populate_db():
 	
 	for key, simulation in sim.simulations.items():
 		database.execute(
-			'INSERT INTO simulations (key, value)'
-			' VALUES (?, ?)',
-			(key, simulation.value)
+			'INSERT INTO simulations (key, value) VALUES (?, ?)', (key, simulation.value)
 		)
 		database.commit()
 	
 	for key, situation in sim.situations.items():
 		database.execute(
-			'INSERT INTO situations (key, is_active)'
-			' VALUES (?, ?)',
-			(key, situation.is_active)
+			'INSERT INTO situations (key, is_active) VALUES (?, ?)', (key, situation.is_active)
 		)
 		database.commit()
 		
 	for key, policy in sim.policies.items():
 		database.execute(
-			'INSERT INTO policies (key, is_active, slider_value, value)'
-			' VALUES (?, ?, ?, ?)',
+			'INSERT INTO policies (key, is_active, slider_value, value) VALUES (?, ?, ?, ?)',
 			(key, policy.is_active, policy.slider_value, policy.value)
 		)
 		database.commit()
 		
-	for key, _ in sim.policies.items():
+	for key, _ in sim.groups.items():
 		database.execute(
-			'INSERT INTO groups (key)'
-			' VALUES (?)',
-			(key, )
+			'INSERT INTO groups (key) VALUES (?)', (key, )
 		)
 		database.commit()
 
@@ -150,6 +143,17 @@ def simulation_from_database() -> Simulation:
 	for group_item in group_items:
 		group_key = group_item['key']
 		group_id = group_item['id']
+		
+		# handle loading historic policy values
+		group_histories_items = database.execute(
+			'SELECT g.mood_value, g.freq_value FROM group_histories AS g WHERE g.group_id = ?', (group_id,)
+		).fetchall()
+		
+		for policy_histories_item in group_histories_items:
+			history_mood_value = policy_histories_item["mood_value"]
+			history_freq_value = policy_histories_item["freq_value"]
+			sim.groups[group_key].mood.history.append(history_mood_value)
+			sim.groups[group_key].freq.history.append(history_freq_value)
 	
 	return sim
 
@@ -242,6 +246,31 @@ def simulation_to_database(sim: Simulation):
 			database.execute(
 				'INSERT INTO policy_histories (policy_id, value) VALUES (?, ?)',
 				(policy_id, policy_history_value)
+			)
+			database.commit()
+		
+	# groups
+	for key, group in sim.groups.items():
+		
+		group_row = database.execute(
+			'SELECT g.id FROM groups AS g WHERE g.key = ?', (key,)
+		).fetchone()
+		if group_row is None:
+			raise Exception(f'cant find group "{key}" in db')
+		
+		group_id = group_row[0]
+		
+		database.execute(
+			'DELETE FROM group_histories WHERE group_id = ?', (group_id,)
+		)
+		database.commit()
+		
+		for index in range(0, len(group.mood.history)):
+			group_mood_history_value = group.mood.history[index]
+			group_freq_history_value = group.mood.history[index]
+			database.execute(
+				'INSERT INTO group_histories (group_id, mood_value, freq_value) VALUES (?, ?, ?)',
+				(group_id, group_mood_history_value, group_freq_history_value)
 			)
 			database.commit()
 	

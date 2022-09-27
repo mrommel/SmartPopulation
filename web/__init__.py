@@ -35,6 +35,32 @@ def create_app(test_config=None):
 	from . import db
 	db.init_app(app)
 	
+	# ############################
+	# template filters
+	
+	@app.template_filter()
+	def pretty_delta_percent(val):
+		"""
+			get the percent value with leading sign (+/-)
+
+			:param val: float value to be transformed
+			:return: e.g. '+8%' for 0.08 or '-15%' for 0.15
+		"""
+		if val < 0:
+			return f'{int(val * 100)}%'
+		else:
+			return f'+{int(val * 100)}%'
+	
+	@app.template_filter('reverse')
+	def reverse_filter(s):
+		"""
+			reverses the list / array
+
+			:param s: array
+			:return: reversed array
+		"""
+		return s[::-1]
+	
 	@app.route("/", methods=('GET', 'POST'))
 	def index():
 		if request.method == 'POST':
@@ -293,3 +319,4 @@ def create_app(test_config=None):
 		return render_template('category.html', category=category_item)
 	
 	return app
+

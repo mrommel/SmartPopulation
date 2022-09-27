@@ -11,7 +11,7 @@ class StateEmployeesGroup(GroupBase):
 	
 	def __init__(self):
 		super().__init__(
-			'State Employees	',
+			'State Employees',
 			'This group covers a wide range of occupations, where people are directly or indirectly working for the '
 			'state, whether it be as teachers or doctors in public schools and hospitals, members of the armed forces, '
 			'and of course the police force. Unlike people working in the free market, state employees can see a '
