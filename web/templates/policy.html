@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='dist/css/progress.css') }}">
+{% endblock %}
+
 {% block menu_policies %}active{% endblock %}
 
 {% block content_header %}
@@ -87,16 +91,19 @@
                                     <div class="nav-sidebar nav-pills">
                                         {% if effect.base_type.value == 0 %}
                                             <a href="/simulation/{{ effect.key }}" class="nav-link p-0">
-                                                <i class="nav-icon fas fa-chart-bar"></i>&nbsp;<p>{{ effect.name }} ({{ effect.value|pretty_delta_percent }})</p>
+                                                <i class="nav-icon fas fa-chart-bar"></i>&nbsp;<p>{{ effect.name }}</p>
                                             </a>
+                                            {{ effect.value|pretty_delta_progress }}
                                         {% elif effect.base_type.value == 1 %}
                                             <a href="/situation/{{ effect.key }}" class="nav-link p-0">
-                                                <i class="nav-icon fas fa-bolt"></i>&nbsp;<p>{{ effect.name }} ({{ effect.value|pretty_delta_percent }})</p>
+                                                <i class="nav-icon fas fa-bolt"></i>&nbsp;<p>{{ effect.name }}</p>
                                             </a>
+                                            {{ effect.value|pretty_delta_progress }}
                                         {% elif effect.base_type.value == 3 %}
                                             <a href="/group/{{ effect.key }}" class="nav-link p-0">
-                                                <i class="nav-icon fas fa-users"></i>&nbsp;<p>{{ effect.name }} ({{ effect.value|pretty_delta_percent }})</p>
+                                                <i class="nav-icon fas fa-users"></i>&nbsp;<p>{{ effect.name }}</p>
                                             </a>
+                                            {{ effect.value|pretty_delta_progress }}
                                         {% else %}
                                             Not handled effect: {{ effect.key }} ({{ effect.base_type.value }})
                                         {% endif %}
@@ -122,4 +129,8 @@
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript" charset="utf-8" src="{{ url_for('static', filename='dist/js/progress.js') }}" />
 {% endblock %}

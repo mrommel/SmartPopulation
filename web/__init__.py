@@ -6,6 +6,7 @@ from flask import Flask, render_template, request
 import json
 import plotly
 import plotly.express as px
+from markupsafe import Markup
 
 from simulation.base import SimulationCategory
 from web.db import get_db, simulation_from_database, simulation_to_database, init_db, populate_db
@@ -50,6 +51,31 @@ def create_app(test_config=None):
 			return f'{int(val * 100)}%'
 		else:
 			return f'+{int(val * 100)}%'
+	
+	@app.template_filter()
+	def pretty_delta_progress(val):
+		"""
+		
+			:param val:
+			:return:
+		"""
+		if val > 0:
+			negative_val = '0px; display: none'
+			positive_val = f'{int(val * 100)}%'
+		else:
+			negative_val = f'{-int(val * 100)}%'
+			positive_val = '0px; display: none'
+		
+		return Markup(
+			'<div class="ui-progress-container">'
+			'<div id="progress_bar_neg" class="ui-progress-bar ui-container" style="width: 150px;">'
+			f'<div class="ui-progress-red" style="width: {negative_val}; ">&nbsp;</div><!-- .ui-progress -->'
+			'</div><!-- #progress_bar -->'
+			'<div id="progress_bar_pos" class="ui-progress-bar ui-container" style="width: 150px;">'
+			f'<div class="ui-progress" style="width: {positive_val};">&nbsp;</div><!-- .ui-progress -->'
+			'</div><!-- #progress_bar -->'
+			'</div>'
+		)
 	
 	@app.template_filter('reverse')
 	def reverse_filter(s):
@@ -282,7 +308,7 @@ def create_app(test_config=None):
 				try:
 					slider_index = policy_item.slider.index(slider_value)
 					policy_item.value = step_value * (slider_index + 1.0)
-					# print(f'Update policy "{key}" to {policy_item.value} / index: {slider_index} / {slider_value}')
+				# print(f'Update policy "{key}" to {policy_item.value} / index: {slider_index} / {slider_value}')
 				except ValueError:
 					print(f'Could not find {slider_value} in {policy_item.slider}')
 				
