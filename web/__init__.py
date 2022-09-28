@@ -55,25 +55,26 @@ def create_app(test_config=None):
 	@app.template_filter()
 	def pretty_delta_progress(val):
 		"""
+			generates a html of the slider (negativ red, positive green)
 		
 			:param val:
-			:return:
+			:return: html (safe) with positive and negative sliders
 		"""
 		if val > 0:
 			negative_val = '0px; display: none'
-			positive_val = f'{int(val * 100)}%'
+			positive_val = f'{max(3, int(val * 100))}%'
 		else:
-			negative_val = f'{-int(val * 100)}%'
+			negative_val = f'{max(3, -int(val * 100))}%'
 			positive_val = '0px; display: none'
 		
 		return Markup(
 			'<div class="ui-progress-container">'
 			'<div id="progress_bar_neg" class="ui-progress-bar ui-container" style="width: 150px;">'
-			f'<div class="ui-progress-red" style="width: {negative_val}; ">&nbsp;</div><!-- .ui-progress -->'
-			'</div><!-- #progress_bar -->'
+			f'<div class="ui-progress-red" style="width: {negative_val}; ">&nbsp;</div><!-- .ui-progress-red -->'
+			'</div><!-- #progress_bar_neg -->'
 			'<div id="progress_bar_pos" class="ui-progress-bar ui-container" style="width: 150px;">'
-			f'<div class="ui-progress" style="width: {positive_val};">&nbsp;</div><!-- .ui-progress -->'
-			'</div><!-- #progress_bar -->'
+			f'<div class="ui-progress-green" style="width: {positive_val};">&nbsp;</div><!-- .ui-progress-green -->'
+			'</div><!-- #progress_bar_pos -->'
 			'</div>'
 		)
 	
