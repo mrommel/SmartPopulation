@@ -15,6 +15,7 @@ class GDPSimulation(SimulationBase):
             "of your economy, and the nations overall wealth. One of the contributing factors is the global economic "
             "cycle, which tends to be cyclical, and is beyond your control.",
             SimulationCategory.economy,
+            'simulation_gdp.png',
             0.35,
             emotion=SimulationEmotion.high_good
         )

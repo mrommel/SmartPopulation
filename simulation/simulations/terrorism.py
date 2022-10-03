@@ -12,6 +12,7 @@ class TerrorismSimulation(SimulationBase):
 			"Terrorism",
 			"hidden",
 			SimulationCategory.hidden,
+			'simulation_default.png',
 			0.5,
 			emotion=SimulationEmotion.high_bad
 		)

@@ -15,6 +15,7 @@ class WagesSimulation(SimulationBase):
 			"reducing wages, and high unemployment will also put downward pressure on wages. Labor laws, including "
 			"minimum wages can push wages artificially higher, although this will have side-effects.",
 			SimulationCategory.economy,
+			'simulation_default.png',
 			0.5,
 			emotion=SimulationEmotion.high_good
 		)

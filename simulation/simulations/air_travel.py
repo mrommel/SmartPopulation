@@ -17,6 +17,7 @@ class AirTravelSimulation(SimulationBase):
 			"air freight. The amount of air travel is very price sensitive, so changes in fuel costs, taxes and other "
 			"charges can have a major effect.",
 			SimulationCategory.transport,
+			'simulation_default.png',
 			0.0,
 			emotion=SimulationEmotion.unknown
 		)

@@ -13,6 +13,7 @@ class EducationSimulation(SimulationBase):
 			"A measurement of the education level of the average citizen. Not only literacy, but numeracy and general "
 			"understanding of everything from history to IT and science.",
 			SimulationCategory.public_services,
+			'simulation_education.png',
 			0.18,
 			emotion=SimulationEmotion.high_good
 		)

@@ -14,6 +14,7 @@ class AverageIncomeSimulation(SimulationBase):
 			"because of the effect of inequality, the average income may be very different to the income of most of "
 			"your citizens in an unequal society",
 			SimulationCategory.economy,
+			'simulation_default.png',
 			0.50,
 			emotion=SimulationEmotion.high_good
 		)

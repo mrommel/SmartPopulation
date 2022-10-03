@@ -137,7 +137,8 @@ class SimulationBase:
 			name: str,
 			description: str,
 			category: SimulationCategory,
-			default_value: float,
+			icon: str = 'simulation_default.png',
+			default_value: float = 0.5,
 			min_value: float = 0.0,
 			max_value: float = 1.0,
 			emotion: SimulationEmotion = SimulationEmotion.unknown
@@ -148,6 +149,7 @@ class SimulationBase:
 			:param name: name of the simulation
 			:param description: description of the simulation
 			:param category: category of the simulation
+			:param icon: name of the icon
 			:param default_value: default value of the simulation
 			:param min_value: minimal value
 			:param max_value: maximal value
@@ -155,6 +157,7 @@ class SimulationBase:
 		self.name = name
 		self.description = description
 		self.category = category
+		self.icon = icon
 		
 		# values
 		self.default_value = default_value

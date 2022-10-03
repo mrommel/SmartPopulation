@@ -15,6 +15,7 @@ class EnergyEfficiencySimulation(SimulationBase):
 			"higher demand for fossil fuels such as oil. Reducing energy usage has become more urgent in recent times "
 			"due to concerns about climate change, and the drive to reduce CO2 emissions.",
 			SimulationCategory.economy,
+			'simulation_default.png',
 			0.5,
 			emotion=SimulationEmotion.high_good
 		)

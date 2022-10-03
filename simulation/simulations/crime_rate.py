@@ -13,6 +13,7 @@ class CrimeRateSimulation(SimulationBase):
 			"An indicator of the level of general non violent crime in your nation. This includes crimes such as car "
 			"crime, burglary etc., but also covers fraud and other similar crimes.",
 			SimulationCategory.law_and_order,
+			'simulation_crime_rate.png',
 			0.55,
 			emotion=SimulationEmotion.high_bad
 		)

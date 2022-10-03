@@ -14,6 +14,7 @@ class WorkingWeekSimulation(SimulationBase):
 			"from the contracted hours as people give into pressure to work unpaid or paid overtime to keep their "
 			"jobs. To employees, shorter hours are seen as a good thing.",
 			SimulationCategory.economy,
+			'simulation_default.png',
 			0.5,
 			emotion=SimulationEmotion.unknown
 		)

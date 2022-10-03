@@ -13,6 +13,7 @@ class WorkerProductivitySimulation(SimulationBase):
 			"The average output in financial terms of a typical citizen. Some nations have more productive employees "
 			"than others, due to such factors as work ethic, technical knowledge and workplace hours.",
 			SimulationCategory.economy,
+			'simulation_default.png',
 			0.5,
 			emotion=SimulationEmotion.high_good
 		)

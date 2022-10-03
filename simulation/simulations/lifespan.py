@@ -12,6 +12,7 @@ class LifespanSimulation(SimulationBase):
 			"Lifespan",
 			"",
 			SimulationCategory.public_services,
+			'simulation_default.png',
 			0.5,
 			emotion=SimulationEmotion.high_good
 		)

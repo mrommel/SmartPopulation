@@ -14,6 +14,7 @@ class ForeignRelationsSimulation(SimulationBase):
 			"wars or terrorism which may threaten our citizens, and secondly, as a way to ensure trade relations are "
 			"good and that we benefit economically from trade and tourism with other nations.",
 			SimulationCategory.foreign_policy,
+			'simulation_default.png',
 			0.14,
 			emotion=SimulationEmotion.high_good
 		)

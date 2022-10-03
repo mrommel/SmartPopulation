@@ -14,6 +14,7 @@ class RacialTensionSimulation(SimulationBase):
 			"immigration can sometimes lead to racial tensions, which can in the worst case, result in violent "
 			"clashes.",
 			SimulationCategory.foreign_policy,
+			'simulation_default.png',
 			0.0,
 			emotion=SimulationEmotion.high_bad
 		)

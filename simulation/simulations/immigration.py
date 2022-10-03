@@ -16,6 +16,7 @@ class ImmigrationSimulation(SimulationBase):
 			"be reduced by border controls, and citizenship tests. Too much immigration too fast can lead to racial "
 			"tensions developing.",
 			SimulationCategory.foreign_policy,
+			'simulation_default.png',
 			1.0,
 			emotion=SimulationEmotion.unknown
 		)

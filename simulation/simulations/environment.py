@@ -13,6 +13,7 @@ class EnvironmentSimulation(SimulationBase):
 			"A general measurement of the quality of the environment, including air quality, but also measuring noise "
 			"pollution, litter, water quality and many other measures of pollution",
 			SimulationCategory.public_services,
+			'simulation_default.png',
 			0.50,
 			emotion=SimulationEmotion.high_good
 		)

@@ -15,6 +15,7 @@ class TechnologySimulation(SimulationBase):
 			"students, and the capabilities of industry. A high technological index boosts international "
 			"competitiveness. Tax incentives may be required to attract high tech industry. ",
 			SimulationCategory.economy,
+			'simulation_default.png',
 			0.5,
 			emotion=SimulationEmotion.high_good
 		)

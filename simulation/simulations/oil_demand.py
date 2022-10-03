@@ -14,6 +14,7 @@ class OilDemandSimulation(SimulationBase):
 			"the greater our demand for oil, although energy efficiency measures and hybrid cars can reduce this "
 			"somewhat, as can investments in cleaner industry and renewable energy sources.",
 			SimulationCategory.transport,
+			'simulation_default.png',
 			0.1,
 			emotion=SimulationEmotion.high_good
 		)

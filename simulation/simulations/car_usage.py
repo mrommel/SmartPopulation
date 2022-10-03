@@ -13,6 +13,7 @@ class CarUsageSimulation(SimulationBase):
 			"A measure of how many miles per year the average household travels by car. High car usage can cause "
 			"pollution, but is inevitable in a booming economy with poor provision of public transport.",
 			SimulationCategory.transport,
+			'simulation_default.png',
 			0.6,
 			emotion=SimulationEmotion.high_good
 		)

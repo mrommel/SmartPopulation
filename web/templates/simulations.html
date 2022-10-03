@@ -33,6 +33,7 @@
                     <thead>
                     <tr>
                         <th style="width: 10px">#</th>
+                        <th style="width: 80px">Icons</th>
                         <th>Name</th>
                         <th>Category</th>
                         <th>Value</th>
@@ -44,6 +45,7 @@
                     {% for key, simulation in simulations.items() %}
                         <tr>
                             <td>{{ loop.index }}</td>
+                            <td><img class="simulation_icon_48" src="{{ url_for('static', filename='dist/img/simulations/') }}{{ simulation.icon }}" /></td>
                             <td>
                                 <div class="nav-sidebar nav-pills">
                                     <a href="/simulation/{{ key }}" class="nav-link p-0">

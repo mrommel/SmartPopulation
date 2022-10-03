@@ -14,6 +14,7 @@ class OilPriceSimulation(SimulationBase):
 			"although this will be mitigated by energy efficiency measures. A lower level of oil dependence will also "
 			"make us less sensitive to global oil price shocks caused by political instabilities.",
 			SimulationCategory.transport,
+			'simulation_default.png',
 			0.1,
 			emotion=SimulationEmotion.high_bad
 		)

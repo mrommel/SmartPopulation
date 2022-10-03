@@ -16,6 +16,7 @@ class MiddleIncomeSimulation(SimulationBase):
 			"cars. They probably take holidays abroad at least once a year. Taxes that affect any of these will hit "
 			"these people hardest, and may push some of them down into poverty",
 			SimulationCategory.economy,
+			'simulation_default.png',
 			0.0,
 			-1.0,
 			1.0,
