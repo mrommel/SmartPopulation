@@ -21,13 +21,12 @@ class TourismSimulation(SimulationBase):
 		)
 		
 		# input @todo
-		# AirlineTax,0-(0.3*x)
-		# AntisocialBehaviour,0-(0.1*x)
-		# StreetGangs,0-(0.3*x)
-		# BorderControls,0.0-(0.22*x)
-		# SalesTax,0-(0.05*x)
-		# _globaleconomy_,0+(0.25*x)
-		# ClassWarfare,0-(0.4*x)
+		# AirlineTax-tourism,0-(0.3*x)
+		# AntisocialBehaviour-tourism,0-(0.1*x)
+		# StreetGangs-tourism,0-(0.3*x)
+		# BorderControls-tourism,0.0-(0.22*x)
+		# _globaleconomy_-tourism,0+(0.25*x)
+		# ClassWarfare-tourism,0-(0.4*x)
 		
 		# connections:
 		self.effects.append(SimulationConnection('gdp', '0+(0.12*x)'))

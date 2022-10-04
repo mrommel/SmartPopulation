@@ -23,4 +23,5 @@ class ViolentCrimeRateSimulation(SimulationBase):
 		self.effects.append(SimulationConnection('retired_mood', '0 - (0.18 * x)'))
 		# _global_liberalism,0.05-(0.1*x)
 		self.effects.append(SimulationConnection('tourism', '0 -(0.2 * x)', 8))
+		self.effects.append(SimulationConnection('lifespan', '0.0 - (0.2 * x)'))
 	

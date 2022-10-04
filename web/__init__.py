@@ -163,10 +163,17 @@ def create_app(test_config=None):
 	def simulation_history(simulation_item):
 		
 		data = simulation_item.history  # list(reversed(simulation_item.history))
-		d = {"iteration": range(0, len(data)), "history": data}
+		d = {"iteration": range(0, len(data)), "value": data}
 		df = pd.DataFrame(d)
 		
-		fig = px.line(df, title="History", x="iteration", y="history", range_y=[0.0, 1.0], template="plotly_dark")
+		fig = px.line(
+			df,
+			title="History",
+			x="iteration",
+			y="value",
+			range_y=[0.0, 1.0],
+			template="plotly_dark"
+		)
 		graph_json = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
 		return graph_json
 	
@@ -268,7 +275,7 @@ def create_app(test_config=None):
 		data = situation_item.history  # list(reversed(simulation_item.history))
 		d = {
 			'iteration': range(0, len(data)),
-			'history': data,
+			'value': data,
 			'start': [situation_item.start_trigger] * len(data),
 			'end': [situation_item.end_trigger] * len(data)
 		}
@@ -278,7 +285,7 @@ def create_app(test_config=None):
 			df,
 			title='History',
 			x='iteration',
-			y=['history', 'start', 'end'],
+			y=['value', 'start', 'end'],
 			range_y=[0.0, 1.0],
 			template='plotly_dark'
 		)

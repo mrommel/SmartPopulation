@@ -112,17 +112,19 @@ class ValueBase:
 		base class of inputs / effects
 	"""
 	
-	def __init__(self, key: str, name: str, base_type: BasicType, value: float):
+	def __init__(self, key: str, name: str, icon: str, base_type: BasicType, value: float):
 		"""
 			value constructor
 		
-			:param key: key of effect or input
-			:param name: name of effect or input
+			:param key: key of the effect or input
+			:param name: name of the effect or input
+			:param icon: icon of the effect or input
 			:param base_type: one of the basic type
-			:param value: value of effect or input
+			:param value: value of the effect or input
 		"""
 		self.key = key
 		self.name = name
+		self.icon = icon
 		self.base_type = base_type
 		self.value = value
 
@@ -264,17 +266,17 @@ class SimulationBase:
 		for key, simulation_item in sim.simulations.items():
 			for effect in simulation_item.effects:
 				if effect.target_name == own_key:
-					input_list.append(ValueBase(key, simulation_item.name, BasicType.simulation, effect.evaluate(self.value)))
+					input_list.append(ValueBase(key, simulation_item.name, simulation_item.icon, BasicType.simulation, effect.evaluate(self.value)))
 		
 		for key, situation_item in sim.situations.items():
 			for effect in situation_item.effects:
 				if effect.target_name == own_key:
-					input_list.append(ValueBase(key, situation_item.name, BasicType.situation, effect.evaluate(self.value)))
+					input_list.append(ValueBase(key, situation_item.name, 'icon', BasicType.situation, effect.evaluate(self.value)))
 		
 		for key, policy_item in sim.policies.items():
 			for effect in policy_item.effects:
 				if effect.target_name == own_key:
-					input_list.append(ValueBase(key, policy_item.name, BasicType.policy, effect.evaluate(self.value)))
+					input_list.append(ValueBase(key, policy_item.name, 'icon', BasicType.policy, effect.evaluate(self.value)))
 		
 		print(f'input_values of {own_key} of {self.name} => {len(input_list)}')
 		
@@ -301,20 +303,21 @@ class SimulationBase:
 			
 			if effect.target_name in simulation.simulations:
 				simulation_name = simulation.simulations[effect.target_name].name
+				simulation_icon = simulation.simulations[effect.target_name].icon
 				effect_list.append(
-					ValueBase(effect.target_name, simulation_name, BasicType.simulation, effect.evaluate(tmp_value)))
+					ValueBase(effect.target_name, simulation_name, simulation_icon, BasicType.simulation, effect.evaluate(tmp_value)))
 			elif effect.target_name in simulation.situations:
 				situation_name = simulation.situations[effect.target_name].name
 				effect_list.append(
-					ValueBase(effect.target_name, situation_name, BasicType.situation, effect.evaluate(tmp_value)))
+					ValueBase(effect.target_name, situation_name, 'icon', BasicType.situation, effect.evaluate(tmp_value)))
 			elif without_mood in simulation.groups:
 				voter_name = f'{simulation.groups[without_mood].name} (Mood)'
 				effect_list.append(
-					ValueBase(without_mood, voter_name, BasicType.voter_group, effect.evaluate(tmp_value)))
+					ValueBase(without_mood, voter_name, 'icon', BasicType.voter_group, effect.evaluate(tmp_value)))
 			elif without_freq in simulation.groups:
 				voter_name = f'{simulation.groups[without_freq].name} (Frequency)'
 				effect_list.append(
-					ValueBase(without_freq, voter_name, BasicType.voter_group, effect.evaluate(tmp_value)))
+					ValueBase(without_freq, voter_name, 'icon', BasicType.voter_group, effect.evaluate(tmp_value)))
 		
 		return effect_list
 
@@ -501,12 +504,12 @@ class SituationBase:
 		for key, simulation_item in sim.simulations.items():
 			for effect in simulation_item.effects:
 				if effect.target_name == own_key:
-					input_list.append(ValueBase(key, simulation_item.name, BasicType.simulation, 0.0))
+					input_list.append(ValueBase(key, simulation_item.name, simulation_item.icon, BasicType.simulation, 0.0))
 		
 		for key, policy_item in sim.policies.items():
 			for effect in policy_item.effects:
 				if effect.target_name == own_key:
-					input_list.append(ValueBase(key, policy_item.name, BasicType.policy, 0.0))
+					input_list.append(ValueBase(key, policy_item.name, 'icon', BasicType.policy, 0.0))
 		
 		return input_list
 	
@@ -531,20 +534,21 @@ class SituationBase:
 			
 			if effect.target_name in simulation.simulations:
 				simulation_name = simulation.simulations[effect.target_name].name
+				simulation_icon = simulation.simulations[effect.target_name].icon
 				effect_list.append(
-					ValueBase(effect.target_name, simulation_name, BasicType.simulation, effect.evaluate(tmp_value)))
+					ValueBase(effect.target_name, simulation_name, simulation_icon, BasicType.simulation, effect.evaluate(tmp_value)))
 			elif effect.target_name in simulation.situations:
 				situation_name = simulation.situations[effect.target_name].name
 				effect_list.append(
-					ValueBase(effect.target_name, situation_name, BasicType.situation, effect.evaluate(tmp_value)))
+					ValueBase(effect.target_name, situation_name, 'icon', BasicType.situation, effect.evaluate(tmp_value)))
 			elif without_mood in simulation.groups:
 				voter_name = f'{simulation.groups[without_mood].name} (Mood)'
 				effect_list.append(
-					ValueBase(without_mood, voter_name, BasicType.voter_group, effect.evaluate(tmp_value)))
+					ValueBase(without_mood, voter_name, 'icon', BasicType.voter_group, effect.evaluate(tmp_value)))
 			elif without_freq in simulation.groups:
 				voter_name = f'{simulation.groups[without_freq].name} (Frequency)'
 				effect_list.append(
-					ValueBase(without_freq, voter_name, BasicType.voter_group, effect.evaluate(tmp_value)))
+					ValueBase(without_freq, voter_name, 'icon', BasicType.voter_group, effect.evaluate(tmp_value)))
 		
 		return effect_list
 
@@ -673,20 +677,21 @@ class PolicyBase:
 			
 			if effect.target_name in simulation.simulations:
 				simulation_name = simulation.simulations[effect.target_name].name
+				simulation_icon = simulation.simulations[effect.target_name].icon
 				effect_list.append(
-					ValueBase(effect.target_name, simulation_name, BasicType.simulation, effect.evaluate(tmp_value)))
+					ValueBase(effect.target_name, simulation_name, simulation_icon, BasicType.simulation, effect.evaluate(tmp_value)))
 			elif effect.target_name in simulation.situations:
 				situation_name = simulation.situations[effect.target_name].name
 				effect_list.append(
-					ValueBase(effect.target_name, situation_name, BasicType.situation, effect.evaluate(tmp_value)))
+					ValueBase(effect.target_name, situation_name, 'icon', BasicType.situation, effect.evaluate(tmp_value)))
 			elif without_mood in simulation.groups:
 				voter_name = f'{simulation.groups[without_mood].name} (Mood)'
 				effect_list.append(
-					ValueBase(without_mood, voter_name, BasicType.voter_group, effect.evaluate(tmp_value)))
+					ValueBase(without_mood, voter_name, 'icon', BasicType.voter_group, effect.evaluate(tmp_value)))
 			elif without_freq in simulation.groups:
 				voter_name = f'{simulation.groups[without_freq].name} (Frequency)'
 				effect_list.append(
-					ValueBase(without_freq, voter_name, BasicType.voter_group, effect.evaluate(tmp_value)))
+					ValueBase(without_freq, voter_name, 'icon', BasicType.voter_group, effect.evaluate(tmp_value)))
 		
 		return effect_list
 	

@@ -22,3 +22,4 @@ class HealthSimulation(SimulationBase):
 		self.effects.append(SimulationConnection('retired_freq', '-0.2 - (0.4 * x)', 8))
 		self.effects.append(SimulationConnection('worker_productivity', '-0.15 + (0.15 * x)'))
 		self.effects.append(SimulationConnection('immigration', '0.1 * (x ** 6.0)'))
+		self.effects.append(SimulationConnection('lifespan', '0.0 + (0.65 * x)', 4))

@@ -15,7 +15,7 @@ class TechnologySimulation(SimulationBase):
 			"students, and the capabilities of industry. A high technological index boosts international "
 			"competitiveness. Tax incentives may be required to attract high tech industry. ",
 			SimulationCategory.economy,
-			'simulation_default.png',
+			'simulation_technology.png',
 			0.5,
 			emotion=SimulationEmotion.high_good
 		)
@@ -26,3 +26,4 @@ class TechnologySimulation(SimulationBase):
 		self.effects.append(SimulationConnection('unemployment', '0.2 * (x ** 8.0)', 2))
 		self.effects.append(SimulationConnection('retired_freq', '0.10 * (x ** 4.0)', 16))
 		self.effects.append(SimulationConnection('skills_shortage', '0.25 * (x ** 2)'))
+		self.effects.append(SimulationConnection('lifespan', '0.0 + (0.15 * x)', 8))

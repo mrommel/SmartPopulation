@@ -35,6 +35,7 @@ make pylint
 * https://jsoncrack.com/
 * https://github.com/ColorlibHQ/AdminLTE
 * https://fontawesome.com/icons
+* https://colorhunt.co/palette/25316d5f6f9497d2ecfef5ac
 
 ## Scratch pad
 

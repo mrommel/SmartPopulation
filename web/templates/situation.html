@@ -76,7 +76,7 @@
                                     <div class="nav-sidebar nav-pills">
                                         {% if input.base_type.value == 0 %}
                                             <a href="/simulation/{{ input.key }}" class="nav-link p-0">
-                                                <i class="nav-icon fas fa-chart-bar"></i>&nbsp;<p>{{ input.name }}</p>
+                                                <img class="simulation_icon_24" src="{{ url_for('static', filename='dist/img/simulations/') }}{{ input.icon }}" />&nbsp;<p>{{ input.name }}</p>
                                             </a>
                                         {% elif input.base_type.value == 2 %}
                                             <a href="/policy/{{ input.key }}" class="nav-link p-0">
@@ -100,7 +100,7 @@
                                     <div class="nav-sidebar nav-pills">
                                         {% if effect.base_type.value == 0 %}
                                             <a href="/simulation/{{ effect.key }}" class="nav-link p-0">
-                                                <i class="nav-icon fas fa-chart-bar"></i>&nbsp;<p>{{ effect.name }}</p>
+                                                <img class="simulation_icon_24" src="{{ url_for('static', filename='dist/img/simulations/') }}{{ effect.icon }}" />&nbsp;<p>{{ effect.name }}</p>
                                             </a>
                                         {% elif effect.base_type.value == 1 %}
                                             <a href="/situation/{{ effect.key }}" class="nav-link p-0">
