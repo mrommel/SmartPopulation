@@ -65,16 +65,8 @@
                             <div class="progress progress-xs">
                                 <div class="progress-bar {{ simulation.prop }}" style="width: {{ (simulation.value * 100)|int }}%"></div>
                             </div>
-                            {{ (simulation.value * 100)|int }}%
+                            {{ (simulation.value * 100)|int }}% ({{ (simulation.min_value * 100)|int }}% - {{ (simulation.max_value * 100)|int }}%)
                         </td>
-                    </tr>
-                    <tr>
-                        <td>Minimal Value</td>
-                        <td>{{ (simulation.min_value * 100)|int }}%</td>
-                    </tr>
-                    <tr>
-                        <td>Maximal Value</td>
-                        <td>{{ (simulation.max_value * 100)|int }}%</td>
                     </tr>
                     <tr>
                         <td>Inputs</td>

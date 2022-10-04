@@ -16,7 +16,7 @@ class InternationalTradeSimulation(SimulationBase):
 			"countries also indulge in 'protectionism' to defend politically sensitive industries against foreign "
 			"competition.",
 			SimulationCategory.foreign_policy,
-			'simulation_default.png',
+			'simulation_international_trade.png',
 			1.0,
 			emotion=SimulationEmotion.high_good
 		)

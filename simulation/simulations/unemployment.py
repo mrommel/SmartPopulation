@@ -13,7 +13,7 @@ class UnemploymentSimulation(SimulationBase):
 			"At its simplest this is a count of the percentage of your population who aren't in gainful employment. "
 			"Adjusted to omit those citizens who are not actively seeking work for one reason or another.",
 			SimulationCategory.economy,
-			'simulation_default.png',
+			'simulation_unemployment.png',
 			0.4,
 			emotion=SimulationEmotion.high_bad
 		)

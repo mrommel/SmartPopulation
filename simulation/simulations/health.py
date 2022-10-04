@@ -13,7 +13,7 @@ class HealthSimulation(SimulationBase):
 			"A general indicator for the health of your citizens that measures not just raw lifespan, but also fitness "
 			"and the general well-being of people.",
 			SimulationCategory.public_services,
-			'simulation_default.png',
+			'simulation_health.png',
 			0.8,
 			emotion=SimulationEmotion.high_good
 		)
