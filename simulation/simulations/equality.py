@@ -14,7 +14,7 @@ class EqualitySimulation(SimulationBase):
 			"of equality of outcome. This is just a simple measurement of the distribution of wealth (financial "
 			"equality of outcome).",
 			SimulationCategory.welfare,
-			'simulation_default.png',
+			'simulation_equality.png',
 			0.4,
 			emotion=SimulationEmotion.high_good
 		)
