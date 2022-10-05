@@ -14,7 +14,7 @@ class BusUsageSimulation(SimulationBase):
 			"environmentally friendly than cars, so are seen as a way to reduce pollution, as well as reduce traffic "
 			"congestion.",
 			SimulationCategory.transport,
-			'simulation_default.png',
+			'simulation_bus_usage.png',
 			0.15,
 			emotion=SimulationEmotion.high_good
 		)
