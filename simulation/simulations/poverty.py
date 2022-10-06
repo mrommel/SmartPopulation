@@ -13,7 +13,7 @@ class PovertySimulation(SimulationBase):
 			"One of the most widely used measures of comparison between nations. The poverty level is periodically "
 			"reassessed, but all nations should strive to get their poverty rate as low as possible.",
 			SimulationCategory.welfare,
-			'simulation_default.png',
+			'simulation_poverty.png',
 			0.64,
 			emotion=SimulationEmotion.high_bad
 		)

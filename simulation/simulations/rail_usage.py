@@ -15,7 +15,7 @@ class RailUsageSimulation(SimulationBase):
 			"efficient in highly populated countries, but improvements to rail  infrastructure can be extremely "
 			"expensive and take a long time.",
 			SimulationCategory.transport,
-			'simulation_default.png',
+			'simulation_rail_usage.png',
 			0.25,
 			emotion=SimulationEmotion.high_good
 		)
