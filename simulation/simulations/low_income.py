@@ -15,7 +15,7 @@ class LowIncomeSimulation(SimulationBase):
 			"and in to the middle income group. Progressive taxation, combined with well-funded public services and "
 			"state benefits are the most popular ways to 'lift people' out of poverty.",
 			SimulationCategory.economy,
-			'simulation_default.png',
+			'simulation_low_income.png',
 			0.0,
 			-1.0,
 			1.0,
