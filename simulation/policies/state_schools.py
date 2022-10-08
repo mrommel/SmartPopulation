@@ -47,3 +47,4 @@ class StateSchoolsPolicy(PolicyBase):
 		# stateEmployees_income,0+(0.09*x)
 		# _global_socialism,0+(0.03*x),12
 		self.effects.append(SimulationConnection('parents_freq', '0.0 + (0.025 * x)', 8))
+		self.effects.append(SimulationConnection('private_schools', '0.0 - (0.8 * x)', 4))

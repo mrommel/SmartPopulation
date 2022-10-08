@@ -33,3 +33,6 @@ class GDPSimulation(SimulationBase):
         self.effects.append(SimulationConnection('rail_usage', '0 + (0.1 * x)'))
         self.effects.append(SimulationConnection('car_usage', '0 + (0.4 * x)'))
         self.effects.append(SimulationConnection('bus_usage', '0 + (0.1 * x)'))
+        self.effects.append(SimulationConnection('private_healthcare', '0.0 + (0.4 * x)', 4))
+        self.effects.append(SimulationConnection('private_housing', '0.0 + (0.5 * x)', 4))
+        self.effects.append(SimulationConnection('private_schools', '0.0 + (0.5 * x)', 4))

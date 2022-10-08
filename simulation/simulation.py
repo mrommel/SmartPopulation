@@ -31,6 +31,7 @@ from simulation.policies.property_tax import PropertyTaxPolicy
 from simulation.policies.recycling import RecyclingPolicy
 from simulation.policies.sales_tax import SalesTaxPolicy
 from simulation.policies.state_health_service import StateHealthServicePolicy
+from simulation.policies.state_housing import StateHousingPolicy
 from simulation.policies.state_pensions import StatePensionsPolicy
 from simulation.policies.state_schools import StateSchoolsPolicy
 from simulation.policies.unemployed_benefit import UnemployedBenefitPolicy
@@ -41,7 +42,6 @@ from simulation.simulations.car_usage import CarUsageSimulation
 from simulation.simulations.co2_emissions import CO2EmissionsSimulation
 from simulation.simulations.energy_efficiency import EnergyEfficiencySimulation
 from simulation.simulations.environment import EnvironmentSimulation
-from simulation.simulations.average_income import AverageIncomeSimulation
 from simulation.simulations.crime_rate import CrimeRateSimulation
 from simulation.simulations.education import EducationSimulation
 from simulation.simulations.equality import EqualitySimulation
@@ -56,6 +56,10 @@ from simulation.simulations.middle_income import MiddleIncomeSimulation
 from simulation.simulations.oil_demand import OilDemandSimulation
 from simulation.simulations.oil_price import OilPriceSimulation
 from simulation.simulations.poverty import PovertySimulation
+from simulation.simulations.private_healthcare import PrivateHealthCareSimulation
+from simulation.simulations.private_housing import PrivateHousingSimulation
+from simulation.simulations.private_pensions import PrivatePensionsSimulation
+from simulation.simulations.private_schools import PrivateSchoolsSimulation
 from simulation.simulations.racial_tension import RacialTensionSimulation
 from simulation.simulations.rail_usage import RailUsageSimulation
 from simulation.simulations.technology import TechnologySimulation
@@ -118,7 +122,6 @@ class Simulation:
 			'crime_rate': CrimeRateSimulation(),
 			'violent_crime_rate': ViolentCrimeRateSimulation(),
 			'poverty_rate': PovertySimulation(),
-			'average_income': AverageIncomeSimulation(),  # ??? is this needed ???
 			'equality': EqualitySimulation(),
 			'environment': EnvironmentSimulation(),
 			'working_week': WorkingWeekSimulation(),
@@ -143,10 +146,10 @@ class Simulation:
 			'_middle_income': MiddleIncomeSimulation(),  # Middle Earnings
 			# High Earnings
 			'gdp': GDPSimulation(),
-			# Private Health Care
-			# Private Housing
-			# Private Schools
-			# Private Pensions
+			'private_healthcare': PrivateHealthCareSimulation(),
+			'private_housing': PrivateHousingSimulation(),
+			'private_schools': PrivateSchoolsSimulation(),
+			'private_pensions': PrivatePensionsSimulation(),
 			# Tobacco Usage
 			# Alcohol Consumption
 			# Traffic Congestion
@@ -264,7 +267,7 @@ class Simulation:
 			# SpaceProgram
 			# SpeedCameras
 			'state_health_service': StateHealthServicePolicy(),
-			# StateHousing
+			'state_housing': StateHousingPolicy(),
 			'state_pensions': StatePensionsPolicy(),
 			'state_schools': StateSchoolsPolicy(),
 			# StemCells

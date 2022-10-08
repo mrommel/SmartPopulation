@@ -39,6 +39,7 @@ class PoliceForcePolicy(PolicyBase):
 		# connections:
 		self.effects.append(SimulationConnection('crime_rate', '-0.35 * (x ** 0.6)', 4))
 		self.effects.append(SimulationConnection('violent_crime_rate', '-0.52 * (x ** 0.6)', 3))
+		# DrugCrimeRate,0-(0.1*x),3
 		self.effects.append(SimulationConnection('conservatives_mood', '-0.2 + (0.48 * x)'))
 		self.effects.append(SimulationConnection('state_employees_mood', '-0.15 + (0.37 * x)'))
 		self.effects.append(SimulationConnection('state_employees_freq', '-0.05 + (0.1 * x)'))

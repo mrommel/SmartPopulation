@@ -48,4 +48,5 @@ class StateHealthServicePolicy(PolicyBase):
 		self.effects.append(SimulationConnection('state_employees_freq', '0.0 + (0.1 * x)'))
 		# state_employees_income,0+(0.09*x)
 		# _global_socialism,0+(0.052*x),4
+		self.effects.append(SimulationConnection('private_healthcare', '0.0 - (0.85*x)', 4))
 

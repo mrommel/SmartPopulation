@@ -2,9 +2,10 @@
 pip==22.2.2
 pylint==2.15.3
 
-# used libries
+# used libraries
 plotly==5.10.0
 flask==2.2.2
+flask_assets
 click~=8.1.3
 wheel~=0.37.1
 Jinja2~=3.1.2
@@ -24,3 +25,4 @@ mccabe~=0.7.0
 platformdirs~=2.5.2
 wrapt~=1.14.1
 zipp~=3.8.1
+python-dotenv
