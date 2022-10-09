@@ -3,7 +3,9 @@
 from flask import Blueprint, request
 from flask import render_template
 
-from web import simulation_from_database, simulation_to_database
+from simulation.simulation import Simulation
+
+# from web import simulation_from_database, simulation_to_database
 
 # Blueprint Configuration
 policies_blueprint = Blueprint(
@@ -13,14 +15,16 @@ policies_blueprint = Blueprint(
 
 @policies_blueprint.route("/policies")
 def policies():
-    sim = simulation_from_database()
+    sim = Simulation()  # simulation_from_database()
 
     return render_template('policies.html', policies=sim.policies)
 
 
 @policies_blueprint.route('/policy/<key>', methods=('GET', 'POST'))
 def policy(key):
+    """
     if request.method == 'POST':
+
         action = request.form['action']
         slider_value = request.form['slider']
 
@@ -44,8 +48,12 @@ def policy(key):
         else:
             print(f'unknown action: {action}')
             sim = simulation_from_database()
+
     else:
         sim = simulation_from_database()
+    """
+
+    sim = Simulation()  #
 
     policy_item = sim.policies[key]
 

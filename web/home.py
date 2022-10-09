@@ -1,8 +1,9 @@
 """General page routes."""
-from flask import Blueprint, request
+from flask import Blueprint, request, make_response
 from flask import render_template
 
-from web import simulation_from_database, simulation_to_database, init_db, populate_db
+from . import db
+from .models import Simulations
 
 # Blueprint Configuration
 home_blueprint = Blueprint(
@@ -10,23 +11,25 @@ home_blueprint = Blueprint(
 )
 
 
-@home_blueprint.route("/", methods=('GET', 'POST'))
+@home_blueprint.route("/", methods=['GET', 'POST'])
 def index():
     """Homepage."""
     if request.method == 'POST':
         action = request.form['action']
         if action == 'next_turn':
-            sim = simulation_from_database()
-            sim.iterate()
-            simulation_to_database(sim)
+            # sim = simulation_from_database()
+            # sim.iterate()
+            # simulation_to_database(sim)
+            pass
         elif action == 'reset':
-            init_db()
-            populate_db()
-            sim = simulation_from_database()
+            db.drop_all()
+            db.create_all()
+            db.session.commit()
         else:
             print(f'unknown action: {action}')
-            sim = simulation_from_database()
-    else:
-        sim = simulation_from_database()
 
-    return render_template('index.html', simulation_count=len(sim.simulations))
+        simulation_count = len(Simulations.query.all())
+    else:
+        simulation_count = len(Simulations.query.all())
+
+    return render_template('index.html', simulation_count=simulation_count)

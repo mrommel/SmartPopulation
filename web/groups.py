@@ -3,7 +3,7 @@
 from flask import Blueprint
 from flask import render_template
 
-from web import simulation_from_database
+# from web import simulation_from_database
 
 # Blueprint Configuration
 groups_blueprint = Blueprint(
@@ -13,7 +13,7 @@ groups_blueprint = Blueprint(
 
 @groups_blueprint.route("/groups")
 def groups():
-    sim = simulation_from_database()
+    sim = Simulation()  # simulation_from_database()
 
     # enrich simulations
     for key, group_item in sim.groups.items():
@@ -44,7 +44,7 @@ def groups():
 
 @groups_blueprint.route("/group/<key>")
 def group(key):
-    sim = simulation_from_database()
+    sim = Simulation()  # simulation_from_database()
 
     group_item = sim.groups[key]
 

@@ -16,7 +16,7 @@ Werkzeug~=2.2.2
 itsdangerous~=2.1.2
 isort~=5.10.1
 tomli~=2.0.1
-setuptools==65.3.0
+setuptools==65.4.1
 tenacity==8.1.0
 pandas==1.5.0
 astroid~=2.12.10
@@ -24,5 +24,7 @@ tomlkit~=0.11.4
 mccabe~=0.7.0
 platformdirs~=2.5.2
 wrapt~=1.14.1
-zipp~=3.8.1
-python-dotenv
+zipp==3.9.0
+python-dotenv==0.21.0
+flask_sqlalchemy==3.0.0
+SQLAlchemy==1.4.41

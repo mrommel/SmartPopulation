@@ -7,7 +7,9 @@ import plotly.express as px
 from flask import Blueprint
 from flask import render_template
 
-from web import simulation_from_database
+from simulation.simulation import Simulation
+
+# from web import simulation_from_database
 
 # Blueprint Configuration
 simulations_blueprint = Blueprint(
@@ -17,7 +19,7 @@ simulations_blueprint = Blueprint(
 
 @simulations_blueprint.route("/simulations")
 def simulations():
-    sim = simulation_from_database()
+    sim = Simulation()  # simulation_from_database()
 
     # enrich simulations
     for key, simulation_item in sim.simulations.items():
@@ -38,7 +40,7 @@ def simulations():
 @simulations_blueprint.route('/simulation_callback', methods=[' POST', 'GET'])
 def cb():
     # request.args.get('data')
-    sim = simulation_from_database()
+    sim = Simulation()  # simulation_from_database()
 
     key = 'air_travel'
     simulation_item = sim.simulations[key]
@@ -47,7 +49,7 @@ def cb():
 
 @simulations_blueprint.route('/simulation/<key>')
 def simulation(key):
-    sim = simulation_from_database()
+    sim = Simulation()  # simulation_from_database()
 
     simulation_item = sim.simulations[key]
 

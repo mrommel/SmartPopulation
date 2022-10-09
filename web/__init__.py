@@ -2,17 +2,15 @@ import os
 
 from flask import Flask
 from flask_assets import Environment
+from flask_sqlalchemy import SQLAlchemy
 
-from web.db import get_db, simulation_from_database, simulation_to_database, init_db, populate_db
+db = SQLAlchemy()
 
 
 def init_app():
     """Create Flask application."""
     app = Flask(__name__, instance_relative_config=False)
     app.config.from_object("config.Config")
-
-    # Database @todo: move to config - but how?
-    app.config['DATABASE'] = os.path.join(app.instance_path, 'flaskr.sqlite')
 
     # ensure the instance folder exists
     try:
@@ -23,7 +21,6 @@ def init_app():
     assets = Environment()
     assets.init_app(app)
 
-    from . import db
     db.init_app(app)
 
     with app.app_context():
@@ -51,5 +48,8 @@ def init_app():
 
         # Compile static assets
         compile_static_assets(assets)
+
+        # Create database tables for our data models
+        db.create_all()
 
     return app

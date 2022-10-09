@@ -4,7 +4,9 @@ from flask import Blueprint
 from flask import render_template
 
 from simulation.base import SimulationCategory
-from web import simulation_from_database
+from simulation.simulation import Simulation
+
+# from web import simulation_from_database
 
 # Blueprint Configuration
 categories_blueprint = Blueprint(
@@ -21,7 +23,7 @@ def categories():
 
 @categories_blueprint.route('/category/<key>')
 def category(key):
-    sim = simulation_from_database()
+    sim = Simulation()  # simulation_from_database()
     category_item = SimulationCategory[key]
 
     category_item.simulation_list = category_item.simulations(sim)

@@ -1,4 +1,4 @@
-import sqlite3
+"""import sqlite3
 
 import click
 from flask import current_app, g
@@ -64,7 +64,7 @@ def populate_db():
 
 @click.command('init-db')
 def init_db_command():
-	"""Clear the existing data and create new tables."""
+	"" "Clear the existing data and create new tables." ""
 	init_db()
 	populate_db()
 	click.echo('Initialized and populated the database.')
@@ -274,4 +274,4 @@ def simulation_to_database(sim: Simulation):
 				(group_id, group_mood_history_value, group_freq_history_value)
 			)
 			database.commit()
-	
+"""

@@ -19,6 +19,11 @@ class Config:
     ASSETS_DEBUG = True
     LESS_RUN_IN_DEBUG = True
 
+    # Database (SQLAlchemy)
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///../instance/flaskr.sqlite'
+    SQLALCHEMY_ECHO = True
+    SQLALCHEMY_TRACK_MODIFICATIONS = True
+
     # Static Assets
     STATIC_FOLDER = "static"
     TEMPLATES_FOLDER = "templates"
