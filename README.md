@@ -26,6 +26,13 @@ make tests
 make pylint
 ```
 
+## Next steps
+
+* move to SQLAlchemy completely
+* think about historic influences (simulations)
+* rename `SimulationConnection` to `Effect`
+* allow `Situation` value to be discrete (taxes) and also have slider values
+
 ## Links
 * https://www.ined.fr/_modules/SimulateurPopulation/?lang=en
 * https://service.destatis.de/bevoelkerungspyramide/#! from 2019 for germany
@@ -36,18 +43,3 @@ make pylint
 * https://github.com/ColorlibHQ/AdminLTE
 * https://fontawesome.com/icons
 * https://colorhunt.co/palette/25316d5f6f9497d2ecfef5ac
-
-## Scratch pad
-
-
-### Life span input
-
-Health,0+(0.65*x),4	
-Environment,-0.2+(0.4*x),6	
-Technology,0.0+(0.15*x),8	
-ViolentCrimeRate,0.0-(0.2*x)
-
-### Life span effects
-
-Retired_freq,0.0+(0.08*x)	
-FoodPrice,0.0+(0.03*x)

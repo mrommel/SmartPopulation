@@ -6,7 +6,7 @@ class GDPSimulation(SimulationBase):
     """
         gdp simulation
     """
-    
+
     def __init__(self):
         super().__init__(
             "GDP",

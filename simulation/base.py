@@ -266,17 +266,41 @@ class SimulationBase:
 		for key, simulation_item in sim.simulations.items():
 			for effect in simulation_item.effects:
 				if effect.target_name == own_key:
-					input_list.append(ValueBase(key, simulation_item.name, simulation_item.icon, BasicType.simulation, effect.evaluate(self.value)))
+					input_list.append(
+						ValueBase(
+							key,
+							simulation_item.name,
+							simulation_item.icon,
+							BasicType.simulation,
+							effect.evaluate(self.value)
+						)
+					)
 		
 		for key, situation_item in sim.situations.items():
 			for effect in situation_item.effects:
 				if effect.target_name == own_key:
-					input_list.append(ValueBase(key, situation_item.name, 'icon', BasicType.situation, effect.evaluate(self.value)))
+					input_list.append(
+						ValueBase(
+							key,
+							situation_item.name,
+							'icon',
+							BasicType.situation,
+							effect.evaluate(self.value)
+						)
+					)
 		
 		for key, policy_item in sim.policies.items():
 			for effect in policy_item.effects:
 				if effect.target_name == own_key:
-					input_list.append(ValueBase(key, policy_item.name, 'icon', BasicType.policy, effect.evaluate(self.value)))
+					input_list.append(
+						ValueBase(
+							key,
+							policy_item.name,
+							'icon',
+							BasicType.policy,
+							effect.evaluate(self.value)
+						)
+					)
 		
 		print(f'input_values of {own_key} of {self.name} => {len(input_list)}')
 		
