@@ -3,7 +3,7 @@
 from flask import Blueprint
 from flask import render_template
 
-# from web import simulation_from_database
+from web import global_simulation
 
 # Blueprint Configuration
 groups_blueprint = Blueprint(
@@ -13,10 +13,9 @@ groups_blueprint = Blueprint(
 
 @groups_blueprint.route("/groups")
 def groups():
-    sim = Simulation()  # simulation_from_database()
 
     # enrich simulations
-    for key, group_item in sim.groups.items():
+    for key, group_item in global_simulation.groups.items():
         if group_item.mood.value > 0.8:
             group_item.mood_prop = 'bg-success'
         elif group_item.mood.value > 0.6:
@@ -39,14 +38,13 @@ def groups():
         else:
             group_item.freq_prop = 'bg-danger'
 
-    return render_template('groups.html', groups=sim.groups)
+    return render_template('groups.html', groups=global_simulation.groups)
 
 
 @groups_blueprint.route("/group/<key>")
 def group(key):
-    sim = Simulation()  # simulation_from_database()
 
-    group_item = sim.groups[key]
+    group_item = global_simulation.groups[key]
 
     if group_item.mood.value > 0.8:
         group_item.mood_prop = 'bg-success'
@@ -70,7 +68,7 @@ def group(key):
     else:
         group_item.freq_prop = 'bg-danger'
 
-    group_item.mood.input_list = group_item.mood.input_values(sim)
-    group_item.freq.input_list = group_item.freq.input_values(sim)
+    group_item.mood.input_list = group_item.mood.input_values(global_simulation)
+    group_item.freq.input_list = group_item.freq.input_values(global_simulation)
 
     return render_template('group.html', group=group_item)

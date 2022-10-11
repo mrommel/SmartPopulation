@@ -7,9 +7,8 @@ import plotly.express as px
 from flask import Blueprint
 from flask import render_template
 
-from simulation.simulation import Simulation
+from web import global_simulation
 
-# from web import simulation_from_database
 
 # Blueprint Configuration
 simulations_blueprint = Blueprint(
@@ -19,10 +18,9 @@ simulations_blueprint = Blueprint(
 
 @simulations_blueprint.route("/simulations")
 def simulations():
-    sim = Simulation()  # simulation_from_database()
 
     # enrich simulations
-    for key, simulation_item in sim.simulations.items():
+    for key, simulation_item in global_simulation.simulations.items():
         if simulation_item.value > 0.8:
             simulation_item.prop = 'bg-success'
         elif simulation_item.value > 0.6:
@@ -34,24 +32,22 @@ def simulations():
         else:
             simulation_item.prop = 'bg-danger'
 
-    return render_template('simulations.html', simulations=sim.simulations)
+    return render_template('simulations.html', simulations=global_simulation.simulations)
 
 
 @simulations_blueprint.route('/simulation_callback', methods=[' POST', 'GET'])
 def cb():
     # request.args.get('data')
-    sim = Simulation()  # simulation_from_database()
 
     key = 'air_travel'
-    simulation_item = sim.simulations[key]
+    simulation_item = global_simulation.simulations[key]
     return simulation_history(simulation_item)
 
 
 @simulations_blueprint.route('/simulation/<key>')
 def simulation(key):
-    sim = Simulation()  # simulation_from_database()
 
-    simulation_item = sim.simulations[key]
+    simulation_item = global_simulation.simulations[key]
 
     # enrich the simulation
     if simulation_item.value > 0.8:
@@ -65,8 +61,8 @@ def simulation(key):
     else:
         simulation_item.prop = 'bg-danger'
 
-    simulation_item.input_list = simulation_item.input_values(sim)
-    simulation_item.effect_list = simulation_item.effect_values(sim)
+    simulation_item.input_list = simulation_item.input_values(global_simulation)
+    simulation_item.effect_list = simulation_item.effect_values(global_simulation)
 
     return render_template(
         'simulation.html', simulation=simulation_item, graph_json=simulation_history(simulation_item))

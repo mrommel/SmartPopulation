@@ -2,8 +2,8 @@
 from flask import Blueprint, request, make_response
 from flask import render_template
 
-from . import db
-from .models import Simulations
+from . import db, global_simulation
+from .models import Simulations, load_from_db, store_to_db
 
 # Blueprint Configuration
 home_blueprint = Blueprint(
@@ -17,10 +17,8 @@ def index():
     if request.method == 'POST':
         action = request.form['action']
         if action == 'next_turn':
-            # sim = simulation_from_database()
-            # sim.iterate()
-            # simulation_to_database(sim)
-            pass
+            global_simulation.iterate()
+            store_to_db(global_simulation)
         elif action == 'reset':
             db.drop_all()
             db.create_all()
@@ -28,8 +26,6 @@ def index():
         else:
             print(f'unknown action: {action}')
 
-        simulation_count = len(Simulations.query.all())
-    else:
-        simulation_count = len(Simulations.query.all())
+    simulation_count = len(global_simulation.simulations)
 
     return render_template('index.html', simulation_count=simulation_count)

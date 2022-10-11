@@ -4,7 +4,10 @@ from flask import Flask
 from flask_assets import Environment
 from flask_sqlalchemy import SQLAlchemy
 
+from simulation.simulation import Simulation
+
 db = SQLAlchemy()
+global_simulation = Simulation()
 
 
 def init_app():
@@ -49,7 +52,11 @@ def init_app():
         # Compile static assets
         compile_static_assets(assets)
 
-        # Create database tables for our data models
+        # Create database tables for our data models (if needed)
         db.create_all()
+
+        # populate db
+        from web.models import load_from_db
+        load_from_db(global_simulation)
 
     return app

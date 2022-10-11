@@ -357,13 +357,17 @@ class Simulation:
 		for _, simulation_item in self.simulations.items():
 			simulation_item.print()
 		print('')
-		print('--- groups ----------------')
-		for _, group_item in self.groups.items():
-			group_item.print()
-		print('')
 		print('--- situations ------------')
 		for _, situation_item in self.situations.items():
 			situation_item.print()
+		print('')
+		print('--- policies ----------------')
+		for _, policy_item in self.policies.items():
+			policy_item.print()
+		print('')
+		print('--- groups ----------------')
+		for _, group_item in self.groups.items():
+			group_item.print()
 		
 		print('')
 		print('---------------------------')
