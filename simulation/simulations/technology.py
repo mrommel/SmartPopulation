@@ -1,5 +1,5 @@
 """technology simulation"""
-from simulation.base import SimulationCategory, SimulationBase, SimulationConnection, SimulationEmotion
+from simulation.base import SimulationCategory, SimulationBase, Effect, SimulationEmotion
 
 
 class TechnologySimulation(SimulationBase):
@@ -21,9 +21,9 @@ class TechnologySimulation(SimulationBase):
 		)
 
 		# connections:
-		self.effects.append(SimulationConnection('worker_productivity', '0.15 * (x ** 4)'))
-		self.effects.append(SimulationConnection('education', '-0.1 + (0.16 * x)'))
-		self.effects.append(SimulationConnection('unemployment', '0.2 * (x ** 8.0)', 2))
-		self.effects.append(SimulationConnection('retired_freq', '0.10 * (x ** 4.0)', 16))
-		self.effects.append(SimulationConnection('skills_shortage', '0.25 * (x ** 2)'))
-		self.effects.append(SimulationConnection('lifespan', '0.0 + (0.15 * x)', 8))
+		self.effects.append(Effect('worker_productivity', '0.15 * (x ** 4)'))
+		self.effects.append(Effect('education', '-0.1 + (0.16 * x)'))
+		self.effects.append(Effect('unemployment', '0.2 * (x ** 8.0)', 2))
+		self.effects.append(Effect('retired_freq', '0.10 * (x ** 4.0)', 16))
+		self.effects.append(Effect('skills_shortage', '0.25 * (x ** 2)'))
+		self.effects.append(Effect('lifespan', '0.0 + (0.15 * x)', 8))

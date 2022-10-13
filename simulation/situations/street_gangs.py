@@ -1,7 +1,7 @@
 """
 	situation of street gangs
 """
-from simulation.base import SituationBase, SimulationCategory, SimulationConnection
+from simulation.base import SituationBase, SimulationCategory, Effect
 
 
 class StreetGangsSituation(SituationBase):
@@ -30,8 +30,8 @@ class StreetGangsSituation(SituationBase):
 		# PoliceDrones,-0.1-(0.1*x)	# street_gangs
 		
 		# effects
-		self.effects.append(SimulationConnection('crime_rate', '0.12 + (0.1 * x)'))
-		self.effects.append(SimulationConnection('conservatives_mood', '-0.1 - (0.1 * x)'))
-		self.effects.append(SimulationConnection('retired_mood', '-0.1 - (0.2 * x)'))
-		# _self.effects.append(SimulationConnection('global_liberalism', '-0.06 - (0.03 * x)'))
-		self.effects.append(SimulationConnection('all_mood', '-0.05 - (0.05 * x)'))
+		self.effects.append(Effect('crime_rate', '0.12 + (0.1 * x)'))
+		self.effects.append(Effect('conservatives_mood', '-0.1 - (0.1 * x)'))
+		self.effects.append(Effect('retired_mood', '-0.1 - (0.2 * x)'))
+		# _self.effects.append(Effect('global_liberalism', '-0.06 - (0.03 * x)'))
+		self.effects.append(Effect('all_mood', '-0.05 - (0.05 * x)'))

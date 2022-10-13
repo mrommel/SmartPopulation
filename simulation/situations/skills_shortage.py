@@ -1,7 +1,7 @@
 """
 	situation of skills shortage
 """
-from simulation.base import SituationBase, SimulationCategory, SimulationConnection
+from simulation.base import SituationBase, SimulationCategory, Effect
 
 
 class SkillsShortageSituation(SituationBase):
@@ -29,6 +29,6 @@ class SkillsShortageSituation(SituationBase):
 		# UniversityGrants,0-(0.2*x)	# skills_shortage
 		
 		# effects
-		self.effects.append(SimulationConnection('gdp', '0.0 - (0.44 * x) ** 1.4'))
+		self.effects.append(Effect('gdp', '0.0 - (0.44 * x) ** 1.4'))
 
 

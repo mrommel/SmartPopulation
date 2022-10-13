@@ -1,5 +1,5 @@
 """energy efficiency simulation"""
-from simulation.base import SimulationCategory, SimulationBase, SimulationConnection, SimulationEmotion
+from simulation.base import SimulationCategory, SimulationBase, Effect, SimulationEmotion
 
 
 class EnergyEfficiencySimulation(SimulationBase):
@@ -21,6 +21,6 @@ class EnergyEfficiencySimulation(SimulationBase):
 		)
 		
 		# connections:
-		self.effects.append(SimulationConnection('gdp', '0.0 + (0.05 * x)'))
-		self.effects.append(SimulationConnection('co2_emissions', '0.0 - (0.2 * x)'))
-		self.effects.append(SimulationConnection('oil_demand', '0.0 - (0.1 * x)'))
+		self.effects.append(Effect('gdp', '0.0 + (0.05 * x)'))
+		self.effects.append(Effect('co2_emissions', '0.0 - (0.2 * x)'))
+		self.effects.append(Effect('oil_demand', '0.0 - (0.1 * x)'))

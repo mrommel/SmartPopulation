@@ -1,7 +1,7 @@
 """
 	situation of black market
 """
-from simulation.base import SituationBase, SimulationCategory, SimulationConnection
+from simulation.base import SituationBase, SimulationCategory, Effect
 
 
 class BlackMarketSituation(SituationBase):
@@ -30,7 +30,7 @@ class BlackMarketSituation(SituationBase):
 		# corporation_tax,0+(0.3*x),4	# black_market
 		
 		# effects
-		self.effects.append(SimulationConnection('crime_rate', '0.05 + (0.05 * x)'))
+		self.effects.append(Effect('crime_rate', '0.05 + (0.05 * x)'))
 		# income_tax_income, 1.0 - (0.03 * x)
 		# salesTax_income, 1.0 - (0.03 * x)
 		# corporationTax_income, 1.0 - (0.03 * x)

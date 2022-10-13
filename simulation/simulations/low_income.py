@@ -1,5 +1,5 @@
 """low income simulation"""
-from simulation.base import SimulationCategory, SimulationBase, SimulationConnection, SimulationEmotion
+from simulation.base import SimulationCategory, SimulationBase, Effect, SimulationEmotion
 
 
 class LowIncomeSimulation(SimulationBase):
@@ -23,7 +23,7 @@ class LowIncomeSimulation(SimulationBase):
 		)
 
 		# connections:
-		self.effects.append(SimulationConnection('car_usage', '0.1 * (x ** 3.0)'))
-		self.effects.append(SimulationConnection('bus_usage', '0.0 - (0.05 * x)'))
-		self.effects.append(SimulationConnection('air_travel', '0.1 * (x ** 4.0)'))
+		self.effects.append(Effect('car_usage', '0.1 * (x ** 3.0)'))
+		self.effects.append(Effect('bus_usage', '0.0 - (0.05 * x)'))
+		self.effects.append(Effect('air_travel', '0.1 * (x ** 4.0)'))
 		

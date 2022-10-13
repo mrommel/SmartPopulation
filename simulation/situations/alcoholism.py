@@ -1,7 +1,7 @@
 """
 	situation of alcoholism
 """
-from simulation.base import SituationBase, SimulationCategory, SimulationConnection
+from simulation.base import SituationBase, SimulationCategory, Effect
 
 
 class AlcoholismSituation(SituationBase):
@@ -28,6 +28,6 @@ class AlcoholismSituation(SituationBase):
 		# DeathPenalty,-0.1-(0.05*x) alcoholism
 	
 		# effects
-		self.effects.append(SimulationConnection('conservatives_mood', '-0.2 - (0.3 * x)'))
-		self.effects.append(SimulationConnection('conservatives_freq', '0.04 + (0.04 * x)', 2))
-		self.effects.append(SimulationConnection('tourism', '-0.08 - (0.05 * x)'))
+		self.effects.append(Effect('conservatives_mood', '-0.2 - (0.3 * x)'))
+		self.effects.append(Effect('conservatives_freq', '0.04 + (0.04 * x)', 2))
+		self.effects.append(Effect('tourism', '-0.08 - (0.05 * x)'))

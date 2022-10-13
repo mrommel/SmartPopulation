@@ -1,5 +1,5 @@
 """rail usage simulation"""
-from simulation.base import SimulationCategory, SimulationBase, SimulationConnection, SimulationEmotion
+from simulation.base import SimulationCategory, SimulationBase, Effect, SimulationEmotion
 
 
 class RailUsageSimulation(SimulationBase):
@@ -21,6 +21,6 @@ class RailUsageSimulation(SimulationBase):
 		)
 
 		# connections:
-		self.effects.append(SimulationConnection('car_usage', '0.0 - (0.35 * x)'))
-		self.effects.append(SimulationConnection('bus_usage', '0.0 - (0.25 * x)'))
-		self.effects.append(SimulationConnection('oil_demand', '0.0 + (0.12 * x)'))
+		self.effects.append(Effect('car_usage', '0.0 - (0.35 * x)'))
+		self.effects.append(Effect('bus_usage', '0.0 - (0.25 * x)'))
+		self.effects.append(Effect('oil_demand', '0.0 + (0.12 * x)'))

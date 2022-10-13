@@ -1,5 +1,5 @@
 """oil price simulation"""
-from simulation.base import SimulationCategory, SimulationBase, SimulationConnection, SimulationEmotion
+from simulation.base import SimulationCategory, SimulationBase, Effect, SimulationEmotion
 
 
 class OilPriceSimulation(SimulationBase):
@@ -20,7 +20,7 @@ class OilPriceSimulation(SimulationBase):
 		)
 		
 		# connections:
-		self.effects.append(SimulationConnection('gdp', '0.22 - (0.4 * x)'))
-		self.effects.append(SimulationConnection('motorist_mood', '0.3 - (0.6 * x)', 2))
-		# self.effects.append(SimulationConnection('motorist_income,0.2-(0.4*x),2
-		self.effects.append(SimulationConnection('motorist_freq', '0.2 - (0.4 * x)', 12))
+		self.effects.append(Effect('gdp', '0.22 - (0.4 * x)'))
+		self.effects.append(Effect('motorist_mood', '0.3 - (0.6 * x)', 2))
+		# self.effects.append(Effect('motorist_income,0.2-(0.4*x),2
+		self.effects.append(Effect('motorist_freq', '0.2 - (0.4 * x)', 12))

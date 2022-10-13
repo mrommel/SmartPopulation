@@ -1,5 +1,5 @@
 """private schools simulation"""
-from simulation.base import SimulationCategory, SimulationBase, SimulationConnection, SimulationEmotion
+from simulation.base import SimulationCategory, SimulationBase, Effect, SimulationEmotion
 
 
 class PrivateSchoolsSimulation(SimulationBase):
@@ -20,9 +20,9 @@ class PrivateSchoolsSimulation(SimulationBase):
         )
 
         # connections:
-        self.effects.append(SimulationConnection('_middle_income', '0.0 - (0.08 * x)'))
-        self.effects.append(SimulationConnection('education', '0.05 + (0.15 * x)', 8))
-        self.effects.append(SimulationConnection('unemployment', '0.0 - (0.13 * x)'))
-        self.effects.append(SimulationConnection('capitalist_mood', '0.0 + (0.1 * x)'))
-        self.effects.append(SimulationConnection('trade_unionist_mood', '0.0 - (0.1 * x)'))
-        self.effects.append(SimulationConnection('religious_freq', '0 + (0.2 * x)', 10))
+        self.effects.append(Effect('_middle_income', '0.0 - (0.08 * x)'))
+        self.effects.append(Effect('education', '0.05 + (0.15 * x)', 8))
+        self.effects.append(Effect('unemployment', '0.0 - (0.13 * x)'))
+        self.effects.append(Effect('capitalist_mood', '0.0 + (0.1 * x)'))
+        self.effects.append(Effect('trade_unionist_mood', '0.0 - (0.1 * x)'))
+        self.effects.append(Effect('religious_freq', '0 + (0.2 * x)', 10))

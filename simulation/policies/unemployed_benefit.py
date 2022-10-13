@@ -1,7 +1,7 @@
 """
 	unemployed benefit policy
 """
-from simulation.base import SimulationCategory, PolicyBase, SimulationConnection, SimulationEmotion
+from simulation.base import SimulationCategory, PolicyBase, Effect, SimulationEmotion
 
 
 class UnemployedBenefitPolicy(PolicyBase):
@@ -37,10 +37,10 @@ class UnemployedBenefitPolicy(PolicyBase):
 		self.value = 0.8
 		
 		# connections:
-		self.effects.append(SimulationConnection('capitalist_mood', '-0.01 - (0.08 * x)'))
-		self.effects.append(SimulationConnection('unemployment', '0.0 + (0.1 * x)', 8))
-		self.effects.append(SimulationConnection('poor_mood', '0.1 + (0.3 * x)'))
-		self.effects.append(SimulationConnection('socialist_mood', '0.0 + (0.15 * x)'))
-		self.effects.append(SimulationConnection('poverty_rate', '0.0 - (0.12 * x)'))
-		self.effects.append(SimulationConnection('_low_income', '0.0 + (0.15 * x)'))
-		self.effects.append(SimulationConnection('black_market', '0.0 - (0.2 * x)'))
+		self.effects.append(Effect('capitalist_mood', '-0.01 - (0.08 * x)'))
+		self.effects.append(Effect('unemployment', '0.0 + (0.1 * x)', 8))
+		self.effects.append(Effect('poor_mood', '0.1 + (0.3 * x)'))
+		self.effects.append(Effect('socialist_mood', '0.0 + (0.15 * x)'))
+		self.effects.append(Effect('poverty_rate', '0.0 - (0.12 * x)'))
+		self.effects.append(Effect('_low_income', '0.0 + (0.15 * x)'))
+		self.effects.append(Effect('black_market', '0.0 - (0.2 * x)'))

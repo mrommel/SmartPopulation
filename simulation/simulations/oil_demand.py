@@ -1,5 +1,5 @@
 """oil demand simulation"""
-from simulation.base import SimulationCategory, SimulationBase, SimulationConnection, SimulationEmotion
+from simulation.base import SimulationCategory, SimulationBase, Effect, SimulationEmotion
 
 
 class OilDemandSimulation(SimulationBase):
@@ -23,4 +23,4 @@ class OilDemandSimulation(SimulationBase):
 		# _globaleconomy_,-0.1+(0.2*x)
 		
 		# connections:
-		self.effects.append(SimulationConnection('oil_price', '0.0 + (0.5 * x)'))
+		self.effects.append(Effect('oil_price', '0.0 + (0.5 * x)'))

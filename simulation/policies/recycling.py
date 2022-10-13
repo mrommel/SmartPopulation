@@ -1,7 +1,7 @@
 """
 	recycling policy
 """
-from simulation.base import SimulationCategory, PolicyBase, SimulationConnection, SimulationEmotion
+from simulation.base import SimulationCategory, PolicyBase, Effect, SimulationEmotion
 
 
 class RecyclingPolicy(PolicyBase):
@@ -39,6 +39,6 @@ class RecyclingPolicy(PolicyBase):
 		self.value = 0.5
 
 		# connections:
-		self.effects.append(SimulationConnection('environmentalist_mood', '0.04 + (0.09 * x)'))
-		self.effects.append(SimulationConnection('environment', '0.01 + (0.04 * x)'))
-		self.effects.append(SimulationConnection('environmentalist_freq', '0.02 + (0.08 * x)', 12))
+		self.effects.append(Effect('environmentalist_mood', '0.04 + (0.09 * x)'))
+		self.effects.append(Effect('environment', '0.01 + (0.04 * x)'))
+		self.effects.append(Effect('environmentalist_freq', '0.02 + (0.08 * x)', 12))

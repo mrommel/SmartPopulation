@@ -1,7 +1,7 @@
 """
 	property tax policy
 """
-from simulation.base import SimulationCategory, PolicyBase, SimulationConnection, SimulationEmotion
+from simulation.base import SimulationCategory, PolicyBase, Effect, SimulationEmotion
 
 
 class PropertyTaxPolicy(PolicyBase):
@@ -42,13 +42,13 @@ class PropertyTaxPolicy(PolicyBase):
 		self.value = 0.75
 		
 		# connections:
-		self.effects.append(SimulationConnection('_middle_income', '0.0 - (0.1 * x)'))
-		self.effects.append(SimulationConnection('_high_income', '0.0 - (0.14 * x)'))
-		self.effects.append(SimulationConnection('socialist_mood', '0.0 + (0.12 * x)'))
-		self.effects.append(SimulationConnection('capitalist_mood', '0.0 - (0.15 * x)'))
-		self.effects.append(SimulationConnection('equality', '0.0 + (0.15 * x)'))
-		self.effects.append(SimulationConnection('middle_income_mood', '0.0 - (0.32 * x)'))
-		self.effects.append(SimulationConnection('wealthy_mood', '0.0 - (x ** 11)'))
-		self.effects.append(SimulationConnection('retired_mood', '0.0 - (0.28 * x)'))
-		self.effects.append(SimulationConnection('homelessness', '0.0 + (0.04 * x)'))
+		self.effects.append(Effect('_middle_income', '0.0 - (0.1 * x)'))
+		self.effects.append(Effect('_high_income', '0.0 - (0.14 * x)'))
+		self.effects.append(Effect('socialist_mood', '0.0 + (0.12 * x)'))
+		self.effects.append(Effect('capitalist_mood', '0.0 - (0.15 * x)'))
+		self.effects.append(Effect('equality', '0.0 + (0.15 * x)'))
+		self.effects.append(Effect('middle_income_mood', '0.0 - (0.32 * x)'))
+		self.effects.append(Effect('wealthy_mood', '0.0 - (x ** 11)'))
+		self.effects.append(Effect('retired_mood', '0.0 - (0.28 * x)'))
+		self.effects.append(Effect('homelessness', '0.0 + (0.04 * x)'))
 	

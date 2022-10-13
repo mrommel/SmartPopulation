@@ -1,5 +1,5 @@
 """violent crime rate simulation"""
-from simulation.base import SimulationCategory, SimulationBase, SimulationConnection, SimulationEmotion
+from simulation.base import SimulationCategory, SimulationBase, Effect, SimulationEmotion
 
 
 class ViolentCrimeRateSimulation(SimulationBase):
@@ -19,9 +19,9 @@ class ViolentCrimeRateSimulation(SimulationBase):
 		)
 
 		# connections:
-		self.effects.append(SimulationConnection('all_mood', '0 - (0.16 * x)'))
-		self.effects.append(SimulationConnection('retired_mood', '0 - (0.18 * x)'))
+		self.effects.append(Effect('all_mood', '0 - (0.16 * x)'))
+		self.effects.append(Effect('retired_mood', '0 - (0.18 * x)'))
 		# _global_liberalism,0.05-(0.1*x)
-		self.effects.append(SimulationConnection('tourism', '0 -(0.2 * x)', 8))
-		self.effects.append(SimulationConnection('lifespan', '0.0 - (0.2 * x)'))
+		self.effects.append(Effect('tourism', '0 -(0.2 * x)', 8))
+		self.effects.append(Effect('lifespan', '0.0 - (0.2 * x)'))
 	

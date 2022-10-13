@@ -1,5 +1,5 @@
 """working week simulation"""
-from simulation.base import SimulationCategory, SimulationBase, SimulationConnection, SimulationEmotion
+from simulation.base import SimulationCategory, SimulationBase, Effect, SimulationEmotion
 
 
 class WorkingWeekSimulation(SimulationBase):
@@ -20,5 +20,5 @@ class WorkingWeekSimulation(SimulationBase):
 		)
 
 		# connections:
-		self.effects.append(SimulationConnection('trade_unionist_mood', '0.1 - (0.1 * x)'))
-		self.effects.append(SimulationConnection('health', '-0.24 * (x ** 8)'))
+		self.effects.append(Effect('trade_unionist_mood', '0.1 - (0.1 * x)'))
+		self.effects.append(Effect('health', '-0.24 * (x ** 8)'))

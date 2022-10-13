@@ -1,5 +1,5 @@
 """racial tension simulation"""
-from simulation.base import SimulationCategory, SimulationBase, SimulationConnection, SimulationEmotion
+from simulation.base import SimulationCategory, SimulationBase, Effect, SimulationEmotion
 
 
 class RacialTensionSimulation(SimulationBase):
@@ -20,9 +20,9 @@ class RacialTensionSimulation(SimulationBase):
 		)
 		
 		# connections:
-		self.effects.append(SimulationConnection('violent_crime_rate', '0.45 * (x ** 6)'))
-		self.effects.append(SimulationConnection('_terrorism', '-0.2 + (x ** 4)'))
-		self.effects.append(SimulationConnection('patriot_freq', '-0.12 + (0.24 * x)'))
-		self.effects.append(SimulationConnection('liberal_freq', '0.1 - (0.2 * x)'))
-		self.effects.append(SimulationConnection('ethnic_minorities_mood', '0.0 - (0.4 * x)'))
-		self.effects.append(SimulationConnection('alcoholism', '0.0 + (0.1 * x)'))
+		self.effects.append(Effect('violent_crime_rate', '0.45 * (x ** 6)'))
+		self.effects.append(Effect('_terrorism', '-0.2 + (x ** 4)'))
+		self.effects.append(Effect('patriot_freq', '-0.12 + (0.24 * x)'))
+		self.effects.append(Effect('liberal_freq', '0.1 - (0.2 * x)'))
+		self.effects.append(Effect('ethnic_minorities_mood', '0.0 - (0.4 * x)'))
+		self.effects.append(Effect('alcoholism', '0.0 + (0.1 * x)'))

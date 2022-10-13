@@ -1,5 +1,5 @@
 """life span simulation"""
-from simulation.base import SimulationCategory, SimulationBase, SimulationConnection, SimulationEmotion
+from simulation.base import SimulationCategory, SimulationBase, Effect, SimulationEmotion
 
 
 class LifespanSimulation(SimulationBase):
@@ -18,5 +18,5 @@ class LifespanSimulation(SimulationBase):
 		)
 
 		# Life span effects
-		self.effects.append(SimulationConnection('retired_freq', '0 - (0.08 * x)'))
-		# self.effects.append(SimulationConnection('food_price', '0 - (0.03 * x)'))
+		self.effects.append(Effect('retired_freq', '0 - (0.08 * x)'))
+		# self.effects.append(Effect('food_price', '0 - (0.03 * x)'))

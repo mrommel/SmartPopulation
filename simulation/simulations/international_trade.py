@@ -1,5 +1,5 @@
 """international trade simulation"""
-from simulation.base import SimulationCategory, SimulationBase, SimulationConnection, SimulationEmotion
+from simulation.base import SimulationCategory, SimulationBase, Effect, SimulationEmotion
 
 
 class InternationalTradeSimulation(SimulationBase):
@@ -22,5 +22,5 @@ class InternationalTradeSimulation(SimulationBase):
 		)
 		
 		# connections:
-		self.effects.append(SimulationConnection('gdp', '0 + (0.15 * x)'))
-		self.effects.append(SimulationConnection('air_travel', '0 + (0.2 * x)'))
+		self.effects.append(Effect('gdp', '0 + (0.15 * x)'))
+		self.effects.append(Effect('air_travel', '0 + (0.2 * x)'))

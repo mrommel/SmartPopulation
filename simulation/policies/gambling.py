@@ -1,7 +1,7 @@
 """
 	gambling policy
 """
-from simulation.base import SimulationCategory, PolicyBase, SimulationConnection, SimulationEmotion
+from simulation.base import SimulationCategory, PolicyBase, Effect, SimulationEmotion
 
 
 class GamblingPolicy(PolicyBase):
@@ -36,10 +36,10 @@ class GamblingPolicy(PolicyBase):
 		self.value = 0.5
 		
 		# connections:
-		self.effects.append(SimulationConnection('liberal_mood', '0.00 + (0.08 * x)'))
-		self.effects.append(SimulationConnection('religious_mood', '0.00 - (0.15 * x)'))
-		self.effects.append(SimulationConnection('gdp', '0.00 + (0.04 * x)', 6))
-		self.effects.append(SimulationConnection('unemployment', '0.00 - (0.03 * x)', 4))
-		self.effects.append(SimulationConnection('capitalist_mood', '0.01 + (0.04 * x)'))
-		self.effects.append(SimulationConnection('organised_crime', '0.0 + (0.45 * x)'))
+		self.effects.append(Effect('liberal_mood', '0.00 + (0.08 * x)'))
+		self.effects.append(Effect('religious_mood', '0.00 - (0.15 * x)'))
+		self.effects.append(Effect('gdp', '0.00 + (0.04 * x)', 6))
+		self.effects.append(Effect('unemployment', '0.00 - (0.03 * x)', 4))
+		self.effects.append(Effect('capitalist_mood', '0.01 + (0.04 * x)'))
+		self.effects.append(Effect('organised_crime', '0.0 + (0.45 * x)'))
 		

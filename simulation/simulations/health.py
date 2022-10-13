@@ -1,5 +1,5 @@
 """health simulation"""
-from simulation.base import SimulationBase, SimulationCategory, SimulationConnection, SimulationEmotion
+from simulation.base import SimulationBase, SimulationCategory, Effect, SimulationEmotion
 
 
 class HealthSimulation(SimulationBase):
@@ -19,7 +19,7 @@ class HealthSimulation(SimulationBase):
 		)
 		
 		# connections
-		self.effects.append(SimulationConnection('retired_freq', '-0.2 - (0.4 * x)', 8))
-		self.effects.append(SimulationConnection('worker_productivity', '-0.15 + (0.15 * x)'))
-		self.effects.append(SimulationConnection('immigration', '0.1 * (x ** 6.0)'))
-		self.effects.append(SimulationConnection('lifespan', '0.0 + (0.65 * x)', 4))
+		self.effects.append(Effect('retired_freq', '-0.2 - (0.4 * x)', 8))
+		self.effects.append(Effect('worker_productivity', '-0.15 + (0.15 * x)'))
+		self.effects.append(Effect('immigration', '0.1 * (x ** 6.0)'))
+		self.effects.append(Effect('lifespan', '0.0 + (0.65 * x)', 4))

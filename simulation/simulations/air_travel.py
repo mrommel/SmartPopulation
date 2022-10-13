@@ -1,7 +1,7 @@
 """
 	air travel simulation
 """
-from simulation.base import SimulationCategory, SimulationBase, SimulationConnection, SimulationEmotion
+from simulation.base import SimulationCategory, SimulationBase, Effect, SimulationEmotion
 
 
 class AirTravelSimulation(SimulationBase):
@@ -23,8 +23,8 @@ class AirTravelSimulation(SimulationBase):
 		)
 
 		# connections:
-		self.effects.append(SimulationConnection('co2_emissions', '0.32 * (x ** 2)'))
-		self.effects.append(SimulationConnection('oil_demand', '0.0 + (0.1 * x)'))
-		self.effects.append(SimulationConnection('environment', '-0.14 * (x ** 3)'))
-		self.effects.append(SimulationConnection('rail_usage', '0.0 - (0.04 * x)'))
+		self.effects.append(Effect('co2_emissions', '0.32 * (x ** 2)'))
+		self.effects.append(Effect('oil_demand', '0.0 + (0.1 * x)'))
+		self.effects.append(Effect('environment', '-0.14 * (x ** 3)'))
+		self.effects.append(Effect('rail_usage', '0.0 - (0.04 * x)'))
 	

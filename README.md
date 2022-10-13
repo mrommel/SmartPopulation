@@ -28,10 +28,11 @@ make pylint
 
 ## Next steps
 
-* move to SQLAlchemy completely
-* think about historic influences (simulations)
-* rename `SimulationConnection` to `Effect`
-* allow `Situation` value to be discrete (taxes) and also have slider values
+- [ ] move to SQLAlchemy completely
+- [ ] think about historic influences (simulations)
+- [ ] allow `Situation` value to be discrete (taxes) and also have slider values
+- [ ] icons for policies, situations and groups
+- [ ] fix pylint issues
 
 ## Links
 * https://www.ined.fr/_modules/SimulateurPopulation/?lang=en

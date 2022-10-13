@@ -6,22 +6,28 @@ from . import db
 
 
 class Simulations(db.Model):
+    """database model of `Simulation`"""
+
     id = db.Column(db.Integer, primary_key=True)
     key = db.Column(db.String(32), index=False, unique=True, nullable=False)
     value = db.Column(db.Float)
     historic_values = db.relationship('SimulationsHistory', backref='simulation', lazy='dynamic')
 
     def __init__(self, key, value):
+        """constructor of a single `Simulations`"""
         self.key = key
         self.value = value
 
     def __repr__(self):
+        """string representation of a single `Simulations`"""
         values_str = [str(historic_value) for historic_value in self.historic_values]
         return "<Simulations {} ({}) = {} ({})>".format(self.key, self.id, self.value, values_str)
 
 
 @event.listens_for(Simulations.__table__, 'after_create')
 def create_simulations(*args, **kwargs):
+    """initialize the ´Simulations´ table with the default values"""
+
     sim = Simulation()
 
     for key, simulation in sim.simulations.items():
@@ -209,6 +215,7 @@ def store_to_db(sim: Simulation):
     # debug
     # for simulations_item in Simulations.query.all():
     #    print(simulations_item)
+    # print('#############################################################')
 
     # situations
     for key, situation in sim.situations.items():
@@ -228,9 +235,12 @@ def store_to_db(sim: Simulation):
 
         db.session.commit()
 
+    # print('#############################################################')
+
     # debug
-    for situation_item in Situations.query.all():
-        print(situation_item)
+    # for situation_item in Situations.query.all():
+    #    print(situation_item)
+    # print('#############################################################')
 
     """
 

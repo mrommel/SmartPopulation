@@ -1,7 +1,7 @@
 """
 	armed police policy
 """
-from simulation.base import SimulationCategory, PolicyBase, SimulationConnection, SimulationEmotion
+from simulation.base import SimulationCategory, PolicyBase, Effect, SimulationEmotion
 
 
 class ArmedPolicePolicy(PolicyBase):
@@ -36,7 +36,8 @@ class ArmedPolicePolicy(PolicyBase):
 		self.value = 0.8
 		
 		# connections:
-		self.effects.append(SimulationConnection('liberal_mood', '-0.05 - (0.25 * x)'))
-		self.effects.append(SimulationConnection('crime_rate', '-0.10 - (0.10 * x)'))
-		self.effects.append(SimulationConnection('violent_crime_rate', '0.00 - (0.20 * x)'))
-		self.effects.append(SimulationConnection('street_gangs', '-0.1 - (0.3 * x)', 2))
+		self.effects.append(Effect('liberal_mood', '-0.05 - (0.25 * x)'))
+		self.effects.append(Effect('crime_rate', '-0.10 - (0.10 * x)'))
+		self.effects.append(Effect('violent_crime_rate', '0.00 - (0.20 * x)'))
+		self.effects.append(Effect('street_gangs', '-0.1 - (0.3 * x)', 2))
+		self.effects.append(Effect('organised_crime', '0.0 - (0.17 * x)'))

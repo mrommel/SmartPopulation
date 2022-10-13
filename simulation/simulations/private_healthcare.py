@@ -1,5 +1,5 @@
 """private healthcare simulation"""
-from simulation.base import SimulationCategory, SimulationBase, SimulationConnection, SimulationEmotion
+from simulation.base import SimulationCategory, SimulationBase, Effect, SimulationEmotion
 
 
 class PrivateHealthCareSimulation(SimulationBase):
@@ -21,10 +21,11 @@ class PrivateHealthCareSimulation(SimulationBase):
         )
 
         # connections:
-        self.effects.append(SimulationConnection('health', '0.0 + (0.25 * x)', 4))
-        self.effects.append(SimulationConnection('_low_income', '0.0 - (0.2 * x)', 4))
-        self.effects.append(SimulationConnection('_middle_income', '0.0 - (0.08 * x)', 4))
-        self.effects.append(SimulationConnection('retired_mood', '0.0 + (0.16 * x)'))
-        self.effects.append(SimulationConnection('unemployment', '0.0 - (0.07 * x)'))
-        self.effects.append(SimulationConnection('trade_unionist_mood', '0.0 - (0.1 * x)'))
-        self.effects.append(SimulationConnection('capitalist_mood', '0.0 + (0.1 * x)'))
+        self.effects.append(Effect('health', '0.0 + (0.25 * x)', 4))
+        self.effects.append(Effect('_low_income', '0.0 - (0.2 * x)', 4))
+        self.effects.append(Effect('_middle_income', '0.0 - (0.08 * x)', 4))
+        self.effects.append(Effect('retired_mood', '0.0 + (0.16 * x)'))
+        self.effects.append(Effect('unemployment', '0.0 - (0.07 * x)'))
+        self.effects.append(Effect('trade_unionist_mood', '0.0 - (0.1 * x)'))
+        self.effects.append(Effect('capitalist_mood', '0.0 + (0.1 * x)'))
+        self.effects.append(Effect('obesity', '-0.2 * (x ** 6)', 12))

@@ -1,7 +1,7 @@
 """
 	work safety law policy
 """
-from simulation.base import SimulationCategory, PolicyBase, SimulationConnection, SimulationEmotion
+from simulation.base import SimulationCategory, PolicyBase, Effect
 
 
 class WorkSafetyLawPolicy(PolicyBase):
@@ -38,9 +38,9 @@ class WorkSafetyLawPolicy(PolicyBase):
 		self.value = 0.8
 		
 		# connections:
-		self.effects.append(SimulationConnection('trade_unionist_mood', '0.04 + (0.06 * x)'))
-		self.effects.append(SimulationConnection('trade_unionist_freq', '0.02 + (0.02 * x)'))
-		self.effects.append(SimulationConnection('self_employed_mood', '-0.05 - (0.08 * x)'))
-		self.effects.append(SimulationConnection('self_employed_freq', '-0.02 - (0.08 * x)'))
-		self.effects.append(SimulationConnection('worker_productivity', '-0.01 - (0.02 * x)', 4))
-		self.effects.append(SimulationConnection('health', '0.01 + (0.02 * x)'))
+		self.effects.append(Effect('trade_unionist_mood', '0.04 + (0.06 * x)'))
+		self.effects.append(Effect('trade_unionist_freq', '0.02 + (0.02 * x)'))
+		self.effects.append(Effect('self_employed_mood', '-0.05 - (0.08 * x)'))
+		self.effects.append(Effect('self_employed_freq', '-0.02 - (0.08 * x)'))
+		self.effects.append(Effect('worker_productivity', '-0.01 - (0.02 * x)', 4))
+		self.effects.append(Effect('health', '0.01 + (0.02 * x)'))

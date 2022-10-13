@@ -1,5 +1,5 @@
 """private pensions simulation"""
-from simulation.base import SimulationCategory, SimulationBase, SimulationConnection, SimulationEmotion
+from simulation.base import SimulationCategory, SimulationBase, Effect, SimulationEmotion
 
 
 class PrivatePensionsSimulation(SimulationBase):
@@ -24,7 +24,7 @@ class PrivatePensionsSimulation(SimulationBase):
         # GDP,0+(0.5*x),4
 
         # connections:
-        self.effects.append(SimulationConnection('_middle_income', '0.0 - (0.10 * x)'))
-        self.effects.append(SimulationConnection('retired_mood', '0.2 + (0.55 * x)'))
-        # self.effects.append(SimulationConnection('retired_income, 0.1 + (0.2 * x)'))
-        self.effects.append(SimulationConnection('capitalist_mood', '0.0 + (0.1 * x)'))
+        self.effects.append(Effect('_middle_income', '0.0 - (0.10 * x)'))
+        self.effects.append(Effect('retired_mood', '0.2 + (0.55 * x)'))
+        # self.effects.append(Effect('retired_income, 0.1 + (0.2 * x)'))
+        self.effects.append(Effect('capitalist_mood', '0.0 + (0.1 * x)'))

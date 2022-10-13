@@ -1,5 +1,5 @@
 """private housing simulation"""
-from simulation.base import SimulationCategory, SimulationBase, SimulationConnection, SimulationEmotion
+from simulation.base import SimulationCategory, SimulationBase, Effect, SimulationEmotion
 
 
 class PrivateHousingSimulation(SimulationBase):
@@ -20,5 +20,6 @@ class PrivateHousingSimulation(SimulationBase):
         )
 
         # connections:
-        self.effects.append(SimulationConnection('_middle_income', '0.0 - (0.08 * x)'))
-        self.effects.append(SimulationConnection('capitalist', '0.0 + (0.1 * x)'))
+        self.effects.append(Effect('_middle_income', '0.0 - (0.08 * x)'))
+        self.effects.append(Effect('capitalist', '0.0 + (0.1 * x)'))
+        self.effects.append(Effect('homelessness', '0.0 - (0.4 * x)'))

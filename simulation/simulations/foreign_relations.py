@@ -1,5 +1,5 @@
 """foreign relations simulation"""
-from simulation.base import SimulationCategory, SimulationBase, SimulationConnection, SimulationEmotion
+from simulation.base import SimulationCategory, SimulationBase, Effect, SimulationEmotion
 
 
 class ForeignRelationsSimulation(SimulationBase):
@@ -20,10 +20,10 @@ class ForeignRelationsSimulation(SimulationBase):
 		)
 		
 		# connections:
-		self.effects.append(SimulationConnection('racial_tension', '0.3 - (0.6 * x)'))
-		self.effects.append(SimulationConnection('_terrorism', '0.24 - (x * 1)'))
-		self.effects.append(SimulationConnection('patriot_freq', '0.2 - (0.4 * x)'))
-		self.effects.append(SimulationConnection('immigration', '-0.1 + (0.2 * x)'))
-		self.effects.append(SimulationConnection('tourism', '0 + (0.4 * x)', 4))
-		self.effects.append(SimulationConnection('international_trade', '-0.2 + (0.2 * x)', 4))
+		self.effects.append(Effect('racial_tension', '0.3 - (0.6 * x)'))
+		self.effects.append(Effect('_terrorism', '0.24 - (x * 1)'))
+		self.effects.append(Effect('patriot_freq', '0.2 - (0.4 * x)'))
+		self.effects.append(Effect('immigration', '-0.1 + (0.2 * x)'))
+		self.effects.append(Effect('tourism', '0 + (0.4 * x)', 4))
+		self.effects.append(Effect('international_trade', '-0.2 + (0.2 * x)', 4))
 		

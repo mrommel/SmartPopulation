@@ -1,5 +1,5 @@
 """tourism simulation"""
-from simulation.base import SimulationCategory, SimulationBase, SimulationConnection, SimulationEmotion
+from simulation.base import SimulationCategory, SimulationBase, Effect, SimulationEmotion
 
 
 class TourismSimulation(SimulationBase):
@@ -29,5 +29,5 @@ class TourismSimulation(SimulationBase):
 		# ClassWarfare-tourism,0-(0.4*x)
 		
 		# connections:
-		self.effects.append(SimulationConnection('gdp', '0+(0.12*x)'))
+		self.effects.append(Effect('gdp', '0+(0.12*x)'))
 		

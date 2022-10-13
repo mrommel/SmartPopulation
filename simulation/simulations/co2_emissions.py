@@ -1,5 +1,5 @@
 """CO2 emissions simulation"""
-from simulation.base import SimulationCategory, SimulationBase, SimulationConnection, SimulationEmotion
+from simulation.base import SimulationCategory, SimulationBase, Effect, SimulationEmotion
 
 
 class CO2EmissionsSimulation(SimulationBase):
@@ -22,5 +22,5 @@ class CO2EmissionsSimulation(SimulationBase):
 		)
 		
 		# connections:
-		self.effects.append(SimulationConnection('foreign_relations', '0 - (0.1 * x)'))
-		self.effects.append(SimulationConnection('environmentalist_mood', '0.1 + (x ** 2) * -0.7'))
+		self.effects.append(Effect('foreign_relations', '0 - (0.1 * x)'))
+		self.effects.append(Effect('environmentalist_mood', '0.1 + (x ** 2) * -0.7'))

@@ -1,7 +1,7 @@
 """
 	situation of organised crime
 """
-from simulation.base import SituationBase, SimulationCategory, SimulationConnection
+from simulation.base import SituationBase, SimulationCategory, Effect
 
 
 class OrganisedCrimeSituation(SituationBase):
@@ -27,11 +27,10 @@ class OrganisedCrimeSituation(SituationBase):
 		# IDCards,0-(0.1*x) # organised_crime
 		# IntelligenceServices,0-(0.3*x) # organised_crime
 		# PhoneTapping,0-(0.24*x) # organised_crime
-		# ArmedPolice,0-(0.17*x) # organised_crime
 		# Narcotics,0-(0.15*x) # organised_crime
 		# PoliceDrones,-0.1-(0.05*x) # organised_crime
 		# LegaliseProstitution,-0.05-(0.1*x) # organised_crime
 
 		# effects
-		self.effects.append(SimulationConnection('crime_rate', '0.1 + (0.2 * x)'))
-		self.effects.append(SimulationConnection('violent_crime_rate', '0 + (0.2 * x)'))
+		self.effects.append(Effect('crime_rate', '0.1 + (0.2 * x)'))
+		self.effects.append(Effect('violent_crime_rate', '0 + (0.2 * x)'))

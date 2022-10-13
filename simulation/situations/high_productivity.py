@@ -1,7 +1,7 @@
 """
 	situation of high productivity
 """
-from simulation.base import SituationBase, SimulationCategory, SimulationConnection
+from simulation.base import SituationBase, SimulationCategory, Effect
 
 
 class HighProductivitySituation(SituationBase):
@@ -28,9 +28,9 @@ class HighProductivitySituation(SituationBase):
 		# input
 		
 		# effects
-		self.effects.append(SimulationConnection('gdp', '0.04 + (0.03 * x)'))
-		self.effects.append(SimulationConnection('self_employed_mood', '0.0 + (0.1 * x)'))
-		self.effects.append(SimulationConnection('capitalist_mood', '0.0 + (0.1 * x)'))
+		self.effects.append(Effect('gdp', '0.04 + (0.03 * x)'))
+		self.effects.append(Effect('self_employed_mood', '0.0 + (0.1 * x)'))
+		self.effects.append(Effect('capitalist_mood', '0.0 + (0.1 * x)'))
 		# self_employed_income,0+(0.08*x)
 
 

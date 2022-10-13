@@ -1,7 +1,7 @@
 """
 	border controls policy
 """
-from simulation.base import SimulationCategory, PolicyBase, SimulationConnection, SimulationEmotion
+from simulation.base import SimulationCategory, PolicyBase, Effect
 
 
 class BorderControlsPolicy(PolicyBase):
@@ -36,9 +36,9 @@ class BorderControlsPolicy(PolicyBase):
 		self.value = 0.2
 		
 		# connections:
-		self.effects.append(SimulationConnection('patriot_mood', '0.0 + (0.30 * x)'))
-		self.effects.append(SimulationConnection('liberal_mood', '0.0 - (0.225 * x)'))
-		self.effects.append(SimulationConnection('immigration', '0.0 - (0.8 * x)', 2))
-		self.effects.append(SimulationConnection('_terrorism', '0.0 - (0.1 * x)'))
-		self.effects.append(SimulationConnection('ethnic_minorities_mood', '0.00 - (0.42 * x)'))
+		self.effects.append(Effect('patriot_mood', '0.0 + (0.30 * x)'))
+		self.effects.append(Effect('liberal_mood', '0.0 - (0.225 * x)'))
+		self.effects.append(Effect('immigration', '0.0 - (0.8 * x)', 2))
+		self.effects.append(Effect('_terrorism', '0.0 - (0.1 * x)'))
+		self.effects.append(Effect('ethnic_minorities_mood', '0.00 - (0.42 * x)'))
 	

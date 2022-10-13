@@ -1,7 +1,7 @@
 """
 	situation of tax evasion
 """
-from simulation.base import SituationBase, SimulationCategory, SimulationConnection
+from simulation.base import SituationBase, SimulationCategory, Effect
 
 
 class TaxEvasionSituation(SituationBase):
@@ -31,5 +31,5 @@ class TaxEvasionSituation(SituationBase):
 		# FlatTax,0.6*(x^4),4		# tax_evasion
 		
 		# effects
-		# self.effects.append(SimulationConnection('', ''))
+		# self.effects.append(Effect('', ''))
 	

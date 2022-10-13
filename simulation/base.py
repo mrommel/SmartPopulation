@@ -80,7 +80,7 @@ class SimulationCategory(Enum):
 		}
 
 
-class SimulationConnection:
+class Effect:
 	"""
 		class that represents a connection between simulations / situations
 	"""

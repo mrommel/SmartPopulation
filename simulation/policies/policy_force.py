@@ -1,7 +1,7 @@
 """
 	policy force policy
 """
-from simulation.base import SimulationCategory, PolicyBase, SimulationConnection, SimulationEmotion
+from simulation.base import SimulationCategory, PolicyBase, Effect, SimulationEmotion
 
 
 class PoliceForcePolicy(PolicyBase):
@@ -37,13 +37,13 @@ class PoliceForcePolicy(PolicyBase):
 		self.value = 0.8
 
 		# connections:
-		self.effects.append(SimulationConnection('crime_rate', '-0.35 * (x ** 0.6)', 4))
-		self.effects.append(SimulationConnection('violent_crime_rate', '-0.52 * (x ** 0.6)', 3))
+		self.effects.append(Effect('crime_rate', '-0.35 * (x ** 0.6)', 4))
+		self.effects.append(Effect('violent_crime_rate', '-0.52 * (x ** 0.6)', 3))
 		# DrugCrimeRate,0-(0.1*x),3
-		self.effects.append(SimulationConnection('conservatives_mood', '-0.2 + (0.48 * x)'))
-		self.effects.append(SimulationConnection('state_employees_mood', '-0.15 + (0.37 * x)'))
-		self.effects.append(SimulationConnection('state_employees_freq', '-0.05 + (0.1 * x)'))
+		self.effects.append(Effect('conservatives_mood', '-0.2 + (0.48 * x)'))
+		self.effects.append(Effect('state_employees_mood', '-0.15 + (0.37 * x)'))
+		self.effects.append(Effect('state_employees_freq', '-0.05 + (0.1 * x)'))
 		# state_employees_income,-0.3+(0.09*x)
-		self.effects.append(SimulationConnection('unemployment', '0 - (0.03 * x)'))
-		self.effects.append(SimulationConnection('alcoholism', '0 - (0.6 * x) '))
-		self.effects.append(SimulationConnection('street_gangs', '0-(0.17*x)', 4))
+		self.effects.append(Effect('unemployment', '0 - (0.03 * x)'))
+		self.effects.append(Effect('alcoholism', '0 - (0.6 * x) '))
+		self.effects.append(Effect('street_gangs', '0-(0.17*x)', 4))

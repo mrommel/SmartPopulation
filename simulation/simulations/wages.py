@@ -1,5 +1,5 @@
 """wages simulation"""
-from simulation.base import SimulationCategory, SimulationBase, SimulationConnection, SimulationEmotion
+from simulation.base import SimulationCategory, SimulationBase, Effect, SimulationEmotion
 
 
 class WagesSimulation(SimulationBase):
@@ -21,6 +21,6 @@ class WagesSimulation(SimulationBase):
 		)
 		
 		# connections:
-		self.effects.append(SimulationConnection('_low_income', '-0.5 + (1.0 * x)'))
-		self.effects.append(SimulationConnection('_middle_income', '-0.3 + (0.6 * x)'))
-		self.effects.append(SimulationConnection('worker_productivity', '0.2 - (0.4 * x)'))
+		self.effects.append(Effect('_low_income', '-0.5 + (1.0 * x)'))
+		self.effects.append(Effect('_middle_income', '-0.3 + (0.6 * x)'))
+		self.effects.append(Effect('worker_productivity', '0.2 - (0.4 * x)'))

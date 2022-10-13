@@ -1,5 +1,5 @@
 """environment simulation"""
-from simulation.base import SimulationCategory, SimulationBase, SimulationConnection, SimulationEmotion
+from simulation.base import SimulationCategory, SimulationBase, Effect, SimulationEmotion
 
 
 class EnvironmentSimulation(SimulationBase):
@@ -19,7 +19,7 @@ class EnvironmentSimulation(SimulationBase):
 		)
 		
 		# connections:
-		self.effects.append(SimulationConnection('environmentalist_mood', '0.4 - (x * 0.8)'))
-		self.effects.append(SimulationConnection('pollution', '1.0 - (1.0 * x)'))
-		self.effects.append(SimulationConnection('tourism', '-0.1 + (0.1 * x)', 8))
-		self.effects.append(SimulationConnection('lifespan', '-0.2 + (0.4 * x)', 6))
+		self.effects.append(Effect('environmentalist_mood', '0.4 - (x * 0.8)'))
+		self.effects.append(Effect('pollution', '1.0 - (1.0 * x)'))
+		self.effects.append(Effect('tourism', '-0.1 + (0.1 * x)', 8))
+		self.effects.append(Effect('lifespan', '-0.2 + (0.4 * x)', 6))

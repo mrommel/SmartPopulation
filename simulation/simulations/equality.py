@@ -1,5 +1,5 @@
 """equality simulation"""
-from simulation.base import SimulationCategory, SimulationBase, SimulationConnection, SimulationEmotion
+from simulation.base import SimulationCategory, SimulationBase, Effect, SimulationEmotion
 
 
 class EqualitySimulation(SimulationBase):
@@ -20,5 +20,5 @@ class EqualitySimulation(SimulationBase):
 		)
 
 		# connections:
-		self.effects.append(SimulationConnection('socialist_mood', '-0.2 + (0.4 * x)'))
-		self.effects.append(SimulationConnection('crime_rate', '0.1 - (x * 0.22)'))
+		self.effects.append(Effect('socialist_mood', '-0.2 + (0.4 * x)'))
+		self.effects.append(Effect('crime_rate', '0.1 - (x * 0.22)'))

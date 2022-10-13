@@ -1,7 +1,7 @@
 """
 	situation of homelessness
 """
-from simulation.base import SituationBase, SimulationCategory, SimulationConnection
+from simulation.base import SituationBase, SimulationCategory, Effect
 
 
 class HomelessnessSituation(SituationBase):
@@ -26,15 +26,13 @@ class HomelessnessSituation(SituationBase):
 		)
 		
 		# input @todo
-		# StateHousing,0-(0.4*x)	 homelessness
-		# PrivateHousing,0-(0.4*x)	homelessness
-		# UnemployedBenefit,0-(0.3*x)	homelessness
-		# MortgageTaxRelief,-0.04-(0.04*x)	homelessness
+		# homelessness-UnemployedBenefit,0-(0.3*x)
+		# homelessness-MortgageTaxRelief,-0.04-(0.04*x)
 	
 		# effects
-		self.effects.append(SimulationConnection('liberal_mood', '-0.09 - (0.09 * x)'))
-		self.effects.append(SimulationConnection('poor_mood', '-0.24 - (0.3 * x)'))
-		self.effects.append(SimulationConnection('middle_income_mood', '-0.06 - (0.05 * x)'))
-		self.effects.append(SimulationConnection('crime_rate', '0.04 + (0.04 * x)'))
-		self.effects.append(SimulationConnection('street_gangs', '0.0 + (0.1 * x)', 2))
+		self.effects.append(Effect('liberal_mood', '-0.09 - (0.09 * x)'))
+		self.effects.append(Effect('poor_mood', '-0.24 - (0.3 * x)'))
+		self.effects.append(Effect('middle_income_mood', '-0.06 - (0.05 * x)'))
+		self.effects.append(Effect('crime_rate', '0.04 + (0.04 * x)'))
+		self.effects.append(Effect('street_gangs', '0.0 + (0.1 * x)', 2))
 		

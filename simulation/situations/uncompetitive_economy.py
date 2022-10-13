@@ -1,7 +1,7 @@
 """
 	situation of uncompetitive economy
 """
-from simulation.base import SituationBase, SimulationCategory, SimulationConnection
+from simulation.base import SituationBase, SimulationCategory, Effect
 
 
 class UncompetitiveEconomySituation(SituationBase):
@@ -29,5 +29,5 @@ class UncompetitiveEconomySituation(SituationBase):
 		# ImportTarrifs,-0.1-(0.3*x)	# uncompetitive_economy
 		
 		# effects
-		self.effects.append(SimulationConnection('gdp', '0.0 - (0.34 * x) ** 1.52'))
-		self.effects.append(SimulationConnection('capitalist_mood', '-0.04 - (0.06 * x)'))
+		self.effects.append(Effect('gdp', '0.0 - (0.34 * x) ** 1.52'))
+		self.effects.append(Effect('capitalist_mood', '-0.04 - (0.06 * x)'))
