@@ -68,10 +68,10 @@
                         <td>{{ situation.end_text }}</td>
                     </tr>
                     <tr>
-                        <td>Inputs</td>
+                        <td>Causes</td>
                         <td>
                             <ul>
-                            {% for input in situation.input_list %}
+                            {% for input in situation.cause_list %}
                                 <li>
                                     <div class="nav-sidebar nav-pills">
                                         {% if input.base_type.value == 0 %}

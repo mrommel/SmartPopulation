@@ -10,29 +10,24 @@ This also plots this chart using plotly.
 
 ### execute application
 
-```
-make run
-```
+``` make run ```
 
 ### execute pytests
 
-```
-make tests
-```
+``` make tests ```
 
 ### execute pylint
 
-```
-make pylint
-```
+``` make pylint ```
 
 ## Next steps
 
 - [ ] move to SQLAlchemy completely
-- [ ] think about historic influences (simulations)
+- [ ] think about historic influences (simulations) (slavery, form of government = people who can vote)
 - [ ] allow `Situation` value to be discrete (taxes) and also have slider values
 - [ ] icons for policies, situations and groups
 - [ ] fix pylint issues
+- [ ] calculate the happiness with the government
 
 ## Links
 * https://www.ined.fr/_modules/SimulateurPopulation/?lang=en

@@ -7,10 +7,8 @@ import plotly.express as px
 from flask import Blueprint
 from flask import render_template
 
-from simulation.simulation import Simulation
 from web import global_simulation
 
-# from web import simulation_from_database
 
 # Blueprint Configuration
 situations_blueprint = Blueprint(
@@ -42,7 +40,7 @@ def situation(key):
     else:
         situation_item.prop = 'bg-danger'
 
-    situation_item.input_list = situation_item.input_values(global_simulation)
+    situation_item.cause_list = situation_item.cause_values(global_simulation)
     situation_item.effect_list = situation_item.effect_values(global_simulation)
 
     return render_template('situation.html', situation=situation_item, graph_json=situation_history(situation_item))

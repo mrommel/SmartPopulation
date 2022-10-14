@@ -50,10 +50,10 @@
                         <td>{{ group.category.name }}</td>
                     </tr>
                     <tr>
-                        <td>Mood Inputs</td>
+                        <td>Mood Causes</td>
                         <td>
                             <ul>
-                            {% for input in group.mood.input_list %}
+                            {% for input in group.mood.cause_list %}
                                 <li>
                                     <div class="nav-sidebar nav-pills">
                                         {% if input.base_type.value == 0 %}
@@ -95,10 +95,10 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>Freq Inputs</td>
+                        <td>Freq Causes</td>
                         <td>
                             <ul>
-                            {% for input in group.freq.input_list %}
+                            {% for input in group.freq.cause_list %}
                                 <li>
                                     <div class="nav-sidebar nav-pills">
                                         {% if input.base_type.value == 0 %}

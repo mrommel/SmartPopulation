@@ -8,7 +8,7 @@ from flask import Blueprint
 from flask import render_template
 
 from web import global_simulation
-
+from web.utils import color_for
 
 # Blueprint Configuration
 simulations_blueprint = Blueprint(
@@ -21,16 +21,7 @@ def simulations():
 
     # enrich simulations
     for key, simulation_item in global_simulation.simulations.items():
-        if simulation_item.value > 0.8:
-            simulation_item.prop = 'bg-success'
-        elif simulation_item.value > 0.6:
-            simulation_item.prop = 'bg-primary'
-        elif simulation_item.value > 0.4:
-            simulation_item.prop = 'bg-warning'
-        elif simulation_item.value > 0.2:
-            simulation_item.prop = 'bg-orange'
-        else:
-            simulation_item.prop = 'bg-danger'
+        simulation_item.prop = color_for(simulation_item.value)
 
     return render_template('simulations.html', simulations=global_simulation.simulations)
 
@@ -50,18 +41,8 @@ def simulation(key):
     simulation_item = global_simulation.simulations[key]
 
     # enrich the simulation
-    if simulation_item.value > 0.8:
-        simulation_item.prop = 'bg-success'
-    elif simulation_item.value > 0.6:
-        simulation_item.prop = 'bg-primary'
-    elif simulation_item.value > 0.4:
-        simulation_item.prop = 'bg-warning'
-    elif simulation_item.value > 0.2:
-        simulation_item.prop = 'bg-orange'
-    else:
-        simulation_item.prop = 'bg-danger'
-
-    simulation_item.input_list = simulation_item.input_values(global_simulation)
+    simulation_item.prop = color_for(simulation_item.value)
+    simulation_item.cause_list = simulation_item.cause_values(global_simulation)
     simulation_item.effect_list = simulation_item.effect_values(global_simulation)
 
     return render_template(

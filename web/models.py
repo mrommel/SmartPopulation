@@ -99,6 +99,7 @@ class Policies(db.Model):
     is_active = db.Column(db.Boolean)
     slider_value = db.Column(db.String(32))
     value = db.Column(db.Float)
+    historic_values = db.relationship('PoliciesHistory', backref='policy', lazy='dynamic')
 
     def __init__(self, key, is_active, slider_value, value):
         self.key = key
@@ -125,6 +126,22 @@ def create_policies(*args, **kwargs):
         )
 
     db.session.commit()
+
+
+class PoliciesHistory(db.Model):
+    __table_args__ = (UniqueConstraint('policy_id', 'iteration', name='policy_iteration'),)
+    id = db.Column(db.Integer, primary_key=True)
+    policy_id = db.Column(db.Integer, db.ForeignKey('policies.id'), nullable=False)
+    iteration = db.Column(db.Integer, nullable=False)
+    value = db.Column(db.Float)
+
+    def __init__(self, policy_id, iteration, value):
+        self.policy_id = policy_id
+        self.iteration = iteration
+        self.value = value
+
+    def __repr__(self):
+        return "<PoliciesHistory {} ({}) = {}>".format(self.policy_id, self.iteration, self.value)
 
 
 class Groups(db.Model):
@@ -176,6 +193,8 @@ def load_from_db(sim: Simulation):
         sim.policies[policies_item.key].value = policies_item.value
 
     # populate policies history
+    for policies_history_item in PoliciesHistory.query.all():
+        sim.policies[policies_history_item.policy.key].history.insert(0, policies_history_item.value)
 
     # populate groups
     for groups_item in Groups.query.all():
@@ -192,6 +211,7 @@ def store_to_db(sim: Simulation):
     # delete all history values
     SimulationsHistory.query.delete()
     SituationsHistory.query.delete()
+    PoliciesHistory.query.delete()
     db.session.commit()
 
     # simulations
@@ -242,64 +262,28 @@ def store_to_db(sim: Simulation):
     #    print(situation_item)
     # print('#############################################################')
 
-    """
-
-    
-        database.execute(
-            'UPDATE situations SET is_active = ? WHERE key = ?',
-            (situation.is_active, key)
-        )
-        database.commit()
-
-        situation_row = database.execute(
-            'SELECT s.id FROM situations AS s WHERE key = ?',
-            (key,)
-        ).fetchone()
-        situation_id = situation_row[0]
-
-        database.execute(
-            'DELETE FROM situation_histories WHERE situation_id = ?',
-            (situation_id,)
-        )
-        database.commit()
-
-        for situation_history_value in situation.history:
-            database.execute(
-                'INSERT INTO situation_histories (situation_id, value) VALUES (?, ?)',
-                (situation_id, situation_history_value)
-            )
-            database.commit()
-
     # polices
     for key, policy in sim.policies.items():
-        database.execute(
-            'UPDATE policies SET is_active = ?, slider_value = ?, value = ? WHERE key = ?',
-            (policy.is_active, policy.slider_value, policy.value, key)
-        )
-        database.commit()
+        policy_item = Policies.query.filter_by(key=key).first()
+        policy_id = policy_item.id
 
-        policy_row = database.execute(
-            'SELECT p.id FROM policies AS p WHERE key = ?',
-            (key,)
-        ).fetchone()
-        if policy_row is None:
+        if policy_item is None:
             raise Exception(f'cant find policy "{key}" in db')
 
-        policy_id = policy_row[0]
+        # update policy value
+        print(f'@@@ update policy {key} to {policy.value}')
+        policy_item.is_active = policy.is_active
+        policy_item.slider_value = policy.slider_value
+        policy_item.value = policy.value
 
-        database.execute(
-            'DELETE FROM policy_histories WHERE policy_id = ?',
-            (policy_id,)
-        )
-        database.commit()
+        # write historic simulation values into db
+        for index, simulation_history_value in enumerate(policy.history):
+            new_policy_history = PoliciesHistory(policy_id, index, simulation_history_value)
+            db.session.add(new_policy_history)
 
-        for policy_history_value in policy.history:
-            database.execute(
-                'INSERT INTO policy_histories (policy_id, value) VALUES (?, ?)',
-                (policy_id, policy_history_value)
-            )
-            database.commit()
+        db.session.commit()
 
+    """
     # groups
     for key, group in sim.groups.items():
 

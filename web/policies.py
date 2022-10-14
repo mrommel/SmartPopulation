@@ -4,8 +4,8 @@ from flask import Blueprint, request
 from flask import render_template
 
 from simulation.simulation import Simulation
-
-# from web import simulation_from_database, simulation_to_database
+from web import global_simulation
+from web.models import store_to_db
 
 # Blueprint Configuration
 policies_blueprint = Blueprint(
@@ -15,13 +15,17 @@ policies_blueprint = Blueprint(
 
 @policies_blueprint.route("/policies")
 def policies():
-    sim = Simulation()  # simulation_from_database()
+    """
+        show an overview of all policies
+    """
 
-    return render_template('policies.html', policies=sim.policies)
+    return render_template('policies.html', policies=global_simulation.policies)
 
 
 @policies_blueprint.route('/policy/<key>', methods=('GET', 'POST'))
 def policy(key):
+    """
+        show single policy and when POSTed it updates the slider aka value of the policy
     """
     if request.method == 'POST':
 
@@ -29,9 +33,7 @@ def policy(key):
         slider_value = request.form['slider']
 
         if action == 'change':
-            sim = simulation_from_database()
-
-            policy_item = sim.policies[key]
+            policy_item = global_simulation.policies[key]
             policy_item.slider_value = slider_value
 
             # determine value
@@ -40,23 +42,16 @@ def policy(key):
             try:
                 slider_index = policy_item.slider.index(slider_value)
                 policy_item.value = step_value * (slider_index + 1.0)
-            # print(f'Update policy "{key}" to {policy_item.value} / index: {slider_index} / {slider_value}')
+                # print(f'Update policy "{key}" to {policy_item.value} / index: {slider_index} / {slider_value}')
             except ValueError:
                 print(f'Could not find {slider_value} in {policy_item.slider}')
 
-            simulation_to_database(sim)
+            store_to_db(global_simulation)
         else:
             print(f'unknown action: {action}')
-            sim = simulation_from_database()
 
-    else:
-        sim = simulation_from_database()
-    """
+    policy_item = global_simulation.policies[key]
 
-    sim = Simulation()  #
-
-    policy_item = sim.policies[key]
-
-    policy_item.effect_list = policy_item.effect_values(sim)
+    policy_item.effect_list = policy_item.effect_values(global_simulation)
 
     return render_template('policy.html', policy=policy_item)

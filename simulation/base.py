@@ -239,7 +239,7 @@ class SimulationBase:
 		"""
 		print(f'{self.name:24}: \t{self.value:.2f}')
 	
-	def input_values(self, sim) -> [ValueBase]:
+	def cause_values(self, sim) -> [ValueBase]:
 		"""
 			get the simulations, situations or policies that have impact on this simulation
 		
@@ -249,7 +249,7 @@ class SimulationBase:
 			:rtype: [ValueBase]
 		"""
 		
-		input_list = []
+		cause_list = []
 		
 		own_key = next((key for key, sim_item in sim.simulations.items() if sim_item.name == self.name), None)
 		
@@ -266,7 +266,7 @@ class SimulationBase:
 		for key, simulation_item in sim.simulations.items():
 			for effect in simulation_item.effects:
 				if effect.target_name == own_key:
-					input_list.append(
+					cause_list.append(
 						ValueBase(
 							key,
 							simulation_item.name,
@@ -279,7 +279,7 @@ class SimulationBase:
 		for key, situation_item in sim.situations.items():
 			for effect in situation_item.effects:
 				if effect.target_name == own_key:
-					input_list.append(
+					cause_list.append(
 						ValueBase(
 							key,
 							situation_item.name,
@@ -292,7 +292,7 @@ class SimulationBase:
 		for key, policy_item in sim.policies.items():
 			for effect in policy_item.effects:
 				if effect.target_name == own_key:
-					input_list.append(
+					cause_list.append(
 						ValueBase(
 							key,
 							policy_item.name,
@@ -302,9 +302,9 @@ class SimulationBase:
 						)
 					)
 		
-		print(f'input_values of {own_key} of {self.name} => {len(input_list)}')
+		# print(f'cause_values of {own_key} of {self.name} => {len(cause_list)}')
 		
-		return input_list
+		return cause_list
 	
 	def effect_values(self, simulation) -> [ValueBase]:
 		
@@ -406,7 +406,13 @@ class GroupBase:
 
 			:return: (nothing)
 		"""
-		print(f'{self.name:24}: \tfreq={self.freq.value * 100.0:.2f}% / \tmood={self.mood.value}')
+		print(self)
+
+	def __repr__(self):
+		"""
+			string representation of `GroupBase`
+		"""
+		return f'<Group {self.name:24}: \tfreq={self.freq.value * 100.0:.2f}% / \tmood={self.mood.value}>'
 
 
 class SituationBase:
@@ -519,25 +525,39 @@ class SituationBase:
 		"""
 		print(f'{self.name:24}: \t{self.value:.2f} => {self.is_active}')
 	
-	def input_values(self, sim) -> [ValueBase]:
+	def cause_values(self, simulation) -> [ValueBase]:
+		"""
+			get the list of causes (input values) for this situation (they have effects towards this)
+
+			:param simulation: simulation where the causes are in
+			:returns: array of causes (input values) for this situation
+		"""
 		
-		input_list = []
+		cause_list = []
 		
-		own_key = next((key for key, sit_item in sim.situations.items() if sit_item.name == self.name), None)
+		own_key = next((key for key, sit_item in simulation.situations.items() if sit_item.name == self.name), None)
 		
-		for key, simulation_item in sim.simulations.items():
+		for key, simulation_item in simulation.simulations.items():
 			for effect in simulation_item.effects:
 				if effect.target_name == own_key:
-					input_list.append(ValueBase(key, simulation_item.name, simulation_item.icon, BasicType.simulation, 0.0))
+					cause_list.append(ValueBase(key, simulation_item.name, simulation_item.icon, BasicType.simulation, 0.0))
 		
-		for key, policy_item in sim.policies.items():
+		for key, policy_item in simulation.policies.items():
 			for effect in policy_item.effects:
 				if effect.target_name == own_key:
-					input_list.append(ValueBase(key, policy_item.name, 'icon', BasicType.policy, 0.0))
+					cause_list.append(ValueBase(key, policy_item.name, 'icon', BasicType.policy, 0.0))
+
+		# note: a situation does not cause changes to another situation so far
 		
-		return input_list
+		return cause_list
 	
 	def effect_values(self, simulation) -> [ValueBase]:
+		"""
+			get the list of effects of this situation
+
+			:param simulation: simulation where the effects are in
+			:returns: array of effects (output values) for this situation
+		"""
 		
 		effect_list = []
 		
@@ -602,8 +622,9 @@ class PolicyBase:
 		"""
 			value constructor
 
-			:param name: name of the simulation
-			:param description: description of the simulation
+			:param name: name of the policy
+			:param description: description of the policy
+			:param category: category of the policy
 		"""
 		self.name = name
 		self.description = description
