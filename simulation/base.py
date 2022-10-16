@@ -38,42 +38,62 @@ class SimulationCategory(Enum):
 	people = 20
 	
 	def __str__(self):
+		"""string representation of this category"""
 		return self.name
 	
 	@property
 	def title(self):
+		"""title of this category"""
 		if self.value == SimulationCategory.public_services.value:
 			return 'Public Services'
-		elif self.value == SimulationCategory.law_and_order.value:
+		if self.value == SimulationCategory.law_and_order.value:
 			return 'Law and order'
-		elif self.value == SimulationCategory.economy.value:
+		if self.value == SimulationCategory.economy.value:
 			return 'Economy'
-		elif self.value == SimulationCategory.foreign_policy.value:
+		if self.value == SimulationCategory.foreign_policy.value:
 			return 'Foreign policy'
-		elif self.value == SimulationCategory.welfare.value:
+		if self.value == SimulationCategory.welfare.value:
 			return 'Welfare'
-		elif self.value == SimulationCategory.transport.value:
+		if self.value == SimulationCategory.transport.value:
 			return 'Transport'
-		elif self.value == SimulationCategory.tax.value:
+		if self.value == SimulationCategory.tax.value:
 			return 'Taxes'
-		elif self.value == SimulationCategory.people.value:
+		if self.value == SimulationCategory.people.value:
 			return 'People'
-		else:
-			return 'default'
+
+		return 'default'
 		
 	def simulations(self, sim):
+		"""
+			get simulations in this category
+
+			:param sim: the simulation
+			:return: dictionary of [key, Simulation]
+		"""
 		return {
 			k: simulation_item for k, simulation_item in sim.simulations.items() if
 			simulation_item.category.value == self.value
 		}
 	
 	def situations(self, sim):
+		"""
+			get situations in this category
+
+			:param sim: the simulation
+			:return: dictionary of [key, Situation]
+		"""
 		return {
 			k: situation_item for k, situation_item in sim.situations.items() if
 			situation_item.category.value == self.value
 		}
 	
 	def policies(self, sim):
+		"""
+			get policies in this category
+
+			:param sim: the simulation
+			:return: dictionary of [key, Policy]
+		"""
 		return {
 			k: policy_item for k, policy_item in sim.policies.items() if
 			policy_item.category.value == self.value
@@ -307,7 +327,12 @@ class SimulationBase:
 		return cause_list
 	
 	def effect_values(self, simulation) -> [ValueBase]:
-		
+		"""
+			get an array of effects from this simulation
+
+			:param simulation: the simulation
+			:return: array of effects from this simulation
+		"""
 		effect_list = []
 		
 		for effect in self.effects:
@@ -702,6 +727,12 @@ class PolicyBase:
 		print(f'{self.name:24}: \t{self.value:.2f}')
 	
 	def effect_values(self, simulation) -> [ValueBase]:
+		"""
+			array of effects of this policy
+
+			:param simulation: the simulation
+			:return: array of effects of this policy
+		"""
 		
 		effect_list = []
 		

@@ -1,7 +1,7 @@
 """
 	inheritance tax policy
 """
-from simulation.base import SimulationCategory, PolicyBase, Effect, SimulationEmotion
+from simulation.base import SimulationCategory, PolicyBase, Effect
 
 
 class InheritanceTaxPolicy(PolicyBase):
@@ -49,5 +49,3 @@ class InheritanceTaxPolicy(PolicyBase):
 		self.effects.append(Effect('_high_income', '0.0 - (0.12 * x)'))
 		self.effects.append(Effect('retired_mood', '0.0 - (0.22 * x)'))
 		# _global_socialism, 0 + (0.1 * x), 32
-
-

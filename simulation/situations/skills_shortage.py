@@ -30,5 +30,3 @@ class SkillsShortageSituation(SituationBase):
 		
 		# effects
 		self.effects.append(Effect('gdp', '0.0 - (0.44 * x) ** 1.4'))
-
-

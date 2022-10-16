@@ -34,4 +34,3 @@ class ObesitySituation(SituationBase):
 		# state_health_service_cost,0.05+(0.15*x),6
 		# HealthTaxCredits_cost,0.05+(0.15*x),6
 		# HealthcareVouchers_cost,0.05+(0.15*x),6
-

@@ -34,5 +34,3 @@ class BlackMarketSituation(SituationBase):
 		# income_tax_income, 1.0 - (0.03 * x)
 		# salesTax_income, 1.0 - (0.03 * x)
 		# corporationTax_income, 1.0 - (0.03 * x)
-
-

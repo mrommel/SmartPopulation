@@ -1,7 +1,7 @@
 """
 	prisons policy
 """
-from simulation.base import SimulationCategory, PolicyBase, Effect, SimulationEmotion
+from simulation.base import SimulationCategory, PolicyBase, Effect
 
 
 class PrisonsPolicy(PolicyBase):
@@ -45,6 +45,3 @@ class PrisonsPolicy(PolicyBase):
 		self.effects.append(Effect('trade_unionist_mood', '0.05 - (0.05 * x)'))
 		# old self.effects.append(Effect('liberal_mood', '0.12 * (x ** 4)'))
 		# old self.effects.append(Effect('conservatives_mood', '0.00 + (0.12 * x)'))
-
-
-

@@ -24,5 +24,3 @@ class CapitalistGroup(GroupBase):
 		# influences
 		# TradeUnionist,-0.25
 		# SelfEmployed,0.2
-
-

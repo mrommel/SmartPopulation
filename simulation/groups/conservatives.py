@@ -22,5 +22,3 @@ class ConservativesGroup(GroupBase):
 		# influences
 		# Religious,0.25
 		# Environmentalist,-0.1
-
-

@@ -1,7 +1,7 @@
 """
 	situation of tax evasion
 """
-from simulation.base import SituationBase, SimulationCategory, Effect
+from simulation.base import SituationBase, SimulationCategory
 
 
 class TaxEvasionSituation(SituationBase):

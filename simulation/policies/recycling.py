@@ -1,7 +1,7 @@
 """
 	recycling policy
 """
-from simulation.base import SimulationCategory, PolicyBase, Effect, SimulationEmotion
+from simulation.base import SimulationCategory, PolicyBase, Effect
 
 
 class RecyclingPolicy(PolicyBase):

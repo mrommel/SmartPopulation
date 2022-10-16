@@ -32,5 +32,3 @@ class HighProductivitySituation(SituationBase):
 		self.effects.append(Effect('self_employed_mood', '0.0 + (0.1 * x)'))
 		self.effects.append(Effect('capitalist_mood', '0.0 + (0.1 * x)'))
 		# self_employed_income,0+(0.08*x)
-
-
