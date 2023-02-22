@@ -21,7 +21,7 @@ class Config:
 
     # Database (SQLAlchemy)
     SQLALCHEMY_DATABASE_URI = 'sqlite:///../instance/flaskr.sqlite'
-    SQLALCHEMY_ECHO = False 
+    SQLALCHEMY_ECHO = True
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     # Static Assets
